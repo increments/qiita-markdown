@@ -89,5 +89,41 @@ describe Qiita::Markdown::Processor do
         ]
       end
     end
+
+    context "with normal link" do
+      let(:markdown) do
+        "[](/example)"
+      end
+
+      it "creates link for that" do
+        should eq <<-EOS.strip_heredoc
+          <p><a href="/example"></a></p>
+        EOS
+      end
+    end
+
+    context "with javascript: link" do
+      let(:markdown) do
+        "[](javascript:alert(1))"
+      end
+
+      it "does not create non-secure link" do
+        should eq <<-EOS.strip_heredoc
+          <p>#{markdown}</p>
+        EOS
+      end
+    end
+
+    context "with mailto: link" do
+      let(:markdown) do
+        "[](mailto:info@example.com)"
+      end
+
+      it "create link for that" do
+        should eq <<-EOS.strip_heredoc
+          <p><a href="mailto:info@example.com"></a></p>
+        EOS
+      end
+    end
   end
 end
