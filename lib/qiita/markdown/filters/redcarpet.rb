@@ -11,7 +11,6 @@ module Qiita
             @renderer = ::Redcarpet::Markdown.new(
               ::Redcarpet::Render::HTML.new(
                 hard_wrap: true,
-                safe_links_only: true,
               ),
               autolink: true,
               fenced_code_blocks: true,

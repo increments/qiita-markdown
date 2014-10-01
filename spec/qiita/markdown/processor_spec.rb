@@ -114,14 +114,26 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with anchor link" do
+      let(:markdown) do
+        "[](#example)"
+      end
+
+      it "creates link for that" do
+        should eq <<-EOS.strip_heredoc
+          <p><a href="#example"></a></p>
+        EOS
+      end
+    end
+
     context "with javascript: link" do
       let(:markdown) do
         "[](javascript:alert(1))"
       end
 
-      it "does not create non-secure link" do
+      it "removes that link by creating empty a element" do
         should eq <<-EOS.strip_heredoc
-          <p>#{markdown}</p>
+          <p><a></a></p>
         EOS
       end
     end
