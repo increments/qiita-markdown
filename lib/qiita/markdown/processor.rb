@@ -7,8 +7,9 @@ module Qiita
 
       DEFAULT_FILTERS = [
         Filters::Redcarpet,
-        HTML::Pipeline::EmojiFilter,
         Filters::Code,
+        Filters::Sanitize,
+        HTML::Pipeline::EmojiFilter,
         HTML::Pipeline::SyntaxHighlightFilter,
         Filters::Mention,
       ]
