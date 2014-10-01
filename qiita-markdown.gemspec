@@ -16,6 +16,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "html-pipeline"
+  spec.add_dependency "redcarpet"
+  spec.add_development_dependency "activesupport"
   spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rspec", "3.1.0"
 end

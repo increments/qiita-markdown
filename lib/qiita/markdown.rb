@@ -1,7 +1,7 @@
-require "qiita/markdown/version"
+require "html/pipeline"
+require "nokogiri"
+require "redcarpet"
 
-module Qiita
-  module Markdown
-    # Your code goes here...
-  end
-end
+require "qiita/markdown/filters/redcarpet"
+require "qiita/markdown/processor"
+require "qiita/markdown/version"
