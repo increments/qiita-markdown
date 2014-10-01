@@ -9,8 +9,8 @@ describe Qiita::Markdown::Processor do
     let(:markdown_text) do
       <<-EOS.strip_heredoc
         # h1
-        ```
-          puts "hello world"
+        ```foo.rb
+        puts "hello world"
         ```
       EOS
     end
@@ -20,6 +20,18 @@ describe Qiita::Markdown::Processor do
         should be_a Hash
         expect(subject[:mentioned_usernames]).to be_an Array
         expect(subject[:output]).to be_a Nokogiri::HTML::DocumentFragment
+      end
+    end
+
+    context "with code" do
+      it "returns detected codes" do
+        expect(subject[:codes]).to eq [
+          {
+            code: %<puts "hello world"\n>,
+            filename: "foo.rb",
+            language: "ruby",
+          },
+        ]
       end
     end
 
