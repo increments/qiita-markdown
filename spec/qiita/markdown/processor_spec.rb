@@ -119,9 +119,9 @@ describe Qiita::Markdown::Processor do
         "[](mailto:info@example.com)"
       end
 
-      it "create link for that" do
+      it "removes that link by creating empty a element" do
         should eq <<-EOS.strip_heredoc
-          <p><a href="mailto:info@example.com"></a></p>
+          <p><a></a></p>
         EOS
       end
     end
