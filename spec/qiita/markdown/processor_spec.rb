@@ -28,6 +28,18 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with HTML-characters" do
+      let(:markdown) do
+        "<>&"
+      end
+
+      it "sanitizes them" do
+        should eq <<-EOS.strip_heredoc
+          <p>&lt;&gt;&amp;</p>
+        EOS
+      end
+    end
+
     context "with code" do
       let(:markdown) do
         <<-EOS.strip_heredoc
