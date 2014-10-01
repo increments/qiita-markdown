@@ -10,7 +10,7 @@ module Qiita
           doc.search("pre").each do |pre|
             if code = pre.at("code")
               label = Label.new(code["class"])
-              pre["lang"] = label.language
+              pre["lang"] = label.language if label.language
               result[:codes] << {
                 code: pre.text,
                 filename: label.filename,
