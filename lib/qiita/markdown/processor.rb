@@ -1,21 +1,26 @@
 module Qiita
   module Markdown
     class Processor
+      DEFAULT_CONTEXT = {
+        asset_root: "/images",
+      }
+
       DEFAULT_FILTERS = [
         Filters::Redcarpet,
+        HTML::Pipeline::EmojiFilter,
         Filters::Code,
         HTML::Pipeline::SyntaxHighlightFilter,
         Filters::Mention,
       ]
 
-      # @param context [Hash] Optional context for HTML::Pipeline.
+      # @param [Hash] context Optional context for HTML::Pipeline.
       def initialize(context = {})
-        @context = context
+        @context = DEFAULT_CONTEXT.merge(context)
       end
 
       # Converts Markdown text into HTML string with extracted metadata.
       #
-      # @param [String] Markdown text.
+      # @param [String] input Markdown text.
       # @return [Hash] Process result.
       # @example
       #   Qiita::Markdown::Processor.new.call(markdown) #=> {

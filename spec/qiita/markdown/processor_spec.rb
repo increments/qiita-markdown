@@ -125,5 +125,34 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context "with emoji" do
+      let(:markdown) do
+        ":+1:"
+      end
+
+      it "replaces it with img element" do
+        should eq <<-EOS.strip_heredoc
+          <p><img class="emoji" title=":+1:" alt=":+1:" src="/images/emoji/%2B1.png" height="20" width="20" align="absmiddle"></p>
+        EOS
+      end
+    end
+
+    context "with emoji in pre or code element" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```
+          :+1:
+          ```
+        EOS
+      end
+
+      it "does not replace it" do
+        should eq <<-EOS.strip_heredoc
+          <pre><code>:+1:
+          </code></pre>
+        EOS
+      end
+    end
   end
 end

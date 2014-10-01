@@ -16,6 +16,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "gemoji"
   spec.add_dependency "github-linguist"
   spec.add_dependency "html-pipeline"
   spec.add_dependency "redcarpet"
