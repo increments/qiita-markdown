@@ -15,9 +15,54 @@ describe Qiita::Markdown::Processor do
       EOS
     end
 
+    context "with valid condition" do
+      it "returns a Hash with HTML output and other metadata" do
+        should be_a Hash
+        expect(subject[:mentioned_usernames]).to be_an Array
+        expect(subject[:output]).to be_a Nokogiri::HTML::DocumentFragment
+      end
+    end
 
-    it "returns a Hash with HTML output and other metadata" do
-      should be_a Hash
+    context "with mention" do
+      let(:markdown_text) do
+        "@alice"
+      end
+
+      it "replaces mention with link" do
+        expect(subject[:output].to_s).to include(<<-EOS.strip_heredoc.rstrip)
+          <a href="/alice" class="user-mention" target="_blank" title="alice">@alice</a>
+        EOS
+      end
+    end
+
+    context "with mentions in complex patterns" do
+      let(:markdown_text) do
+        <<-EOS.strip_heredoc
+          @alice
+
+          ```
+            @bob
+          ```
+
+          @charlie/@dave
+          @ell_en
+          @frank-san
+          @Isaac
+          @justin
+          @justin
+        EOS
+      end
+
+      it "extracts mentions correctly" do
+        expect(subject[:mentioned_usernames]).to eq %w[
+          alice
+          dave
+          ell_en
+          frank
+          Isaac
+          justin
+        ]
+      end
     end
   end
 end

@@ -16,6 +16,7 @@ module Qiita
         HTML::Pipeline.new(
           [
             Filters::Redcarpet,
+            Filters::Mention,
           ],
         )
       end
