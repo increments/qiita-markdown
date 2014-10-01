@@ -3,31 +3,44 @@ require "active_support/core_ext/string/strip"
 describe Qiita::Markdown::Processor do
   describe "#call" do
     subject do
-      described_class.new.call(markdown_text)
+      result[:output].to_s
     end
 
-    let(:markdown_text) do
-      <<-EOS.strip_heredoc
-        # h1
-        ```foo.rb
-        puts "hello world"
-        ```
-      EOS
+    let(:markdown) do
+      raise NotImplementedError
+    end
+
+    let(:result) do
+      described_class.new.call(markdown)
     end
 
     context "with valid condition" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          # example
+        EOS
+      end
+
       it "returns a Hash with HTML output and other metadata" do
-        should be_a Hash
-        expect(subject[:mentioned_usernames]).to be_an Array
-        expect(subject[:output]).to be_a Nokogiri::HTML::DocumentFragment
+        expect(result[:codes]).to be_an Array
+        expect(result[:mentioned_usernames]).to be_an Array
+        expect(result[:output]).to be_a Nokogiri::HTML::DocumentFragment
       end
     end
 
     context "with code" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```foo.rb
+          puts 'hello world'
+          ```
+        EOS
+      end
+
       it "returns detected codes" do
-        expect(subject[:codes]).to eq [
+        expect(result[:codes]).to eq [
           {
-            code: %<puts "hello world"\n>,
+            code: "puts 'hello world'\n",
             filename: "foo.rb",
             language: "ruby",
           },
@@ -36,19 +49,19 @@ describe Qiita::Markdown::Processor do
     end
 
     context "with mention" do
-      let(:markdown_text) do
+      let(:markdown) do
         "@alice"
       end
 
       it "replaces mention with link" do
-        expect(subject[:output].to_s).to include(<<-EOS.strip_heredoc.rstrip)
+        should include(<<-EOS.strip_heredoc.rstrip)
           <a href="/alice" class="user-mention" target="_blank" title="alice">@alice</a>
         EOS
       end
     end
 
     context "with mentions in complex patterns" do
-      let(:markdown_text) do
+      let(:markdown) do
         <<-EOS.strip_heredoc
           @alice
 
@@ -66,7 +79,7 @@ describe Qiita::Markdown::Processor do
       end
 
       it "extracts mentions correctly" do
-        expect(subject[:mentioned_usernames]).to eq %w[
+        expect(result[:mentioned_usernames]).to eq %w[
           alice
           dave
           ell_en
