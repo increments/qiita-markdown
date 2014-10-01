@@ -6,59 +6,6 @@ module Qiita
         def call
           ::Sanitize.clean_node!(
             doc,
-            elements: %w[
-              a
-              b
-              blockquote
-              br
-              code
-              dd
-              del
-              div
-              dl
-              dt
-              em
-              h1
-              h2
-              h3
-              h4
-              h5
-              h6
-              h7
-              h8
-              hr
-              i
-              img
-              ins
-              kbd
-              li
-              ol
-              p
-              pre
-              q
-              rp
-              rt
-              ruby
-              s
-              samp
-              strike
-              strong
-              sub
-              sup
-              table
-              tbody
-              td
-              tfoot
-              th
-              thead
-              tr
-              tt
-              ul
-              var
-            ],
-            remove_contents: [
-              "script",
-            ],
             attributes: {
               "a" => [
                 "href",
@@ -142,6 +89,56 @@ module Qiita
                 "width",
               ],
             },
+            elements: %w[
+              a
+              b
+              blockquote
+              br
+              code
+              dd
+              del
+              div
+              dl
+              dt
+              em
+              h1
+              h2
+              h3
+              h4
+              h5
+              h6
+              h7
+              h8
+              hr
+              i
+              img
+              ins
+              kbd
+              li
+              ol
+              p
+              pre
+              q
+              rp
+              rt
+              ruby
+              s
+              samp
+              strike
+              strong
+              sub
+              sup
+              table
+              tbody
+              td
+              tfoot
+              th
+              thead
+              tr
+              tt
+              ul
+              var
+            ],
             protocols: {
               "a" => {
                 "href" => [
@@ -158,6 +155,9 @@ module Qiita
                 ],
               },
             },
+            remove_contents: [
+              "script",
+            ],
             transformers: TransformableNode,
           )
           doc
