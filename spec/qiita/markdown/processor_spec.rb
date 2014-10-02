@@ -57,16 +57,16 @@ describe Qiita::Markdown::Processor do
       it "adds ID for ToC" do
         should eq <<-EOS.strip_heredoc
           <h1>
-          <a id="a" class="anchor" href="#a" aria-hidden="true"><span class="octicon octicon-link"></span></a>a</h1>
+          <span id="a" class="fragment"></span><a href="#a"><i class="fa fa-link"></i></a>a</h1>
 
           <h2>
-          <a id="a-1" class="anchor" href="#a-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>a</h2>
+          <span id="a-1" class="fragment"></span><a href="#a-1"><i class="fa fa-link"></i></a>a</h2>
 
           <h3>
-          <a id="a-2" class="anchor" href="#a-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>a</h3>
+          <span id="a-2" class="fragment"></span><a href="#a-2"><i class="fa fa-link"></i></a>a</h3>
 
           <h3>
-          <a id="a-3" class="anchor" href="#a-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>a</h3>
+          <span id="a-3" class="fragment"></span><a href="#a-3"><i class="fa fa-link"></i></a>a</h3>
         EOS
       end
     end

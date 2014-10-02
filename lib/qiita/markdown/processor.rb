@@ -9,7 +9,7 @@ module Qiita
         Filters::Redcarpet,
         Filters::Code,
         Filters::Sanitize,
-        HTML::Pipeline::TableOfContentsFilter,
+        Filters::Toc,
         HTML::Pipeline::EmojiFilter,
         HTML::Pipeline::SyntaxHighlightFilter,
         Filters::Mention,
