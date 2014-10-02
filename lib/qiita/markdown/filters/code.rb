@@ -17,12 +17,14 @@ module Qiita
           doc.search("pre").each do |pre|
             if code = pre.at("code")
               label = Label.new(code["class"])
+              filename = label.filename
               language = label.language
               language = language_aliases[language] || language
+              pre["filename"] = filename if filename
               pre["lang"] = language if language
               result[:codes] << {
                 code: pre.text,
-                filename: label.filename,
+                filename: filename,
                 language: language,
               }
             end

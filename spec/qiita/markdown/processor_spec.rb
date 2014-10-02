@@ -91,6 +91,44 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context 'with code & filename' do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```example.rb
+          1
+          ```
+        EOS
+      end
+
+      it 'returns code-frame, code-lang, and highlighted pre element' do
+        should eq <<-EOS.strip_heredoc
+          <div class="code-frame" data-lang="ruby">
+          <div class="code-lang"><span class="bold">example.rb</span></div>
+          <div class="highlight"><pre><span class="mi">1</span>
+          </pre></div>
+          </div>
+        EOS
+      end
+
+    end
+
+    context 'with code & no filename' do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```ruby
+          1
+          ```
+        EOS
+      end
+
+      it 'returns code-frame and highlighted pre element' do
+        should eq <<-EOS.strip_heredoc
+          <div class="code-frame" data-lang="ruby"><div class="highlight"><pre><span class="mi">1</span>
+          </pre></div></div>
+        EOS
+      end
+    end
+
     context "with undefined but aliased language" do
       let(:markdown) do
         <<-EOS.strip_heredoc
@@ -272,10 +310,7 @@ describe Qiita::Markdown::Processor do
       end
 
       it "does not replace it" do
-        should eq <<-EOS.strip_heredoc
-          <pre><code>:+1:
-          </code></pre>
-        EOS
+        should_not include('img')
       end
     end
   end
