@@ -162,21 +162,25 @@ describe Qiita::Markdown::Processor do
 
           @charlie/@dave
           @ell_en
-          @frank-san
+          @fran-k
           @Isaac
           @justin
           @justin
+          @mallory@github
+          @#{?o * 33}
+          @oo
         EOS
       end
 
       it "extracts mentions correctly" do
-        expect(result[:mentioned_usernames]).to eq %w[
+        expect(result[:mentioned_usernames]).to eq %W[
           alice
           dave
           ell_en
-          frank
+          fran-k
           Isaac
           justin
+          mallory@github
         ]
       end
     end

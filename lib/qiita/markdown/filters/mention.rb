@@ -10,7 +10,7 @@ module Qiita
         # Allows "_" instead of "-" in username pattern.
         MentionPattern = /
           (?:^|\W)
-          @((?>[a-z0-9][a-z0-9_]*))
+          @((?>[\w][\w-]{1,30}\w(?:@github)?))
           (?!\/)
           (?=
             \.+[ \t\W]|
