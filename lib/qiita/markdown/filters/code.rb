@@ -1,24 +1,39 @@
 module Qiita
   module Markdown
     module Filters
+      DEFAULT_LANGUAGE_ALIASES = {
+        "el" => "common-lisp",
+        "zsh" => "bash",
+      }
+
       # 1. Detects language written in <pre> element.
       # 2. Adds lang attribute (but this attribute is consumed by syntax highliter).
       # 3. Adds detected code data into `result[:codes]`.
+      #
+      # You can pass language aliases table via context[:language_aliases].
       class Code < HTML::Pipeline::Filter
         def call
           result[:codes] ||= []
           doc.search("pre").each do |pre|
             if code = pre.at("code")
               label = Label.new(code["class"])
-              pre["lang"] = label.language if label.language
+              language = label.language
+              language = language_aliases[language] || language
+              pre["lang"] = language if language
               result[:codes] << {
                 code: pre.text,
                 filename: label.filename,
-                language: label.language,
+                language: language,
               }
             end
           end
           doc
+        end
+
+        private
+
+        def language_aliases
+          context[:language_aliases] || DEFAULT_LANGUAGE_ALIASES
         end
 
         # Detects language from code block label.

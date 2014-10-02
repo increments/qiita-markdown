@@ -60,6 +60,26 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with undefined but aliased language" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```zsh
+          true
+          ```
+        EOS
+      end
+
+      it "returns aliased language name" do
+        expect(result[:codes]).to eq [
+          {
+            code: "true\n",
+            filename: nil,
+            language: "bash",
+          },
+        ]
+      end
+    end
+
     context "with mention" do
       let(:markdown) do
         "@alice"
