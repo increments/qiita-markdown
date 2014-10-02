@@ -181,6 +181,23 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with allowed_usernames context" do
+      before do
+        context[:allowed_usernames] = ["alice"]
+      end
+
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          @alice
+          @bob
+        EOS
+      end
+
+      it "limits mentions to allowed usernames" do
+        expect(result[:mentioned_usernames]).to eq ["alice"]
+      end
+    end
+
     context "with normal link" do
       let(:markdown) do
         "[](/example)"

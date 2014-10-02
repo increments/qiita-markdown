@@ -3,6 +3,8 @@ module Qiita
     module Filters
       # 1. Adds :mentioned_usernames into result Hash as Array of String.
       # 2. Replaces @mention with link.
+      #
+      # You can pass :allowed_usernames context to limit mentioned usernames.
       class Mention < HTML::Pipeline::MentionFilter
         # Overrides HTML::Pipeline::MentionFilter's constant.
         # Allows "_" instead of "-" in username pattern.
@@ -18,18 +20,27 @@ module Qiita
           )
         /ix
 
-        # @note Overrides to use overridden MentionPattern and to disable MentionLogins.
-        def self.mentioned_logins_in(text)
-          text.gsub(self::MentionPattern) do |match|
-            yield match, $1, false
+        # @note Override to use customized MentionPattern and allowed_usernames logic.
+        def mention_link_filter(text, _, _)
+          text.gsub(MentionPattern) do |match|
+            name = $1
+            if allowed_usernames && !allowed_usernames.include?(name)
+              match
+            else
+              result[:mentioned_usernames] |= [name]
+              url = File.join(base_url, name)
+              match.sub(
+                "@#{name}",
+                %[<a href="#{url}" class="user-mention" target="_blank" title="#{name}">@#{name}</a>]
+              )
+            end
           end
         end
 
-        # @note Override to change HTML template.
-        def link_to_mentioned_user(name)
-          result[:mentioned_usernames] |= [name]
-          url = File.join(base_url, name)
-          %[<a href="#{url}" class="user-mention" target="_blank" title="#{name}">@#{name}</a>]
+        private
+
+        def allowed_usernames
+          context[:allowed_usernames]
         end
       end
     end
