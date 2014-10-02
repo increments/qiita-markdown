@@ -107,6 +107,18 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with script element" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <script>alert(1)</script>
+        EOS
+      end
+
+      it "removes script element" do
+        should eq "\n"
+      end
+    end
+
     context "with mention" do
       let(:markdown) do
         "@alice"
