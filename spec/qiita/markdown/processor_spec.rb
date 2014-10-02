@@ -6,12 +6,16 @@ describe Qiita::Markdown::Processor do
       result[:output].to_s
     end
 
+    let(:context) do
+      {}
+    end
+
     let(:markdown) do
       raise NotImplementedError
     end
 
     let(:result) do
-      described_class.new.call(markdown)
+      described_class.new(context).call(markdown)
     end
 
     context "with valid condition" do
@@ -116,6 +120,22 @@ describe Qiita::Markdown::Processor do
 
       it "removes script element" do
         should eq "\n"
+      end
+    end
+
+    context "with script context" do
+      before do
+        context[:script] = true
+      end
+
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <script>alert(1)</script>
+        EOS
+      end
+
+      it "allows script element" do
+        should eq markdown
       end
     end
 

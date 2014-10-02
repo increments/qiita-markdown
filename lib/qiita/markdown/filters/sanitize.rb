@@ -2,6 +2,7 @@ module Qiita
   module Markdown
     module Filters
       # Sanitizes undesirable elements by whitelist-based rule.
+      # You can pass optional :rule and :script context.
       class Sanitize < HTML::Pipeline::Filter
         # Wraps a node env to transform invalid node.
         class TransformableNode
@@ -198,6 +199,11 @@ module Qiita
           transformers: TransformableNode,
         }
 
+        SCRIPTABLE_RULE = RULE.dup.tap do |rule|
+          rule[:elements] = RULE[:elements] + ["script"]
+          rule[:remove_contents] = []
+        end
+
         def call
           ::Sanitize.clean_node!(doc, rule)
           doc
@@ -206,7 +212,18 @@ module Qiita
         private
 
         def rule
-          context[:rule] || RULE
+          case
+          when context[:rule]
+            context[:rule]
+          when has_script_context?
+            SCRIPTABLE_RULE
+          else
+            RULE
+          end
+        end
+
+        def has_script_context?
+          context[:script] == true
         end
       end
     end
