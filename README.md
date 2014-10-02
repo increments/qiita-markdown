@@ -37,6 +37,6 @@ processor.call(text)
 Processor takes optional context as a Hash which is shared by all filters.
 
 ```ruby
-processor = Qiita::Markdown::Processor.new(asset_root: "http://cdn.example.com")
-processor.call(text)
+processor = Qiita::Markdown::Processor.new(asset_root: "http://example.com/assets")
+processor.call(text, asset_root: "http://cdn.example.com")
 ```
