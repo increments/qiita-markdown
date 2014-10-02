@@ -51,7 +51,7 @@ module Qiita
             when empty?
               nil
             when !has_only_filename?
-              section[0]
+              sections[0]
             when linguist_language
               linguist_language.default_alias_name
             end
