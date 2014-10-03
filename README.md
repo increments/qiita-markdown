@@ -1,4 +1,4 @@
-# Qiita::Markdown
+# Qiita::Markdown [![Build Status](https://travis-ci.org/increments/qiita-markdown.svg)](https://travis-ci.org/increments/qiita-markdown)
 Qiita-specified markdown renderer.
 
 ## Usage
