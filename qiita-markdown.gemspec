@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activesupport"
-  spec.add_dependency "gemoji", ">= 2.0.0"
+  spec.add_dependency "gemoji"
   spec.add_dependency "github-linguist"
   spec.add_dependency "html-pipeline"
   spec.add_dependency "redcarpet"
