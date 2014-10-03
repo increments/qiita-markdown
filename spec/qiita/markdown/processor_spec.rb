@@ -295,7 +295,7 @@ describe Qiita::Markdown::Processor do
 
       it "replaces it with img element" do
         should eq <<-EOS.strip_heredoc
-          <p><img class="emoji" title=":+1:" alt=":+1:" src="/images/emoji/%2B1.png" height="20" width="20" align="absmiddle"></p>
+          <p><img class="emoji" title=":+1:" alt=":+1:" src="/images/emoji/unicode/1f44d.png" height="20" width="20" align="absmiddle"></p>
         EOS
       end
     end
