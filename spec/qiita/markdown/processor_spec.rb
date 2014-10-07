@@ -311,5 +311,25 @@ describe Qiita::Markdown::Processor do
         should_not include('img')
       end
     end
+
+    context "with colon-only label" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```:
+          1
+          ```
+        EOS
+      end
+
+      it "does not replace it" do
+        expect(result[:codes]).to eq [
+          {
+            code: "1\n",
+            filename: nil,
+            language: nil,
+          },
+        ]
+      end
+    end
   end
 end

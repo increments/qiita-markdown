@@ -81,7 +81,7 @@ module Qiita
           end
 
           def has_only_filename?
-            sections[1].nil? && sections[0].include?(".")
+            sections[1].nil? && sections[0] && sections[0].include?(".")
           end
 
           def linguist_language
