@@ -6,8 +6,6 @@ module Qiita
       #
       # You can pass :allowed_usernames context to limit mentioned usernames.
       class Mention < HTML::Pipeline::MentionFilter
-        # Overrides HTML::Pipeline::MentionFilter's constant.
-        # Allows "_" instead of "-" in username pattern.
         MentionPattern = /
           (?:^|\W)
           @((?>[\w][\w-]{1,30}\w(?:@github)?))
