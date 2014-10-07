@@ -184,11 +184,27 @@ describe Qiita::Markdown::Processor do
 
       let(:markdown) do
         <<-EOS.strip_heredoc
-          <script data-a="b">alert(1)</script>
+          <script async data-a="b">alert(1)</script>
         EOS
       end
 
       it "allows data-attributes" do
+        should eq markdown
+      end
+    end
+
+    context "with iframe" do
+      before do
+        context[:script] = true
+      end
+
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <iframe width="1" height="2" src="//example.com" frameborder="0" allowfullscreen></iframe>
+        EOS
+      end
+
+      it "allows iframe with some attributes" do
         should eq markdown
       end
     end

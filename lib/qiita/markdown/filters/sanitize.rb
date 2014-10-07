@@ -48,6 +48,13 @@ module Qiita
             "a" => [
               "href",
             ],
+            "iframe" => [
+              "allowfullscreen",
+              "frameborder",
+              "height",
+              "src",
+              "width",
+            ],
             "img" => [
               "src",
             ],
@@ -158,7 +165,7 @@ module Qiita
         }
 
         SCRIPTABLE_RULE = RULE.dup.tap do |rule|
-          rule[:elements] = RULE[:elements] + ["script"]
+          rule[:elements] = RULE[:elements] + ["iframe", "script"]
           rule[:remove_contents] = []
         end
 
@@ -169,6 +176,10 @@ module Qiita
 
         private
 
+        def has_script_context?
+          context[:script] == true
+        end
+
         def rule
           case
           when context[:rule]
@@ -178,10 +189,6 @@ module Qiita
           else
             RULE
           end
-        end
-
-        def has_script_context?
-          context[:script] == true
         end
       end
     end
