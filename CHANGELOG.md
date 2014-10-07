@@ -1,3 +1,6 @@
+## 0.0.4
+* Add iframe and data-attributes support
+
 ## 0.0.3
 * Fix bug of code block that has colon-only label
 
