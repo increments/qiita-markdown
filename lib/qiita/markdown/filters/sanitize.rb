@@ -52,7 +52,11 @@ module Qiita
               "allowfullscreen",
               "frameborder",
               "height",
+              "marginheight",
+              "marginwidth",
+              "scrolling",
               "src",
+              "style",
               "width",
             ],
             "img" => [
