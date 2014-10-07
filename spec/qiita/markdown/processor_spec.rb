@@ -177,6 +177,22 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with data-attribute" do
+      before do
+        context[:script] = true
+      end
+
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <script data-a="b">alert(1)</script>
+        EOS
+      end
+
+      it "allows data-attributes" do
+        should eq markdown
+      end
+    end
+
     context "with mention" do
       let(:markdown) do
         "@alice"

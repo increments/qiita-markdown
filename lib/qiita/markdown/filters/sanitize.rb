@@ -55,6 +55,10 @@ module Qiita
               "itemscope",
               "itemtype",
             ],
+            "script" => [
+              "async",
+              "src",
+            ],
             all: [
               "abbr",
               "align",
@@ -78,6 +82,7 @@ module Qiita
               "target",
               "title",
               "width",
+              :data,
             ],
           },
           elements: [
