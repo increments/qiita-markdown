@@ -363,5 +363,17 @@ describe Qiita::Markdown::Processor do
         ]
       end
     end
+
+    context "with font element with color attribute" do
+      let(:markdown) do
+        %[<font color="red">test</font>]
+      end
+
+      it "allows font element with color attribute" do
+        should eq <<-EOS.strip_heredoc
+          <p>#{markdown}</p>
+        EOS
+      end
+    end
   end
 end

@@ -108,6 +108,7 @@ module Qiita
             "dl",
             "dt",
             "em",
+            "font",
             "h1",
             "h2",
             "h3",
