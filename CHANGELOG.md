@@ -1,3 +1,6 @@
+## 0.0.5
+* Allow font element with color attribute
+
 ## 0.0.4
 * Add iframe and data-attributes support
 
