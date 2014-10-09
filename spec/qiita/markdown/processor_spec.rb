@@ -216,7 +216,7 @@ describe Qiita::Markdown::Processor do
 
       it "replaces mention with link" do
         should include(<<-EOS.strip_heredoc.rstrip)
-          <a href="/alice" class="user-mention" target="_blank" title="alice">@alice</a>
+          <a href="/alice" class="user-mention" title="alice">@alice</a>
         EOS
       end
     end
