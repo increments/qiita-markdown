@@ -1,3 +1,6 @@
+## 0.0.6
+* Remove target="_blank" from a element of mention
+
 ## 0.0.5
 * Allow font element with color attribute
 
