@@ -1,7 +1,7 @@
 module Qiita
   module Markdown
     module Filters
-      # Converts [ ] or [x] into checkbox element.
+      # Converts [ ] and [x] into checkbox elements.
       #
       # * [x] Foo
       # * [ ] Bar
