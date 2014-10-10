@@ -5,6 +5,7 @@ require "nokogiri"
 require "redcarpet"
 require "sanitize"
 
+require "qiita/markdown/filters/checkbox"
 require "qiita/markdown/filters/code"
 require "qiita/markdown/filters/mention"
 require "qiita/markdown/filters/redcarpet"

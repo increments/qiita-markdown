@@ -9,6 +9,7 @@ module Qiita
         Filters::Redcarpet,
         Filters::Sanitize,
         Filters::Code,
+        Filters::Checkbox,
         Filters::Toc,
         HTML::Pipeline::EmojiFilter,
         Filters::SyntaxHighlight,

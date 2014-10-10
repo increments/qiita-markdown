@@ -375,5 +375,68 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context "with checkbox list" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          - [ ] a
+          - [x] b
+        EOS
+      end
+
+      it "inserts checkbox" do
+        should eq <<-EOS.strip_heredoc
+          <ul>
+          <li>
+          <input type="checkbox" data-checkbox-index="0">a</li>
+          <li>
+          <input type="checkbox" data-checkbox-index="1" checked>b</li>
+          </ul>
+        EOS
+      end
+    end
+
+    context 'with checkbox list in code block' do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```
+          - [ ] a
+          - [x] b
+          ```
+        EOS
+      end
+
+      it "does not replace checkbox" do
+        should eq <<-EOS.strip_heredoc
+          <div class="code-frame" data-lang="text"><div class="highlight"><pre>- [ ] a
+          - [x] b
+          </pre></div></div>
+        EOS
+      end
+    end
+
+    context "with checkbox list and :checkbox_disabled context" do
+      before do
+        context[:checkbox_disabled] = true
+      end
+
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          - [ ] a
+          - [x] b
+        EOS
+      end
+
+      it "inserts checkbox with disabled attribute" do
+        should eq <<-EOS.strip_heredoc
+          <ul>
+          <li>
+          <input type="checkbox" data-checkbox-index="0" disabled>a</li>
+          <li>
+          <input type="checkbox" data-checkbox-index="1" checked disabled>b</li>
+          </ul>
+        EOS
+      end
+    end
   end
 end
