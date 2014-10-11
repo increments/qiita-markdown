@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = Qiita::Markdown::VERSION
   spec.authors       = ["Ryo Nakamura"]
   spec.email         = ["r7kamura@gmail.com"]
-  spec.summary       = "Qiita-specified markdown renderer."
+  spec.summary       = "Qiita-specified markdown processor."
   spec.homepage      = "https://github.com/increments/qiita-markdown"
   spec.license       = "MIT"
 

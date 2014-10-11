@@ -1,5 +1,14 @@
 # Qiita::Markdown [![Build Status](https://travis-ci.org/increments/qiita-markdown.svg)](https://travis-ci.org/increments/qiita-markdown)
-Qiita-specified markdown renderer.
+Qiita-specified markdown processor.
+
+* Markdown conversion
+* Sanitization
+* Code and language detection
+* Task list
+* ToC
+* Emoji
+* Syntax highlighting
+* Mention
 
 ## Usage
 Qiita::Markdown::Processor provides markdown rendering logic.
