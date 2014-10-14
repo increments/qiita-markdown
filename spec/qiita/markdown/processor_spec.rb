@@ -396,6 +396,30 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with nested checkbox list" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          - [ ] a
+           - [ ] b
+        EOS
+      end
+
+      it "inserts checkbox" do
+        should eq <<-EOS.strip_heredoc
+          <ul>
+          <li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0">a
+
+          <ul>
+          <li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1">b</li>
+          </ul>
+          </li>
+          </ul>
+        EOS
+      end
+    end
+
     context 'with checkbox list in code block' do
       let(:markdown) do
         <<-EOS.strip_heredoc

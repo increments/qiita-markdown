@@ -35,7 +35,8 @@ module Qiita
           end
 
           def convert
-            @node.content = @node.content.sub(checkbox_mark, "")
+            inner = @node.children.first
+            inner.content = inner.content.sub(checkbox_mark, "")
             @node.prepend_child(checkbox_node)
           end
 
@@ -62,7 +63,8 @@ module Qiita
             if instance_variable_defined?(:@has_close_checkbox)
               @has_close_checkbox
             else
-              @has_close_checkbox = @node.content.start_with?(CHECKBOX_CLOSE_MARK)
+              inner = @node.children.first
+              @has_close_checkbox = inner.text? && inner.content.start_with?(CHECKBOX_CLOSE_MARK)
             end
           end
 
@@ -70,7 +72,8 @@ module Qiita
             if instance_variable_defined?(:@has_open_checkbox)
               @has_open_checkbox
             else
-              @has_open_checkbox = @node.content.start_with?(CHECKBOX_OPEN_MARK)
+              inner = @node.children.first
+              @has_open_checkbox = inner.text? && inner.content.start_with?(CHECKBOX_OPEN_MARK)
             end
           end
         end
