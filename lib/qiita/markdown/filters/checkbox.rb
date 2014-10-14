@@ -35,9 +35,9 @@ module Qiita
           end
 
           def convert
-            inner = @node.children.first
-            inner.content = inner.content.sub(checkbox_mark, "")
+            first_text_node.content = first_text_node.content.sub(checkbox_mark, "")
             @node.prepend_child(checkbox_node)
+            @node["class"] = "task-list-item"
           end
 
           private
@@ -57,6 +57,10 @@ module Qiita
             node.children.first["checked"] = true if has_close_checkbox?
             node.children.first["disabled"] = true if @disabled
             node
+          end
+
+          def first_text_node
+            @first_text_node ||= @node.children.first
           end
 
           def has_close_checkbox?
