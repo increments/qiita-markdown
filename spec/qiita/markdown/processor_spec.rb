@@ -388,9 +388,9 @@ describe Qiita::Markdown::Processor do
         should eq <<-EOS.strip_heredoc
           <ul>
           <li>
-          <input type="checkbox" data-checkbox-index="0">a</li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0">a</li>
           <li>
-          <input type="checkbox" data-checkbox-index="1" checked>b</li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked>b</li>
           </ul>
         EOS
       end
@@ -431,9 +431,9 @@ describe Qiita::Markdown::Processor do
         should eq <<-EOS.strip_heredoc
           <ul>
           <li>
-          <input type="checkbox" data-checkbox-index="0" disabled>a</li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0" disabled>a</li>
           <li>
-          <input type="checkbox" data-checkbox-index="1" checked disabled>b</li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked disabled>b</li>
           </ul>
         EOS
       end

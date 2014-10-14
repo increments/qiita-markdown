@@ -51,7 +51,7 @@ module Qiita
           end
 
           def checkbox_node
-            node = Nokogiri::HTML.fragment('<input type="checkbox">')
+            node = Nokogiri::HTML.fragment('<input type="checkbox" class="task-list-item-checkbox">')
             node.children.first["data-checkbox-index"] = @index
             node.children.first["checked"] = true if has_close_checkbox?
             node.children.first["disabled"] = true if @disabled
