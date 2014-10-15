@@ -46,14 +46,14 @@ processor.call(text)
 `.new` and `#call` can take optional context as a Hash with following keys:
 
 ```
-allowed_usernames - A list of usernames allowed to be username. (Array<String>)
-asset_path        - URL path to link to emoji sprite. (String)
-asset_root        - Base URL to link to emoji sprite. (String)
-base_url          - Used to construct links to user profile pages for each. (String)
-default_language  - Default language used if no language detected from code. (String)
-language_aliases  - Alias table for some language names. (Hash)
-rule              - Sanitization rule table. (Hash)
-script            - A flag to allow to embed script element. (Boolean)
+:allowed_usernames - A list of usernames allowed to be username. (Array<String>)
+:asset_path        - URL path to link to emoji sprite. (String)
+:asset_root        - Base URL to link to emoji sprite. (String)
+:base_url          - Used to construct links to user profile pages for each. (String)
+:default_language  - Default language used if no language detected from code. (String)
+:language_aliases  - Alias table for some language names. (Hash)
+:rule              - Sanitization rule table. (Hash)
+:script            - A flag to allow to embed script element. (Boolean)
 ```
 
 ```ruby
