@@ -157,7 +157,7 @@ describe Qiita::Markdown::Processor do
       end
 
       it "removes script element" do
-        should eq "\n"
+        should eq "<p></p>\n"
       end
     end
 
@@ -168,7 +168,7 @@ describe Qiita::Markdown::Processor do
 
       let(:markdown) do
         <<-EOS.strip_heredoc
-          <script>alert(1)</script>
+          <p><script>alert(1)</script></p>
         EOS
       end
 
@@ -184,7 +184,7 @@ describe Qiita::Markdown::Processor do
 
       let(:markdown) do
         <<-EOS.strip_heredoc
-          <script async data-a="b">alert(1)</script>
+          <p><script async data-a="b">alert(1)</script></p>
         EOS
       end
 
