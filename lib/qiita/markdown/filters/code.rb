@@ -7,7 +7,7 @@ module Qiita
       }
 
       # 1. Detects language written in <pre> element.
-      # 2. Adds lang attribute (but this attribute is consumed by syntax highliter).
+      # 2. Adds lang attribute (but this attribute is consumed by syntax highlighter).
       # 3. Adds detected code data into `result[:codes]`.
       #
       # You can pass language aliases table via context[:language_aliases].
