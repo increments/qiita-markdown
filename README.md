@@ -9,6 +9,7 @@ Qiita-specified markdown processor.
 * Emoji
 * Syntax highlighting
 * Mention
+* Task list
 
 ## Usage
 Qiita::Markdown::Processor provides markdown rendering logic.
