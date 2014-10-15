@@ -1,3 +1,6 @@
+## 0.0.7
+* Change dependent gem version
+
 ## 0.0.6
 * Remove target="_blank" from a element of mention
 
