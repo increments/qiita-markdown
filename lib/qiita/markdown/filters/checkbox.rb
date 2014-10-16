@@ -7,14 +7,10 @@ module Qiita
       # * [ ] Bar
       # * [ ] Baz
       #
-      # Takes following context options:
-      #
-      # * :checkbox_disabled - Pass true to add `disabled` attribute to input element
-      #
       class Checkbox < HTML::Pipeline::Filter
         def call
           doc.search("li").each_with_index do |li, index|
-            list = List.new(disabled: context[:checkbox_disabled], index: index, node: li)
+            list = List.new(index: index, node: li)
             list.convert if list.has_checkbox?
           end
           doc
@@ -26,8 +22,7 @@ module Qiita
           CHECKBOX_CLOSE_MARK = "[x] "
           CHECKBOX_OPEN_MARK  = "[ ] "
 
-          def initialize(disabled: nil, index: nil, node: nil)
-            @disabled = disabled
+          def initialize(index: nil, node: nil)
             @index = index
             @node = node
           end
@@ -57,7 +52,7 @@ module Qiita
             node = Nokogiri::HTML.fragment('<input type="checkbox" class="task-list-item-checkbox">')
             node.children.first["data-checkbox-index"] = @index
             node.children.first["checked"] = true if has_close_checkbox?
-            node.children.first["disabled"] = true if @disabled
+            node.children.first["disabled"] = true
             node
           end
 

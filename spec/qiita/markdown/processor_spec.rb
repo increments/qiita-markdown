@@ -388,9 +388,9 @@ describe Qiita::Markdown::Processor do
         should eq <<-EOS.strip_heredoc
           <ul>
           <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0">a</li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0" disabled>a</li>
           <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked>b</li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked disabled>b</li>
           </ul>
         EOS
       end
@@ -408,11 +408,11 @@ describe Qiita::Markdown::Processor do
         should eq <<-EOS.strip_heredoc
           <ul>
           <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0">a
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0" disabled>a
 
           <ul>
           <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1">b</li>
+          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" disabled>b</li>
           </ul>
           </li>
           </ul>
@@ -439,30 +439,6 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context "with task list and :checkbox_disabled context" do
-      before do
-        context[:checkbox_disabled] = true
-      end
-
-      let(:markdown) do
-        <<-EOS.strip_heredoc
-          - [ ] a
-          - [x] b
-        EOS
-      end
-
-      it "inserts checkbox with disabled attribute" do
-        should eq <<-EOS.strip_heredoc
-          <ul>
-          <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0" disabled>a</li>
-          <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked disabled>b</li>
-          </ul>
-        EOS
-      end
-    end
-
     context 'with empty line between task list' do
       let(:markdown) do
         <<-EOS.strip_heredoc
@@ -472,11 +448,11 @@ describe Qiita::Markdown::Processor do
         EOS
       end
 
-      it "inserts checkbox with disabled attribute" do
+      it "inserts checkbox" do
         should eq <<-EOS.strip_heredoc
           <ul>
-          <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0">a</p></li>
-          <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked>b</p></li>
+          <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0" disabled>a</p></li>
+          <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked disabled>b</p></li>
           </ul>
         EOS
       end
