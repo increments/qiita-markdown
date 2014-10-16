@@ -1,3 +1,6 @@
+## 0.0.8
+* Support gapped task list
+
 ## 0.0.7
 * Change dependent gem version
 
