@@ -71,15 +71,15 @@ module Qiita
             end
           end
 
-          memoize\
           def has_close_checkbox?
-            @has_close_checkbox = first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_CLOSE_MARK)
+            first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_CLOSE_MARK)
           end
+          memoize :has_close_checkbox?
 
-          memoize\
           def has_open_checkbox?
-            @has_open_checkbox = first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_OPEN_MARK)
+            first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_OPEN_MARK)
           end
+          memoize :has_open_checkbox?
         end
       end
     end
