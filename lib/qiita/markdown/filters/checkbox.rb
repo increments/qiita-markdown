@@ -21,6 +21,8 @@ module Qiita
         end
 
         class List
+          include Mem
+
           CHECKBOX_CLOSE_MARK = "[x] "
           CHECKBOX_OPEN_MARK  = "[ ] "
 
@@ -36,7 +38,7 @@ module Qiita
 
           def convert
             first_text_node.content = first_text_node.content.sub(checkbox_mark, "")
-            @node.prepend_child(checkbox_node)
+            first_text_node.add_previous_sibling(checkbox_node)
             @node["class"] = "task-list-item"
           end
 
@@ -60,25 +62,23 @@ module Qiita
           end
 
           def first_text_node
-            @first_text_node ||= @node.children.first
+            @first_text_node ||= begin
+              if @node.children.first.name == "p"
+                @node.children.first.children.first
+              else
+                @node.children.first
+              end
+            end
           end
 
+          memoize\
           def has_close_checkbox?
-            if instance_variable_defined?(:@has_close_checkbox)
-              @has_close_checkbox
-            else
-              inner = @node.children.first
-              @has_close_checkbox = inner.text? && inner.content.start_with?(CHECKBOX_CLOSE_MARK)
-            end
+            @has_close_checkbox = first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_CLOSE_MARK)
           end
 
+          memoize\
           def has_open_checkbox?
-            if instance_variable_defined?(:@has_open_checkbox)
-              @has_open_checkbox
-            else
-              inner = @node.children.first
-              @has_open_checkbox = inner.text? && inner.content.start_with?(CHECKBOX_OPEN_MARK)
-            end
+            @has_open_checkbox = first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_OPEN_MARK)
           end
         end
       end

@@ -1,6 +1,7 @@
 require "active_support/core_ext/object/blank"
 require "html/pipeline"
 require "linguist"
+require "mem"
 require "nokogiri"
 require "redcarpet"
 require "sanitize"
