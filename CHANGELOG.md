@@ -1,3 +1,6 @@
+## 0.0.9
+* Make it Ruby 2.0.0-compatible
+
 ## 0.0.8
 * Support gapped task list
 
