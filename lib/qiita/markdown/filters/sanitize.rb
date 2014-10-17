@@ -89,6 +89,7 @@ module Qiita
               "itemprop",
               "lang",
               "name",
+              "rowspan",
               "tabindex",
               "target",
               "title",
