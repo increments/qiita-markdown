@@ -457,5 +457,19 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context 'with empty list' do
+      let(:markdown) do
+        "- \n"
+      end
+
+      it "inserts checkbox" do
+        should eq <<-EOS.strip_heredoc
+          <ul>
+          <li>
+          </ul>
+        EOS
+      end
+    end
   end
 end

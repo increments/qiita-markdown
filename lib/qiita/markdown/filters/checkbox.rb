@@ -57,22 +57,21 @@ module Qiita
           end
 
           def first_text_node
-            @first_text_node ||= begin
-              if @node.children.first.name == "p"
-                @node.children.first.children.first
-              else
-                @node.children.first
-              end
+            if @node.children.first && @node.children.first.name == "p"
+              @node.children.first.children.first
+            else
+              @node.children.first
             end
           end
+          memoize :first_text_node
 
           def has_close_checkbox?
-            first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_CLOSE_MARK)
+            !!first_text_node && first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_CLOSE_MARK)
           end
           memoize :has_close_checkbox?
 
           def has_open_checkbox?
-            first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_OPEN_MARK)
+            !!first_text_node && first_text_node.text? && first_text_node.content.start_with?(CHECKBOX_OPEN_MARK)
           end
           memoize :has_open_checkbox?
         end
