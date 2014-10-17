@@ -1,3 +1,6 @@
+## 0.1.2
+* Support rowspan attribute
+
 ## 0.1.1
 * Support empty list
 
