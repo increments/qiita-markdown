@@ -2,7 +2,7 @@
 * Support empty list
 
 ## 0.1.0
-* Default to add diabled attribute to checkbox
+* Default to add disabled attribute to checkbox
 
 ## 0.0.9
 * Make it Ruby 2.0.0-compatible
