@@ -1,3 +1,6 @@
+## 0.1.1
+* Support empty list
+
 ## 0.1.0
 * Default to add diabled attribute to checkbox
 
