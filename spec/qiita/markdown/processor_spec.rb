@@ -388,9 +388,9 @@ describe Qiita::Markdown::Processor do
         should eq <<-EOS.strip_heredoc
           <ul>
           <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0" disabled>a</li>
+          <input type="checkbox" class="task-list-item-checkbox" disabled>a</li>
           <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked disabled>b</li>
+          <input type="checkbox" class="task-list-item-checkbox" checked disabled>b</li>
           </ul>
         EOS
       end
@@ -408,11 +408,11 @@ describe Qiita::Markdown::Processor do
         should eq <<-EOS.strip_heredoc
           <ul>
           <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0" disabled>a
+          <input type="checkbox" class="task-list-item-checkbox" disabled>a
 
           <ul>
           <li class="task-list-item">
-          <input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" disabled>b</li>
+          <input type="checkbox" class="task-list-item-checkbox" disabled>b</li>
           </ul>
           </li>
           </ul>
@@ -451,8 +451,8 @@ describe Qiita::Markdown::Processor do
       it "inserts checkbox" do
         should eq <<-EOS.strip_heredoc
           <ul>
-          <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="0" disabled>a</p></li>
-          <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" data-checkbox-index="1" checked disabled>b</p></li>
+          <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" disabled>a</p></li>
+          <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" checked disabled>b</p></li>
           </ul>
         EOS
       end

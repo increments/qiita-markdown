@@ -9,8 +9,8 @@ module Qiita
       #
       class Checkbox < HTML::Pipeline::Filter
         def call
-          doc.search("li").each_with_index do |li, index|
-            list = List.new(index: index, node: li)
+          doc.search("li").each do |li|
+            list = List.new(li)
             list.convert if list.has_checkbox?
           end
           doc
@@ -22,8 +22,7 @@ module Qiita
           CHECKBOX_CLOSE_MARK = "[x] "
           CHECKBOX_OPEN_MARK  = "[ ] "
 
-          def initialize(index: nil, node: nil)
-            @index = index
+          def initialize(node)
             @node = node
           end
 
@@ -50,7 +49,6 @@ module Qiita
 
           def checkbox_node
             node = Nokogiri::HTML.fragment('<input type="checkbox" class="task-list-item-checkbox">')
-            node.children.first["data-checkbox-index"] = @index
             node.children.first["checked"] = true if has_close_checkbox?
             node.children.first["disabled"] = true
             node
