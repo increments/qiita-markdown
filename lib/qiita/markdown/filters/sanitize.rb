@@ -70,6 +70,9 @@ module Qiita
               "async",
               "src",
             ],
+            "td" => [
+              "style",
+            ],
             all: [
               "abbr",
               "align",
@@ -95,6 +98,11 @@ module Qiita
               "title",
               "width",
               :data,
+            ],
+          },
+          css: {
+            properties: [
+              "text-align",
             ],
           },
           elements: [

@@ -471,5 +471,36 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context 'with text-aligned table' do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          | a  | b  | c   |
+          |:---|---:|:---:|
+          | a  | b  | c   |
+        EOS
+      end
+
+      it "creates table element with text-align style" do
+        should eq <<-EOS.strip_heredoc
+          <table>
+          <thead>
+          <tr>
+          <th>a</th>
+          <th>b</th>
+          <th>c</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+          <td style="text-align: left">a</td>
+          <td style="text-align: right">b</td>
+          <td style="text-align: center">c</td>
+          </tr>
+          </tbody>
+          </table>
+        EOS
+      end
+    end
   end
 end
