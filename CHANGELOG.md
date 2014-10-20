@@ -1,3 +1,6 @@
+## 0.1.3
+* Support text-align syntax on table
+
 ## 0.1.2
 * Support rowspan attribute
 
