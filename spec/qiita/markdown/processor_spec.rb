@@ -177,14 +177,14 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context "with data-attribute" do
+    context "with allowed attributes" do
       before do
         context[:script] = true
       end
 
       let(:markdown) do
         <<-EOS.strip_heredoc
-          <p><script async data-a="b">alert(1)</script></p>
+          <p><script async data-a="b" type="text/javascript">alert(1)</script></p>
         EOS
       end
 

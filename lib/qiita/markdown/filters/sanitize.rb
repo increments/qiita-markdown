@@ -69,6 +69,7 @@ module Qiita
             "script" => [
               "async",
               "src",
+              "type"
             ],
             "td" => [
               "style",
