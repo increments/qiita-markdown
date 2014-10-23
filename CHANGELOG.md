@@ -1,3 +1,6 @@
+## 0.1.4
+* Support type attribute of script element
+
 ## 0.1.3
 * Support text-align syntax on table
 
