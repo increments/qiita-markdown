@@ -8,7 +8,7 @@ module Qiita
           # Memoize.
           # @return [Redcarpet::Markdown]
           def renderer
-            @renderer = ::Redcarpet::Markdown.new(
+            @renderer ||= ::Redcarpet::Markdown.new(
               ::Redcarpet::Render::HTML.new(
                 hard_wrap: true,
               ),
