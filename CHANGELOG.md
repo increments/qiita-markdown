@@ -1,3 +1,6 @@
+## 0.1.5
+* Memoize Redcarpet::Markdown object
+
 ## 0.1.4
 * Support type attribute of script element
 
