@@ -5,6 +5,7 @@ require "mem"
 require "nokogiri"
 require "redcarpet"
 require "sanitize"
+require "pygments"
 
 require "qiita/markdown/filters/checkbox"
 require "qiita/markdown/filters/code"
