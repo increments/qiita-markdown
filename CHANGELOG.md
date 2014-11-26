@@ -1,3 +1,6 @@
+## 0.1.6
+* Add missing dependency on pygments.rb (thx @kwappa)
+
 ## 0.1.5
 * Memoize Redcarpet::Markdown object
 
