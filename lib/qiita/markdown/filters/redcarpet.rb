@@ -14,6 +14,7 @@ module Qiita
               ),
               autolink: true,
               fenced_code_blocks: true,
+              footnotes: true,
               no_intra_emphasis: true,
               strikethrough: true,
               tables: true,
