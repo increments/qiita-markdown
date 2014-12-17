@@ -8,6 +8,7 @@ module Qiita
       DEFAULT_FILTERS = [
         Filters::Redcarpet,
         Filters::Sanitize,
+        Filters::Footnote,
         Filters::Code,
         Filters::Checkbox,
         Filters::Toc,

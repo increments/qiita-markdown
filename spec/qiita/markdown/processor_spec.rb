@@ -513,7 +513,7 @@ describe Qiita::Markdown::Processor do
 
       it "generates footnotes elements" do
         should eq <<-EOS.strip_heredoc
-          <p><sup id="fnref1"><a href="#fn1">1</a></sup></p>
+          <p><sup id="fnref1"><a href="#fn1" title="test">1</a></sup></p>
 
           <div class="footnotes">
           <hr>
