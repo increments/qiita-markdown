@@ -91,7 +91,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context 'with code & filename' do
+    context "with code & filename" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           ```example.rb
@@ -100,7 +100,7 @@ describe Qiita::Markdown::Processor do
         EOS
       end
 
-      it 'returns code-frame, code-lang, and highlighted pre element' do
+      it "returns code-frame, code-lang, and highlighted pre element" do
         should eq <<-EOS.strip_heredoc
           <div class="code-frame" data-lang="ruby">
           <div class="code-lang"><span class="bold">example.rb</span></div>
@@ -112,7 +112,7 @@ describe Qiita::Markdown::Processor do
 
     end
 
-    context 'with code & no filename' do
+    context "with code & no filename" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           ```ruby
@@ -121,7 +121,7 @@ describe Qiita::Markdown::Processor do
         EOS
       end
 
-      it 'returns code-frame and highlighted pre element' do
+      it "returns code-frame and highlighted pre element" do
         should eq <<-EOS.strip_heredoc
           <div class="code-frame" data-lang="ruby"><div class="highlight"><pre><span class="mi">1</span>
           </pre></div></div>
@@ -326,7 +326,7 @@ describe Qiita::Markdown::Processor do
       end
 
       it "replaces it with img element" do
-        should include('img')
+        should include("img")
       end
     end
 
@@ -340,7 +340,7 @@ describe Qiita::Markdown::Processor do
       end
 
       it "does not replace it" do
-        should_not include('img')
+        should_not include("img")
       end
     end
 
@@ -420,7 +420,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context 'with task list in code block' do
+    context "with task list in code block" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           ```
@@ -439,7 +439,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context 'with empty line between task list' do
+    context "with empty line between task list" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           - [ ] a
@@ -458,7 +458,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context 'with empty list' do
+    context "with empty list" do
       let(:markdown) do
         "- \n"
       end
@@ -472,7 +472,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context 'with text-aligned table' do
+    context "with text-aligned table" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           | a  | b  | c   |
