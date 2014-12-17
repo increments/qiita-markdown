@@ -157,7 +157,7 @@ describe Qiita::Markdown::Processor do
       end
 
       it "removes script element" do
-        should eq "<p></p>\n"
+        should eq "\n"
       end
     end
 
