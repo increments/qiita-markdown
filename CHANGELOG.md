@@ -1,3 +1,6 @@
+## 0.1.8
+- Add title attribute into footnote link element
+
 ## 0.1.7
 - Enable footnotes markdown syntax
 
