@@ -10,6 +10,7 @@ Qiita-specified markdown processor.
 * Syntax highlighting
 * Mention
 * Task list
+* Footnotes
 
 ## Usage
 Qiita::Markdown::Processor provides markdown rendering logic.
