@@ -502,5 +502,31 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context 'with footenotes syntax' do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          [^1]
+          [^1]: test
+        EOS
+      end
+
+      it "generates footnotes elements" do
+        should eq <<-EOS.strip_heredoc
+          <p><sup id="fnref1"><a href="#fn1">1</a></sup></p>
+
+          <div class="footnotes">
+          <hr>
+          <ol>
+
+          <li id="fn1">
+          <p>test <a href="#fnref1">↩</a></p>
+          </li>
+
+          </ol>
+          </div>
+        EOS
+      end
+    end
   end
 end
