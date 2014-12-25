@@ -1,3 +1,6 @@
+## 0.1.9
+- Fix a bug that raised error while rendering links with absolute URI inside of `<sup>` tag (e.g. `<sup>[Qiita](http://qiita.com/)</sup>`)
+
 ## 0.1.8
 - Add title attribute into footnote link element
 
