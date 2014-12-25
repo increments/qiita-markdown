@@ -4,7 +4,8 @@ module Qiita
       class Footnote < HTML::Pipeline::Filter
         def call
           doc.search("sup > a").each do |a|
-            if li = doc.search(a["href"]).first
+            href = a["href"]
+            if href.start_with?("#") && (li = doc.search(href).first)
               a[:title] = li.text.gsub(/\A\n/, "").gsub(/ ↩\n\z/, "")
             end
           end

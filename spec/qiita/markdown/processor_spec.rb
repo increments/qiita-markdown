@@ -528,5 +528,19 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context 'with manually written link inside of <sup> tag' do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <sup>[Qiita](http://qiita.com/)</sup>
+        EOS
+      end
+
+      it "does not confuse the structure with automatically generated footnote reference" do
+        should eq <<-EOS.strip_heredoc
+          <p><sup><a href="http://qiita.com/">Qiita</a></sup></p>
+        EOS
+      end
+    end
   end
 end
