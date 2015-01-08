@@ -1,3 +1,6 @@
+## 0.2.0
+- Support text-align style on table syntax (thx @uribou)
+
 ## 0.1.9
 - Fix a bug that raised error while rendering links with absolute URI inside of `<sup>` tag (e.g. `<sup>[Qiita](http://qiita.com/)</sup>`)
 
