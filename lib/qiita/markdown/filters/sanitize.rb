@@ -74,6 +74,9 @@ module Qiita
             "td" => [
               "style",
             ],
+            "th" => [
+              "style",
+            ],
             all: [
               "abbr",
               "align",
