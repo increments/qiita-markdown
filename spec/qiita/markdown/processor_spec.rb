@@ -486,9 +486,9 @@ describe Qiita::Markdown::Processor do
           <table>
           <thead>
           <tr>
-          <th>a</th>
-          <th>b</th>
-          <th>c</th>
+          <th style="text-align: left">a</th>
+          <th style="text-align: right">b</th>
+          <th style="text-align: center">c</th>
           </tr>
           </thead>
           <tbody>
