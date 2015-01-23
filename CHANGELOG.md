@@ -1,3 +1,6 @@
+## 0.2.1
+- Strengthen sanitization (thx xrekkusu)
+
 ## 0.2.0
 - Support text-align style on table syntax (thx @uribou)
 
