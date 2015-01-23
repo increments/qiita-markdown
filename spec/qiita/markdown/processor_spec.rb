@@ -109,7 +109,26 @@ describe Qiita::Markdown::Processor do
           </div>
         EOS
       end
+    end
 
+    context "with malicious script in filename" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```js:test<script>alert(1)</script>
+          1
+          ```
+        EOS
+      end
+
+      it "sanitizes script element" do
+        should eq <<-EOS.strip_heredoc
+          <div class="code-frame" data-lang="js">
+          <div class="code-lang"><span class="bold">test</span></div>
+          <div class="highlight"><pre><span class="mi">1</span>
+          </pre></div>
+          </div>
+        EOS
+      end
     end
 
     context "with code & no filename" do

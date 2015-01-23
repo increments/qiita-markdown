@@ -7,7 +7,6 @@ module Qiita
 
       DEFAULT_FILTERS = [
         Filters::Redcarpet,
-        Filters::Sanitize,
         Filters::Footnote,
         Filters::Code,
         Filters::Checkbox,
@@ -15,6 +14,7 @@ module Qiita
         HTML::Pipeline::EmojiFilter,
         Filters::SyntaxHighlight,
         Filters::Mention,
+        Filters::Sanitize,
       ]
 
       # @param [Hash] context Optional context for HTML::Pipeline.
