@@ -62,6 +62,11 @@ module Qiita
             "img" => [
               "src",
             ],
+            "input" => [
+              "checked",
+              "disabled",
+              "type",
+            ],
             "div" => [
               "itemscope",
               "itemtype",
@@ -133,6 +138,7 @@ module Qiita
             "hr",
             "i",
             "img",
+            "input",
             "ins",
             "kbd",
             "li",
@@ -145,6 +151,7 @@ module Qiita
             "ruby",
             "s",
             "samp",
+            "span",
             "strike",
             "strong",
             "sub",
