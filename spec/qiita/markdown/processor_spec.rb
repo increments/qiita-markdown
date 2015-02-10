@@ -561,5 +561,19 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context 'with manually written <a> tag with strange href inside of <sup> tag' do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <sup><a href="#foo.1">Link</a></sup>
+        EOS
+      end
+
+      it "does not confuse the structure with automatically generated footnote reference" do
+        should eq <<-EOS.strip_heredoc
+          <p><sup><a href="#foo.1">Link</a></sup></p>
+        EOS
+      end
+    end
   end
 end
