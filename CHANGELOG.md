@@ -1,4 +1,6 @@
 ## Unreleased
+
+## 0.3.0
 - Introduce another processor Qiita::Markdown::SummaryProcessor, which is for rendering a summary of markdown document.
 
 ## 0.2.2
