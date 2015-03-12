@@ -12,7 +12,7 @@ Qiita-specified markdown processor.
 * Task list
 * Footnotes
 
-## Usage
+## Basic Usage
 Qiita::Markdown::Processor provides markdown rendering logic.
 
 ```ruby
@@ -60,5 +60,31 @@ processor.call(text)
 
 ```ruby
 processor = Qiita::Markdown::Processor.new(asset_root: "http://example.com/assets")
+processor.call(text)
+```
+
+## Rendering Summary
+There's another processor Qiita::Markdown::SummaryProcessor,
+which is for rendering a summary of markdown document.
+It simplifies a document by removing complex markups
+and also truncates it to a specific length without breaking the document structure.
+
+Note that this processor does not produce the `:codes` output in contrast to the Processor.
+
+### Context
+
+SummaryProcessor accepts the following context in addition to the Processor's context:
+
+```ruby
+{
+  truncate: {
+    length: 100,  # Documents will be truncated if it exceeds this character count. (Integer)
+    omission: '…' # A string added to the end of document when it's truncated. (String, nil)
+  }
+}
+```
+
+```ruby
+processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 80 })
 processor.call(text)
 ```

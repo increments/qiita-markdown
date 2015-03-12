@@ -15,7 +15,7 @@ module Qiita
         def call
           result[:codes] ||= []
           doc.search("pre").each do |pre|
-            if code = pre.at("code")
+            if (code = pre.at("code"))
               label = Label.new(code["class"])
               filename = label.filename
               language = label.language

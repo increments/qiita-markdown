@@ -47,7 +47,7 @@ module Qiita
           end
 
           def id
-            @node.text.downcase.gsub(/[^\p{Word}\- ]/u, '').gsub(' ', '-')
+            @node.text.downcase.gsub(/[^\p{Word}\- ]/u, "").gsub(" ", "-")
           end
 
           def increment

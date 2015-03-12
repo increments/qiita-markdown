@@ -256,13 +256,13 @@ describe Qiita::Markdown::Processor do
           @justin
           @justin
           @mallory@github
-          @#{?o * 33}
+          @#{'o' * 33}
           @oo
         EOS
       end
 
       it "extracts mentions correctly" do
-        expect(result[:mentioned_usernames]).to eq %W[
+        expect(result[:mentioned_usernames]).to eq %w[
           alice
           dave
           ell_en
@@ -522,7 +522,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context 'with footenotes syntax' do
+    context "with footenotes syntax" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           [^1]
@@ -548,7 +548,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context 'with manually written link inside of <sup> tag' do
+    context "with manually written link inside of <sup> tag" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           <sup>[Qiita](http://qiita.com/)</sup>
@@ -562,7 +562,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context 'with manually written <a> tag with strange href inside of <sup> tag' do
+    context "with manually written <a> tag with strange href inside of <sup> tag" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           <sup><a href="#foo.1">Link</a></sup>
