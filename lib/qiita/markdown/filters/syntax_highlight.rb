@@ -32,7 +32,7 @@ module Qiita
 
           def call
             outer = Nokogiri::HTML.fragment(%Q[<div class="code-frame" data-lang="#{language}">])
-            frame = outer.at('div')
+            frame = outer.at("div")
             frame.add_child(filename_node) if filename
             frame.add_child(highlighted_node)
             @node.replace(outer)
