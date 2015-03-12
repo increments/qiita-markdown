@@ -1,3 +1,6 @@
+## Unreleased
+- Introduce another processor Qiita::Markdown::SummaryProcessor, which is for rendering a summary of markdown document.
+
 ## 0.2.2
 - Fix a bug that raised error on rendering `<a>` tag with href for unknown fragment inside of `<sup>` tag (e.g. `<sup><a href="#foo.1">Link</a></sup>`)
 
