@@ -274,6 +274,20 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with mention to a user suffixed with _ and a preceding word prefixed with _" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          _symbol @user_
+        EOS
+      end
+
+      it "does not treat the mention as a part of emphasis" do
+        should eq <<-EOS.strip_heredoc
+          <p>_symbol <a href="/user_" class="user-mention" title="user_">@user_</a></p>
+        EOS
+      end
+    end
+
     context "with allowed_usernames context" do
       before do
         context[:allowed_usernames] = ["alice"]

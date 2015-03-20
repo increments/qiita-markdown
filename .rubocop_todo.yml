@@ -36,10 +36,6 @@ Style/AndOr:
 Style/BarePercentLiterals:
   Enabled: false
 
-# Offense count: 1
-Style/ConstantName:
-  Enabled: false
-
 # Offense count: 10
 Style/Documentation:
   Enabled: false

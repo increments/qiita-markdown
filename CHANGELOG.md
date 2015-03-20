@@ -1,4 +1,5 @@
 ## Unreleased
+- Fix an issue that mentions to username suffixed with `_` and a preceding word prefixed with `_` were treated as emphasis (e.g. `_some_symbol @user_`).
 
 ## 0.3.0
 - Introduce another processor Qiita::Markdown::SummaryProcessor, which is for rendering a summary of markdown document.
