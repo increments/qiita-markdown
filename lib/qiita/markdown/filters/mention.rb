@@ -6,7 +6,7 @@ module Qiita
       #
       # You can pass :allowed_usernames context to limit mentioned usernames.
       class Mention < HTML::Pipeline::MentionFilter
-        MentionPattern = /
+        MENTION_PATTERN = /
           (?:^|\W)
           @((?>[\w][\w-]{1,30}\w(?:@github)?))
           (?!\/)
@@ -20,7 +20,7 @@ module Qiita
 
         # @note Override to use customized MentionPattern and allowed_usernames logic.
         def mention_link_filter(text, _, _)
-          text.gsub(MentionPattern) do |match|
+          text.gsub(MENTION_PATTERN) do |match|
             name = $1
             if allowed_usernames && !allowed_usernames.include?(name)
               match
