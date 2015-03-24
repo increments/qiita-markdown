@@ -1,21 +1,22 @@
-require "redcarpet"
+require "greenmat"
 
 module Qiita
   module Markdown
     module Filters
-      class Redcarpet < HTML::Pipeline::TextFilter
+      class Greenmat < HTML::Pipeline::TextFilter
         class << self
           # Memoize.
-          # @return [Redcarpet::Markdown]
+          # @return [Greenmat::Markdown]
           def renderer
-            @renderer ||= ::Redcarpet::Markdown.new(
-              ::Redcarpet::Render::HTML.new(
+            @renderer ||= ::Greenmat::Markdown.new(
+              ::Greenmat::Render::HTML.new(
                 hard_wrap: true,
               ),
               autolink: true,
               fenced_code_blocks: true,
               footnotes: true,
               no_intra_emphasis: true,
+              no_mention_emphasis: true,
               strikethrough: true,
               tables: true,
             )
