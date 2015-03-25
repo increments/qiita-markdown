@@ -274,6 +274,18 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with mention to user whose name starts and ends with underscore" do
+      let(:markdown) do
+        "@_alice_"
+      end
+
+      it "does not emphasize the name" do
+        should include(<<-EOS.strip_heredoc.rstrip)
+          <a href="/_alice_" class="user-mention" title="_alice_">@_alice_</a>
+        EOS
+      end
+    end
+
     context "with allowed_usernames context" do
       before do
         context[:allowed_usernames] = ["alice"]
