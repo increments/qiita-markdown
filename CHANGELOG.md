@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.4.0
+- Replace the core renderer redcarpet with greenmat, which is a fork of redcarpet.
+- Fix a bug where mentions with username including underscores (e.g. `@_username_`) was wrongly emphasized.
+
 ## 0.3.0
 - Introduce another processor Qiita::Markdown::SummaryProcessor, which is for rendering a summary of markdown document.
 
