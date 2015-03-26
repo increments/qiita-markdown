@@ -40,6 +40,10 @@ module Qiita
         def allowed_usernames
           context[:allowed_usernames]
         end
+
+        def has_ancestor?(node, tags)
+          super || node.parent.parent["class"] == "code-lang"
+        end
       end
     end
   end

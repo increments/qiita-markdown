@@ -274,6 +274,26 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with mention-like filename on code block" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```ruby:@alice
+          1
+          ```
+        EOS
+      end
+
+      it "does not treat it as mention" do
+        should include(<<-EOS.strip_heredoc.rstrip)
+          <div class="code-frame" data-lang="ruby">
+          <div class="code-lang"><span class="bold">@alice</span></div>
+          <div class="highlight"><pre><span class="mi">1</span>
+          </pre></div>
+          </div>
+        EOS
+      end
+    end
+
     context "with mention to user whose name starts and ends with underscore" do
       let(:markdown) do
         "@_alice_"
