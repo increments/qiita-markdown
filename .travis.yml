@@ -1,6 +1,9 @@
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install libicu-dev
+- sudo apt-get update -qq
+- sudo apt-get install libicu-dev
 language: ruby
 rvm:
 - 2.0.0
+env:
+  global:
+    secure: n8eyxYYfxLApgR4YGKqbrOgGlraIyLyoql4K4DvLZV4kqfGf9LLsPdP7Shudqrv5k2h8xIwnJVnwcPZx9YCu5WWYrJd7vmivpU2j52LwFPYRM+GFNcu7TXmzcNSPG8agnc5We9amF5zJY6XSTpzWpxyqfIwEZM75iR6XXuHuLFk=
