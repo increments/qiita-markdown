@@ -1,3 +1,6 @@
+## 0.4.2
+- Fix bug on SummaryProcessor with mention
+
 ## 0.4.1
 - Ignore mention in filename label
 
