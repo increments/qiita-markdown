@@ -1,4 +1,5 @@
-## Unreleased
+## 0.4.1
+- Ignore mention in filename label
 
 ## 0.4.0
 - Replace the core renderer redcarpet with greenmat, which is a fork of redcarpet.
