@@ -42,7 +42,7 @@ module Qiita
         end
 
         def has_ancestor?(node, tags)
-          super || node.parent.parent["class"] == "code-lang"
+          super || node.parent.parent && node.parent.parent["class"] == "code-lang"
         end
       end
     end
