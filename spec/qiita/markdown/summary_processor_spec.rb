@@ -231,5 +231,17 @@ describe Qiita::Markdown::SummaryProcessor do
         should eq "Lorem ipsu"
       end
     end
+
+    context "with mention" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          @alice
+        EOS
+      end
+
+      it "replaces mention with link" do
+        should eq %{<a href="/alice" class="user-mention" title="alice">@alice</a>\n}
+      end
+    end
   end
 end
