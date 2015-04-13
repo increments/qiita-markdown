@@ -9,7 +9,6 @@ Qiita-specified markdown processor.
 * Emoji
 * Syntax highlighting
 * Mention
-* Task list
 * Footnotes
 
 ## Basic Usage
