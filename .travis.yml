@@ -4,6 +4,8 @@ before_install:
 language: ruby
 rvm:
   - 2.0.0
+  - 2.1
+  - 2.2
 env:
   global:
     secure: n8eyxYYfxLApgR4YGKqbrOgGlraIyLyoql4K4DvLZV4kqfGf9LLsPdP7Shudqrv5k2h8xIwnJVnwcPZx9YCu5WWYrJd7vmivpU2j52LwFPYRM+GFNcu7TXmzcNSPG8agnc5We9amF5zJY6XSTpzWpxyqfIwEZM75iR6XXuHuLFk=
