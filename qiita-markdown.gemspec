@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "greenmat", ">= 3.2.0.2", "< 4"
   spec.add_dependency "rugged", ">= 0.21.1b2"
   spec.add_dependency "sanitize"
+  spec.add_development_dependency "benchmark-ips", "~> 1.2"
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "codeclimate-test-reporter", "0.4.4"
   spec.add_development_dependency "pry"
