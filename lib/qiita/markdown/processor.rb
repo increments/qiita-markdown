@@ -10,7 +10,6 @@ module Qiita
         Filters::Footnote,
         Filters::Code,
         Filters::Checkbox,
-        Filters::Toc,
         HTML::Pipeline::EmojiFilter,
         Filters::SyntaxHighlight,
         Filters::Mention,

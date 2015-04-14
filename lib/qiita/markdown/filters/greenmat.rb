@@ -1,31 +1,27 @@
-require "greenmat"
-
 module Qiita
   module Markdown
     module Filters
       class Greenmat < HTML::Pipeline::TextFilter
-        class << self
-          # Memoize.
-          # @return [Greenmat::Markdown]
-          def renderer
-            @renderer ||= ::Greenmat::Markdown.new(
-              ::Greenmat::Render::HTML.new(
-                hard_wrap: true,
-              ),
-              autolink: true,
-              fenced_code_blocks: true,
-              footnotes: true,
-              no_intra_emphasis: true,
-              no_mention_emphasis: true,
-              strikethrough: true,
-              tables: true,
-            )
-          end
-        end
-
         # @return [Nokogiri::HTML::DocumentFragment]
         def call
-          Nokogiri::HTML.fragment(self.class.renderer.render(@text))
+          Nokogiri::HTML.fragment(greenmat.render(@text))
+        end
+
+        private
+
+        # Memoize.
+        # @return [Greenmat::Markdown]
+        def greenmat
+          @renderer ||= ::Greenmat::Markdown.new(
+            Qiita::Markdown::Greenmat::HTMLRenderer.new(hard_wrap: true, with_toc_data: true),
+            autolink: true,
+            fenced_code_blocks: true,
+            footnotes: true,
+            no_intra_emphasis: true,
+            no_mention_emphasis: true,
+            strikethrough: true,
+            tables: true,
+          )
         end
       end
     end

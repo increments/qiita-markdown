@@ -56,6 +56,7 @@ describe Qiita::Markdown::Processor do
 
       it "adds ID for ToC" do
         should eq <<-EOS.strip_heredoc
+
           <h1>
           <span id="a" class="fragment"></span><a href="#a"><i class="fa fa-link"></i></a>a</h1>
 
