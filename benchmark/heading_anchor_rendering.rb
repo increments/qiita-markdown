@@ -160,11 +160,11 @@ module Rendering
           @counter ||= Hash.new(0)
         end
 
-        Heading = Struct.new(:text, :level, :counter) do
+        Heading = Struct.new(:body, :level, :counter) do
           # For reference, C implementation of Redcarpet::Render::HTML#header is the following:
           # https://github.com/vmg/redcarpet/blob/v3.2.3/ext/redcarpet/html.c#L281-L296
           def to_s
-            "\n<h#{level}>#{content}</h#{level}>\n"
+            "\n<h#{level}>#{body}</h#{level}>\n"
           end
 
           def increment
@@ -174,20 +174,20 @@ module Rendering
           private
 
           def content
-            text
+            body
           end
         end
 
         class HeadingWithAnchor < Heading
+          def to_s
+            "\n<h#{level}>#{anchor_element}#{body}</h#{level}>\n"
+          end
+
           def increment
             counter[id] += 1
           end
 
           private
-
-          def content
-            anchor_element + text
-          end
 
           def anchor_element
             %(<span id="#{suffixed_id}" class="fragment"></span><a href="##{suffixed_id}"><i class="fa fa-link"></i></a>)
@@ -203,6 +203,10 @@ module Rendering
 
           def id
             @id ||= text.downcase.gsub(/[^\p{Word}\- ]/u, "").gsub(" ", "-")
+          end
+
+          def text
+            Nokogiri::HTML.fragment(body).text
           end
 
           def suffix
@@ -234,12 +238,11 @@ end
 
 # Calculating -------------------------------------
 #         post process         4 i/100ms
-#            rendering        22 i/100ms
+#            rendering        14 i/100ms
 # -------------------------------------------------
-#         post process       48.3 (±16.6%) i/s -        236 in   5.027265s
-#            rendering      227.3 (±15.8%) i/s -       1122 in   5.084983s
+#         post process       44.9 (±13.4%) i/s -        224 in   5.066301s
+#            rendering      151.1 (±16.5%) i/s -        742 in   5.057789s
 #
 # Comparison:
-#            rendering:      227.3 i/s
-#         post process:       48.3 i/s - 4.70x slower
-#
+#            rendering:      151.1 i/s
+#         post process:       44.9 i/s - 3.36x slower

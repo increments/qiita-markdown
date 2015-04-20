@@ -6,7 +6,7 @@ module Qiita
           @counter ||= Hash.new(0)
         end
 
-        AbstractHeading = Struct.new(:text, :level, :counter) do
+        AbstractHeading = Struct.new(:body, :level, :counter) do
           def to_s
             fail NotImplementedError
           end
@@ -27,6 +27,10 @@ module Qiita
 
           def id
             @id ||= text.downcase.gsub(/[^\p{Word}\- ]/u, "").gsub(" ", "-")
+          end
+
+          def text
+            Nokogiri::HTML.fragment(body).text
           end
 
           def suffix

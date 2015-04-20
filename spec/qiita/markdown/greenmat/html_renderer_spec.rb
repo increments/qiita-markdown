@@ -31,6 +31,21 @@ describe Qiita::Markdown::Greenmat::HTMLRenderer do
           <h3><span id="a-3" class="fragment"></span><a href="#a-3"><i class="fa fa-link"></i></a>a</h3>
         EOS
       end
+
+      context "and heading title including special HTML characters" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            # <b>R&amp;B</b>
+          EOS
+        end
+
+        it "generates fragment identifier by sanitizing the characters in the title" do
+          should eq <<-EOS.strip_heredoc
+
+            <h1><span id="rb" class="fragment"></span><a href="#rb"><i class="fa fa-link"></i></a><b>R&amp;B</b></h1>
+          EOS
+        end
+      end
     end
 
     context "without :with_toc_data extension" do

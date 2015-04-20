@@ -26,7 +26,7 @@ module Qiita
           # For reference, C implementation of Redcarpet::Render::HTML#header is the following:
           # https://github.com/vmg/redcarpet/blob/v3.2.3/ext/redcarpet/html.c#L281-L296
           def to_s
-            "\n<h#{level}>#{text}</h#{level}>\n"
+            "\n<h#{level}>#{body}</h#{level}>\n"
           end
 
           def increment
@@ -36,7 +36,7 @@ module Qiita
 
         class HeadingWithAnchor < AbstractHeading
           def to_s
-            "\n<h#{level}>#{anchor_element}#{text}</h#{level}>\n"
+            "\n<h#{level}>#{anchor_element}#{body}</h#{level}>\n"
           end
 
           def increment
