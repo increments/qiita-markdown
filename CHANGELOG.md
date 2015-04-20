@@ -1,3 +1,7 @@
+## 0.6.0
+* Add `:escape_html` extension to Qiita::Markdown::Greenmat::HTMLToCRenderer.
+* Fix backward incompatibility of fragment identifier of heading that includes special HTML characters in v0.5.0.
+
 ## 0.5.0
 - Add renderers Qiita::Markdown::Greenmat::HTMLRenderer and Qiita::Markdown::Greenmat::HTMLToCRenderer which can be passed to `Redcarpet::Markdown.new` and generate consistent heading fragment identifiers.
 
