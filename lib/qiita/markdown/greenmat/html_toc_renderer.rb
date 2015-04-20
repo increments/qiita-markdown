@@ -54,7 +54,7 @@ module Qiita
 
         class HeadingAnchor < AbstractHeading
           def to_s
-            "<a href=\"##{suffixed_id}\">#{text}</a>\n"
+            "<a href=\"##{suffixed_id}\">#{body}</a>\n"
           end
 
           def increment

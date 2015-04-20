@@ -94,4 +94,22 @@ describe Qiita::Markdown::Greenmat::HTMLToCRenderer do
       EOS
     end
   end
+
+  context "with heading title including special HTML characters" do
+    let(:markdown) do
+      <<-EOS.strip_heredoc
+        # <b>R&amp;B</b>
+      EOS
+    end
+
+    it "generates fragment identifier by sanitizing the characters in the title" do
+      should eq <<-EOS.strip_heredoc
+        <ul>
+        <li>
+        <a href="#rb"><b>R&amp;B</b></a>
+        </li>
+        </ul>
+      EOS
+    end
+  end
 end
