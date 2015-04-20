@@ -1,7 +1,8 @@
 require "active_support/core_ext/string/strip"
 
 describe Qiita::Markdown::Greenmat::HTMLToCRenderer do
-  let(:renderer) { described_class.new }
+  let(:renderer) { described_class.new(extension) }
+  let(:extension) { {} }
   let(:greenmat) { ::Greenmat::Markdown.new(renderer) }
   subject(:rendered_html) { greenmat.render(markdown) }
 
@@ -107,6 +108,26 @@ describe Qiita::Markdown::Greenmat::HTMLToCRenderer do
         <ul>
         <li>
         <a href="#rb"><b>R&amp;B</b></a>
+        </li>
+        </ul>
+      EOS
+    end
+  end
+
+  context "with :escape_html extension" do
+    let(:extension) { { escape_html: true } }
+
+    let(:markdown) do
+      <<-EOS.strip_heredoc
+        # <b>R&amp;B</b>
+      EOS
+    end
+
+    it "escapes special HTML characters in heading title" do
+      should eq <<-EOS.strip_heredoc
+        <ul>
+        <li>
+        <a href="#rb">&lt;b&gt;R&amp;amp;B&lt;/b&gt;</a>
         </li>
         </ul>
       EOS
