@@ -1,3 +1,6 @@
+## 0.5.0
+- Add renderers Qiita::Markdown::Greenmat::HTMLRenderer and Qiita::Markdown::Greenmat::HTMLToCRenderer which can be passed to `Redcarpet::Markdown.new` and generate consistent heading fragment identifiers.
+
 ## 0.4.2
 - Fix bug on SummaryProcessor with mention
 
