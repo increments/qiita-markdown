@@ -4,8 +4,9 @@ module Qiita
       class HTMLToCRenderer < ::Greenmat::Render::HTML_TOC
         include HeadingRendering
 
-        def initialize(*)
+        def initialize(extensions = {})
           super
+          @extensions = extensions
           @last_level = 0
         end
 
@@ -32,7 +33,7 @@ module Qiita
         def generate_heading_html(text, level, level_difference)
           html = list_item_preceding_html(level_difference)
 
-          anchor = HeadingAnchor.new(text, level, heading_counter)
+          anchor = HeadingAnchor.new(text, level, heading_counter, escape_html?)
           html << anchor.to_s
           anchor.increment
 
@@ -50,6 +51,10 @@ module Qiita
                  end
 
           html << "<li>\n"
+        end
+
+        def escape_html?
+          @extensions[:escape_html]
         end
 
         class HeadingAnchor < AbstractHeading

@@ -6,7 +6,17 @@ module Qiita
           @counter ||= Hash.new(0)
         end
 
-        AbstractHeading = Struct.new(:body, :level, :counter) do
+        class AbstractHeading
+          attr_reader :raw_body, :level, :counter, :escape_html
+          alias_method :escape_html?, :escape_html
+
+          def initialize(raw_body, level, counter, escape_html = false)
+            @raw_body = raw_body
+            @level = level
+            @counter = counter
+            @escape_html = escape_html
+          end
+
           def to_s
             fail NotImplementedError
           end
@@ -25,12 +35,16 @@ module Qiita
             count > 0
           end
 
+          def body
+            escape_html? ? CGI.escape_html(raw_body) : raw_body
+          end
+
           def id
             @id ||= text.downcase.gsub(/[^\p{Word}\- ]/u, "").gsub(" ", "-")
           end
 
           def text
-            Nokogiri::HTML.fragment(body).text
+            Nokogiri::HTML.fragment(raw_body).text
           end
 
           def suffix
