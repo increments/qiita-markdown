@@ -1,3 +1,6 @@
+## 0.7.0
+- Support `@all`
+
 ## 0.6.0
 - Add `:escape_html` extension to Qiita::Markdown::Greenmat::HTMLToCRenderer.
 - Fix backward incompatibility of fragment identifier of heading that includes special HTML characters in v0.5.0.
