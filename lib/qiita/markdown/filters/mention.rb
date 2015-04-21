@@ -22,7 +22,14 @@ module Qiita
         def mention_link_filter(text, _, _)
           text.gsub(MentionPattern) do |match|
             name = $1
-            if allowed_usernames && !allowed_usernames.include?(name)
+            case
+            when allowed_usernames && name == "all"
+              result[:mentioned_usernames] |= allowed_usernames
+              match.sub(
+                "@#{name}",
+                %[<a href="/" class="user-mention" title="#{name}">@#{name}</a>]
+              )
+            when allowed_usernames && !allowed_usernames.include?(name) || name == "all"
               match
             else
               result[:mentioned_usernames] |= [name]
