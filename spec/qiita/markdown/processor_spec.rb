@@ -324,6 +324,48 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with @all and allowed_usernames context" do
+      before do
+        context[:allowed_usernames] = ["alice", "bob"]
+      end
+
+      let(:markdown) do
+        "@all"
+      end
+
+      it "links it and reports all allowed users as mentioned user names" do
+        should include(<<-EOS.strip_heredoc.rstrip)
+          <a href="/" class="user-mention" title="all">@all</a>
+        EOS
+        expect(result[:mentioned_usernames]).to eq context[:allowed_usernames]
+      end
+    end
+
+    context "with @all and @alice" do
+      before do
+        context[:allowed_usernames] = ["alice", "bob"]
+      end
+
+      let(:markdown) do
+        "@all @alice"
+      end
+
+      it "does not duplicate mentioned user names" do
+        expect(result[:mentioned_usernames]).to eq context[:allowed_usernames]
+      end
+    end
+
+    context "with @all and no allowed_usernames context" do
+      let(:markdown) do
+        "@all"
+      end
+
+      it "does not repond to @all" do
+        should eq "<p>@all</p>\n"
+        expect(result[:mentioned_usernames]).to eq []
+      end
+    end
+
     context "with normal link" do
       let(:markdown) do
         "[](/example)"
