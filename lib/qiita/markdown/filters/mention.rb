@@ -8,7 +8,7 @@ module Qiita
       class Mention < HTML::Pipeline::MentionFilter
         MentionPattern = /
           (?:^|\W)
-          @((?>[\w][\w-]{1,30}\w(?:@github)?))
+          @((?>[\w][\w-]{0,30}\w(?:@github)?))
           (?!\/)
           (?=
             \.+[ \t\W]|
