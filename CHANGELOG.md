@@ -1,3 +1,6 @@
+## 0.7.1
+- Support mentions to 2-character usernames
+
 ## 0.7.0
 - Support `@all`
 
