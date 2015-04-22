@@ -241,6 +241,18 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with mention to short name user" do
+      let(:markdown) do
+        "@al"
+      end
+
+      it "replaces mention with link" do
+        should include(<<-EOS.strip_heredoc.rstrip)
+          <a href="/al" class="user-mention" title="al">@al</a>
+        EOS
+      end
+    end
+
     context "with mentions in complex patterns" do
       let(:markdown) do
         <<-EOS.strip_heredoc
@@ -258,7 +270,11 @@ describe Qiita::Markdown::Processor do
           @justin
           @mallory@github
           @#{'o' * 33}
-          @oo
+          @o
+          @o-
+          @-o
+          @o_
+          @_o
         EOS
       end
 
@@ -271,6 +287,8 @@ describe Qiita::Markdown::Processor do
           Isaac
           justin
           mallory@github
+          o_
+          _o
         ]
       end
     end
