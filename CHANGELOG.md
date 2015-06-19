@@ -1,3 +1,6 @@
+## 0.8.0
+- Sanitize data-attributes
+
 ## 0.7.1
 - Support mentions to 2-character usernames
 
