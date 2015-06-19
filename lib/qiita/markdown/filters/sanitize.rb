@@ -94,6 +94,7 @@ module Qiita
               "color",
               "cols",
               "colspan",
+              "data-lang",
               "datetime",
               "height",
               "hreflang",
@@ -106,7 +107,6 @@ module Qiita
               "target",
               "title",
               "width",
-              :data,
             ],
           },
           css: {
@@ -190,6 +190,8 @@ module Qiita
         }
 
         SCRIPTABLE_RULE = RULE.dup.tap do |rule|
+          rule[:attributes] = RULE[:attributes].dup
+          rule[:attributes][:all] = rule[:attributes][:all] + [:data]
           rule[:elements] = RULE[:elements] + ["iframe", "script"]
           rule[:remove_contents] = []
         end

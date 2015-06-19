@@ -668,5 +668,37 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context "with data-attributes" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <div data-a="b"></div>
+        EOS
+      end
+
+      it "sanitizes data-attributes" do
+        should eq <<-EOS.strip_heredoc
+          <div></div>
+        EOS
+      end
+    end
+
+    context "with data-attributes and :script option" do
+      before do
+        context[:script] = true
+      end
+
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <div data-a="b"></div>
+        EOS
+      end
+
+      it "does not sanitize data-attributes" do
+        should eq <<-EOS.strip_heredoc
+          <div data-a="b"></div>
+        EOS
+      end
+    end
   end
 end
