@@ -16,7 +16,7 @@ module Qiita
       # @note Modify filters if you want.
       # @return [Array<HTML::Pipeline::Filter>]
       def filters
-        @filters ||= DEFAULT_FILTERS
+        @filters ||= DEFAULT_FILTERS.clone
       end
     end
   end
