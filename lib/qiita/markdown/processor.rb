@@ -39,7 +39,6 @@ module Qiita
       # @note Modify filters if you want.
       # @return [Array<HTML::Pipeline::Filter>]
       def filters
-        p @filters
         @filters ||= DEFAULT_FILTERS.clone
       end
     end
