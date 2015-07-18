@@ -1,3 +1,6 @@
+## 0.8.1
+- Fix filters configurations (thx @imishinist)
+
 ## 0.8.0
 - Sanitize data-attributes
 
