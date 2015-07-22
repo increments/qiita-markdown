@@ -19,7 +19,7 @@ module Qiita
         /ix
 
         # @note Override to use customized MentionPattern and allowed_usernames logic.
-        def mention_link_filter(text, _, _)
+        def mention_link_filter(text, _, _, _)
           text.gsub(MentionPattern) do |match|
             name = $1
             case
