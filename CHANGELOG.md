@@ -1,3 +1,6 @@
+## 0.9.0
+- Support html-pipeline v2
+
 ## 0.8.1
 - Fix filters configurations (thx @imishinist)
 
