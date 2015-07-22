@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport"
   spec.add_dependency "gemoji"
   spec.add_dependency "github-linguist"
-  spec.add_dependency "html-pipeline"
+  spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
   spec.add_dependency "pygments.rb"
   spec.add_dependency "greenmat", ">= 3.2.0.2", "< 4"
