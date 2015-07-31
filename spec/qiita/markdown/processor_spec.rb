@@ -456,6 +456,17 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with image notation" do
+      let(:markdown) do
+        "![a](http://example.com/b.png)"
+      end
+
+      it "wraps it in a element" do
+        should eq '<p><a href="http://example.com/b.png" target="_blank">' +
+          %(<img src="http://example.com/b.png" alt="a"></a></p>\n)
+      end
+    end
+
     context "with colon-only label" do
       let(:markdown) do
         <<-EOS.strip_heredoc
