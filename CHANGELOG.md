@@ -1,3 +1,6 @@
+## 0.11.0
+- Add `autolink` class to autolink element
+
 ## 0.10.0
 - Add ImageLink filter
 

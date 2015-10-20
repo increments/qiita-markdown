@@ -408,6 +408,19 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with raw URL" do
+      let(:markdown) do
+        "http://qiita.com/search?q=日本語"
+      end
+
+      it "creates link for that with .autolink class" do
+        should eq(
+          '<p><a href="http://qiita.com/search?q=%E6%97%A5%E6%9C%AC%E8%AA%9E" class="autolink">' \
+          "http://qiita.com/search?q=日本語</a></p>\n"
+        )
+      end
+    end
+
     context "with javascript: link" do
       let(:markdown) do
         "[](javascript:alert(1))"

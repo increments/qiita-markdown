@@ -1,3 +1,5 @@
+require "uri"
+
 module Qiita
   module Markdown
     module Greenmat
@@ -7,6 +9,11 @@ module Qiita
         def initialize(extensions = {})
           super
           @with_toc_data = extensions[:with_toc_data]
+        end
+
+        # https://github.com/vmg/redcarpet/blob/v3.2.3/ext/redcarpet/html.c#L76-L116
+        def autolink(link, _link_type)
+          %(<a href="#{link}" class="autolink">#{link}</a>)
         end
 
         def header(text, level)
