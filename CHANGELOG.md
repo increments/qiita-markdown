@@ -1,5 +1,5 @@
 ## 0.10.0
-- Add LinkImage filter
+- Add ImageLink filter
 
 ## 0.9.0
 - Support html-pipeline v2
