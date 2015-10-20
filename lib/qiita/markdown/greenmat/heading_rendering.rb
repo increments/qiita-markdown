@@ -40,7 +40,7 @@ module Qiita
           end
 
           def id
-            @id ||= text.downcase.gsub(/[^\p{Word}\- ]/u, "").gsub(" ", "-")
+            @id ||= text.downcase.gsub(/[^\p{Word}\- ]/u, "").tr(" ", "-")
           end
 
           def text

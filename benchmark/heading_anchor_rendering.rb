@@ -85,7 +85,7 @@ module PostProcess
         end
 
         def id
-          @node.text.downcase.gsub(/[^\p{Word}\- ]/u, "").gsub(" ", "-")
+          @node.text.downcase.gsub(/[^\p{Word}\- ]/u, "").tr(" ", "-")
         end
 
         def increment
@@ -202,7 +202,7 @@ module Rendering
           end
 
           def id
-            @id ||= text.downcase.gsub(/[^\p{Word}\- ]/u, "").gsub(" ", "-")
+            @id ||= text.downcase.gsub(/[^\p{Word}\- ]/u, "").tr(" ", "-")
           end
 
           def text
