@@ -18,20 +18,19 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.0.0"
 
-  spec.add_dependency "activesupport"
   spec.add_dependency "gemoji"
-  spec.add_dependency "github-linguist"
+  spec.add_dependency "github-linguist", "~> 4.0"
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
   spec.add_dependency "pygments.rb"
   spec.add_dependency "greenmat", ">= 3.2.0.2", "< 4"
-  spec.add_dependency "rugged", ">= 0.21.1b2"
   spec.add_dependency "sanitize"
+  spec.add_development_dependency "activesupport"
   spec.add_development_dependency "benchmark-ips", "~> 1.2"
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "codeclimate-test-reporter", "0.4.4"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "3.1.0"
+  spec.add_development_dependency "rspec", "~> 3.1"
   spec.add_development_dependency "rubocop", "~> 0.29"
 end
