@@ -51,7 +51,7 @@ describe Qiita::Markdown::Processor do
 
       it "replaces with mailto link" do
         should eq <<-EOS.strip_heredoc
-          <p><a href="mailto:test@example.com">test@example.com</a></p>
+          <p><a href="mailto:test@example.com" class="autolink">test@example.com</a></p>
         EOS
       end
     end
