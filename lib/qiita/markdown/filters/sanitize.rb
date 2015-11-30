@@ -173,6 +173,7 @@ module Qiita
                 :relative,
                 "http",
                 "https",
+                "mailto",
               ],
             },
             "img" => {

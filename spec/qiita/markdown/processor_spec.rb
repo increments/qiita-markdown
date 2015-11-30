@@ -44,6 +44,18 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with email address" do
+      let(:markdown) do
+        "test@example.com"
+      end
+
+      it "replaces with mailto link" do
+        should eq <<-EOS.strip_heredoc
+          <p><a href="mailto:test@example.com">test@example.com</a></p>
+        EOS
+      end
+    end
+
     context "with headings" do
       let(:markdown) do
         <<-EOS.strip_heredoc
@@ -444,18 +456,6 @@ describe Qiita::Markdown::Processor do
     context "with javascript: link" do
       let(:markdown) do
         "[](javascript:alert(1))"
-      end
-
-      it "removes that link by creating empty a element" do
-        should eq <<-EOS.strip_heredoc
-          <p><a></a></p>
-        EOS
-      end
-    end
-
-    context "with mailto: link" do
-      let(:markdown) do
-        "[](mailto:info@example.com)"
       end
 
       it "removes that link by creating empty a element" do
