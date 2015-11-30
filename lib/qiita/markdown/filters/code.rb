@@ -3,6 +3,7 @@ module Qiita
     module Filters
       DEFAULT_LANGUAGE_ALIASES = {
         "el" => "common-lisp",
+        "hack" => "php",
         "zsh" => "bash",
       }
 
