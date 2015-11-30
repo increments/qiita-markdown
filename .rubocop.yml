@@ -8,3 +8,6 @@ Style/StringLiterals:
 
 Style/TrailingComma:
   EnforcedStyleForMultiline: comma
+
+Style/UnneededPercentQ:
+  Enabled: false

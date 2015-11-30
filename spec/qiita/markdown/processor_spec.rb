@@ -112,6 +112,26 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with code & filename with .php" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```example.php
+          1
+          ```
+        EOS
+      end
+
+      it "returns PHP code-frame" do
+        should eq <<-EOS.strip_heredoc
+          <div class="code-frame" data-lang="php">
+          <div class="code-lang"><span class="bold">example.php</span></div>
+          <div class="highlight"><pre><span class="mi">1</span>
+          </pre></div>
+          </div>
+        EOS
+      end
+    end
+
     context "with malicious script in filename" do
       let(:markdown) do
         <<-EOS.strip_heredoc
