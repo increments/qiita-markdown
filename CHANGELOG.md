@@ -1,3 +1,6 @@
+## 0.11.1
+- Support email address link
+
 ## 0.11.0
 - Add `autolink` class to autolink element
 - Remove activesupport runtime dependency
