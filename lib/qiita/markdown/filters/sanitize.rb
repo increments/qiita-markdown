@@ -174,7 +174,6 @@ module Qiita
             "tt",
             "ul",
             "var",
-            "video",
           ],
           protocols: {
             "a" => {
@@ -214,7 +213,7 @@ module Qiita
         SCRIPTABLE_RULE = RULE.dup.tap do |rule|
           rule[:attributes] = RULE[:attributes].dup
           rule[:attributes][:all] = rule[:attributes][:all] + [:data]
-          rule[:elements] = RULE[:elements] + ["iframe", "script"]
+          rule[:elements] = RULE[:elements] + ["iframe", "script", "video"]
           rule[:remove_contents] = []
         end
 
