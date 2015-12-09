@@ -82,6 +82,14 @@ module Qiita
             "th" => [
               "style",
             ],
+            "video" => [
+              "src",
+              "autoplay",
+              "controls",
+              "loop",
+              "muted",
+              "poster",
+            ],
             all: [
               "abbr",
               "align",
@@ -166,6 +174,7 @@ module Qiita
             "tt",
             "ul",
             "var",
+            "video",
           ],
           protocols: {
             "a" => {
@@ -178,6 +187,18 @@ module Qiita
             },
             "img" => {
               "src" => [
+                :relative,
+                "http",
+                "https",
+              ],
+            },
+            "video" => {
+              "src" => [
+                :relative,
+                "http",
+                "https",
+              ],
+              "poster" => [
                 :relative,
                 "http",
                 "https",
