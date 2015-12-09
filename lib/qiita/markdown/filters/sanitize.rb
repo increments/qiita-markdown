@@ -82,6 +82,14 @@ module Qiita
             "th" => [
               "style",
             ],
+            "video" => [
+              "src",
+              "autoplay",
+              "controls",
+              "loop",
+              "muted",
+              "poster",
+            ],
             all: [
               "abbr",
               "align",
@@ -183,6 +191,18 @@ module Qiita
                 "https",
               ],
             },
+            "video" => {
+              "src" => [
+                :relative,
+                "http",
+                "https",
+              ],
+              "poster" => [
+                :relative,
+                "http",
+                "https",
+              ],
+            },
           },
           remove_contents: [
             "script",
@@ -193,7 +213,7 @@ module Qiita
         SCRIPTABLE_RULE = RULE.dup.tap do |rule|
           rule[:attributes] = RULE[:attributes].dup
           rule[:attributes][:all] = rule[:attributes][:all] + [:data]
-          rule[:elements] = RULE[:elements] + ["iframe", "script"]
+          rule[:elements] = RULE[:elements] + ["iframe", "script", "video"]
           rule[:remove_contents] = []
         end
 
