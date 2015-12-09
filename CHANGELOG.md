@@ -1,3 +1,6 @@
+## 0.11.2
+- Support video element on `SCRIPTABLE_RULE`
+
 ## 0.11.1
 - Support email address link
 
