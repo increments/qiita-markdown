@@ -345,6 +345,20 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with mention in blockquote" do
+      let(:markdown) do
+        "> @alice"
+      end
+
+      it "does not replace mention with link" do
+        should include(<<-EOS.strip_heredoc.rstrip)
+          <blockquote>
+          <p>@alice</p>
+          </blockquote>
+        EOS
+      end
+    end
+
     context "with mention to user whose name starts and ends with underscore" do
       let(:markdown) do
         "@_alice_"

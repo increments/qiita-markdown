@@ -6,6 +6,8 @@ module Qiita
       #
       # You can pass :allowed_usernames context to limit mentioned usernames.
       class Mention < HTML::Pipeline::MentionFilter
+        IGNORE_PARENTS = ::HTML::Pipeline::MentionFilter::IGNORE_PARENTS + Set["blockquote"]
+
         MentionPattern = /
           (?:^|\W)
           @((?>[\w][\w-]{0,30}\w(?:@github)?))
@@ -17,6 +19,21 @@ module Qiita
             $
           )
         /ix
+
+        # @note Override to use another IGNORE_PARENTS
+        def call
+          result[:mentioned_usernames] ||= []
+
+          doc.search(".//text()").each do |node|
+            content = node.to_html
+            next if !content.include?("@")
+            next if has_ancestor?(node, IGNORE_PARENTS)
+            html = mention_link_filter(content, base_url, info_url, username_pattern)
+            next if html == content
+            node.replace(html)
+          end
+          doc
+        end
 
         # @note Override to use customized MentionPattern and allowed_usernames logic.
         def mention_link_filter(text, _, _, _)
