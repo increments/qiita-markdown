@@ -26,7 +26,7 @@ module Qiita
 
           doc.search(".//text()").each do |node|
             content = node.to_html
-            next if !content.include?("@")
+            next unless content.include?("@")
             next if has_ancestor?(node, IGNORE_PARENTS)
             html = mention_link_filter(content, base_url, info_url, username_pattern)
             next if html == content
