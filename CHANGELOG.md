@@ -1,3 +1,6 @@
+## 0.11.3
+- Ignore menton in blockquote element
+
 ## 0.11.2
 - Support video element on `SCRIPTABLE_RULE`
 
