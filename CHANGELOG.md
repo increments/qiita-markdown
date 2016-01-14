@@ -1,3 +1,6 @@
+## 0.11.5
+- Add a leading newline to `<pre>` elements so that leading newlines inputted by user are properly rendered on browsers
+
 ## 0.11.4
 - Avoid stripping leading and trailing newlines in code snippets
 
