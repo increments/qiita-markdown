@@ -82,7 +82,7 @@ module Qiita
 
           def pygments_options
             @pygments_options ||= begin
-              options = { encoding: "utf-8" }
+              options = { encoding: "utf-8", stripnl: false }
               options[:startinline] = true if has_inline_php?
               options
             end

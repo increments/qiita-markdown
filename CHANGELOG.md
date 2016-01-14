@@ -1,3 +1,6 @@
+## 0.11.4
+- Avoid stripping leading and trailing newlines in code snippets
+
 ## 0.11.3
 - Ignore menton in blockquote element
 

@@ -201,6 +201,27 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with code with leading and trailing newlines" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          ```
+
+          foo
+
+          ```
+        EOS
+      end
+
+      it "does not strip the newlines" do
+        should eq <<-EOS.strip_heredoc
+          <div class="code-frame" data-lang="text"><div class="highlight"><pre>
+          foo
+
+          </pre></div></div>
+         EOS
+      end
+    end
+
     context "with script element" do
       let(:markdown) do
         <<-EOS.strip_heredoc
