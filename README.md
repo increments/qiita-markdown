@@ -59,6 +59,7 @@ processor.call(text)
 :language_aliases    - Alias table for some language names. (Hash)
 :rule                - Sanitization rule table. (Hash)
 :script              - A flag to allow to embed script element. (Boolean)
+markdown: {:footnotes} - A flag to enable / disable footnotes in document. (Default: true)
 ```
 
 ```ruby
