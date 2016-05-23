@@ -30,7 +30,7 @@ module Qiita
 
 
         def options
-          @options ||= DEFAULT_OPTIONS.merge(context[:greenmat] || {})
+          @options ||= DEFAULT_OPTIONS.merge(context[:markdown] || {})
         end
       end
     end

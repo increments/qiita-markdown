@@ -243,5 +243,20 @@ describe Qiita::Markdown::SummaryProcessor do
         should eq %{<a href="/alice" class="user-mention js-hovercard" title="alice" data-hovercard-target-type="user" data-hovercard-target-name="alice">@alice</a>\n}
       end
     end
+
+    context "with footenotes syntax" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          [^1]
+          [^1]: test
+        EOS
+      end
+
+      it "does not generates footnotes elements by default" do
+        should eq <<-EOS.strip_heredoc
+          <a href="test">^1</a>
+        EOS
+      end
+    end
   end
 end

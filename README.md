@@ -80,7 +80,7 @@ SummaryProcessor accepts the following context in addition to the Processor's co
 
 ```ruby
 {
-  greenmat: {
+  markdown: {
     footnotes: false # Enable / Disable footnotes in document. (Default: true)
   },
   truncate: {

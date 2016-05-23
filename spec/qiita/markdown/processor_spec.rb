@@ -789,9 +789,9 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-   context "with greenmat: { footnotes: false } context" do
+   context "with markdown: { footnotes: false } context" do
       before do
-        context[:greenmat] = { footnotes: false }
+        context[:markdown] = { footnotes: false }
       end
 
       let(:markdown) do
