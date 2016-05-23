@@ -243,5 +243,31 @@ describe Qiita::Markdown::SummaryProcessor do
         should eq %{<a href="/alice" class="user-mention" title="alice">@alice</a>\n}
       end
     end
+
+    context "with footenotes syntax" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          [^1]
+          [^1]:test
+        EOS
+      end
+
+      it "removes first footnote elements" do
+        should eq <<-EOS.strip_heredoc
+
+          test
+
+
+
+
+
+
+
+
+
+
+        EOS
+      end
+    end
   end
 end
