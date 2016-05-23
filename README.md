@@ -80,6 +80,9 @@ SummaryProcessor accepts the following context in addition to the Processor's co
 
 ```ruby
 {
+  greenmat: {
+    footnotes: false # Enable / Disable footnotes in document. (Default: true)
+  },
   truncate: {
     length: 100,  # Documents will be truncated if it exceeds this character count. (Integer)
     omission: '…' # A string added to the end of document when it's truncated. (String, nil)
