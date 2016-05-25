@@ -54,6 +54,7 @@ processor.call(text)
 :default_language    - Default language used if no language detected from code. (String)
 :emoji_names         - A list of allowed emoji names. (Array<String>)
 :emoji_url_generator - #call'able object that accepts emoji name as argument and returns emoji image URL. (#call)
+                       The original implementation is used when the generator returned a falsey value.
 :language_aliases    - Alias table for some language names. (Hash)
 :rule                - Sanitization rule table. (Hash)
 :script              - A flag to allow to embed script element. (Boolean)
