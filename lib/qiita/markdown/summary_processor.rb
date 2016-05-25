@@ -10,7 +10,7 @@ module Qiita
         HTML::Pipeline::EmojiFilter,
         Filters::Mention,
         Filters::Sanitize,
-        Filters::Truncate
+        Filters::Truncate,
       ]
 
       # @note Modify filters if you want.

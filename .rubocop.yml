@@ -3,10 +3,23 @@ inherit_from: .rubocop_todo.yml
 Metrics/ClassLength:
   Enabled: false
 
+Style/AsciiComments:
+  Exclude:
+    - benchmark/**/*
+
+Style/EmptyCaseCondition:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-Style/TrailingComma:
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: comma
 
 Style/UnneededPercentQ:
