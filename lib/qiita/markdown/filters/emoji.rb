@@ -26,11 +26,7 @@ module Qiita
         end
 
         def emoji_names
-          if context[:emoji_names]
-            context[:emoji_names]
-          else
-            self.class.emoji_names
-          end
+          context[:emoji_names] || self.class.emoji_names
         end
       end
     end
