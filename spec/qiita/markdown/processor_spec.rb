@@ -537,7 +537,7 @@ describe Qiita::Markdown::Processor do
 
       it "wraps it in a element" do
         should eq '<p><a href="http://example.com/b.png" target="_blank">' +
-          %(<img src="http://example.com/b.png" alt="a"></a></p>\n)
+                  %(<img src="http://example.com/b.png" alt="a"></a></p>\n)
       end
     end
 

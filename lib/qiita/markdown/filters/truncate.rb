@@ -11,7 +11,7 @@ module Qiita
       class Truncate < HTML::Pipeline::Filter
         DEFAULT_OPTIONS = {
           length: 100,
-          omission: "…".freeze
+          omission: "…".freeze,
         }.freeze
 
         def call
@@ -36,7 +36,7 @@ module Qiita
         # since it traverses the node's descendants _before_ the node itself.
         # https://github.com/sparklemotion/nokogiri/blob/v1.6.6.2/lib/nokogiri/xml/node.rb#L571-L574
         def traverse(node, &block)
-          block.call(node)
+          yield(node)
 
           node.children.each do |child_node|
             traverse(child_node, &block)

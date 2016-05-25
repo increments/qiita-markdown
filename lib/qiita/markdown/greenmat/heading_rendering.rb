@@ -8,7 +8,7 @@ module Qiita
 
         class AbstractHeading
           attr_reader :raw_body, :level, :counter, :escape_html
-          alias_method :escape_html?, :escape_html
+          alias escape_html? escape_html
 
           def initialize(raw_body, level, counter, escape_html = false)
             @raw_body = raw_body
