@@ -7,6 +7,9 @@ Style/AsciiComments:
   Exclude:
     - benchmark/**/*
 
+Style/Documentation:
+  Enabled: false
+
 Style/EmptyCaseCondition:
   Enabled: false
 
