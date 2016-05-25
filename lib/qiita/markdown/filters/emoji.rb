@@ -3,9 +3,8 @@ module Qiita
     module Filters
       class Emoji < HTML::Pipeline::EmojiFilter
         # @note Override
-        # Overriding with no-op to disable :asset_host context check
-        # since emoji URLs can also be generated with :emoji_url_generator context.
         def validate
+          needs :asset_root unless emoji_url_generator
         end
 
         private
