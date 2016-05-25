@@ -787,11 +787,11 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context "with emoji_names and emoji_url context" do
+    context "with emoji_names and emoji_url_generator context" do
       before do
         context[:emoji_names] = %w(foo o)
 
-        context[:emoji_url] = proc do |emoji_name|
+        context[:emoji_url_generator] = proc do |emoji_name|
           "https://example.com/foo.png" if emoji_name == "foo"
         end
       end
