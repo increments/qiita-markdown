@@ -22,7 +22,7 @@ module Qiita
 
         # @note Override
         def emoji_pattern
-          @emoji_pattern ||= /:(#{emoji_names.map { |name| Regexp.escape(name) }.join('|')}):/
+          @emoji_pattern ||= /:(#{Regexp.union(emoji_names).source}):/
         end
 
         def emoji_names
