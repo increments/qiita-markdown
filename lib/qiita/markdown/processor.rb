@@ -11,7 +11,7 @@ module Qiita
         Filters::Footnote,
         Filters::Code,
         Filters::Checkbox,
-        HTML::Pipeline::EmojiFilter,
+        Filters::Emoji,
         Filters::SyntaxHighlight,
         Filters::Mention,
         Filters::Sanitize,

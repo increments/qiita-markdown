@@ -786,5 +786,32 @@ describe Qiita::Markdown::Processor do
         EOS
       end
     end
+
+    context "with emoji_names and emoji_url_generator context" do
+      before do
+        context[:emoji_names] = %w(foo o)
+
+        context[:emoji_url_generator] = proc do |emoji_name|
+          "https://example.com/foo.png" if emoji_name == "foo"
+        end
+      end
+
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          :foo: :o: :x:
+        EOS
+      end
+
+      it "replaces only the specified emoji names with img elements with custom URL" do
+        should include(
+          '<img class="emoji" title=":foo:" alt=":foo:" src="https://example.com/foo.png"',
+          '<img class="emoji" title=":o:" alt=":o:" src="/images/emoji/unicode/2b55.png"'
+        )
+
+        should_not include(
+          '<img class="emoji" title=":x:" alt=":x:"'
+        )
+      end
+    end
   end
 end

@@ -7,7 +7,7 @@ module Qiita
       DEFAULT_FILTERS = [
         Filters::Greenmat,
         Filters::Simplify,
-        HTML::Pipeline::EmojiFilter,
+        Filters::Emoji,
         Filters::Mention,
         Filters::Sanitize,
         Filters::Truncate,
