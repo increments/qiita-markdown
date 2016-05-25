@@ -1,3 +1,6 @@
+## 0.12.0
+- Add custom emoji support via `:emoji_names` and `:emoji_url_generator` contexts
+
 ## 0.11.5
 - Add a leading newline to `<pre>` elements so that leading newlines inputted by user are properly rendered on browsers
 
