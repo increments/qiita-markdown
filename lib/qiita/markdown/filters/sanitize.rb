@@ -47,6 +47,7 @@ module Qiita
           attributes: {
             "a" => [
               "href",
+              "rel",
             ],
             "iframe" => [
               "allowfullscreen",

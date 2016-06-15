@@ -7,7 +7,7 @@ describe Qiita::Markdown::Processor do
     end
 
     let(:context) do
-      {}
+      { hostname: "example.com" }
     end
 
     let(:markdown) do
@@ -482,7 +482,7 @@ describe Qiita::Markdown::Processor do
 
       it "replaces it with preferred link and updates :mentioned_groups" do
         is_expected.to eq <<-EOS.strip_heredoc
-          <p><a href="https://alice.example.com/groups/bob">@alice/bob</a></p>
+          <p><a href="https://alice.example.com/groups/bob" rel="nofollow" target="_blank">@alice/bob</a></p>
         EOS
         expect(result[:mentioned_groups]).to eq [{
           group_url_name: "bob",
@@ -517,13 +517,13 @@ describe Qiita::Markdown::Processor do
 
     context "with raw URL" do
       let(:markdown) do
-        "http://qiita.com/search?q=日本語"
+        "http://example.com/search?q=日本語"
       end
 
       it "creates link for that with .autolink class" do
         should eq(
-          '<p><a href="http://qiita.com/search?q=%E6%97%A5%E6%9C%AC%E8%AA%9E" class="autolink">' \
-          "http://qiita.com/search?q=日本語</a></p>\n"
+          '<p><a href="http://example.com/search?q=%E6%97%A5%E6%9C%AC%E8%AA%9E" class="autolink">' \
+          "http://example.com/search?q=日本語</a></p>\n"
         )
       end
     end
@@ -745,7 +745,7 @@ describe Qiita::Markdown::Processor do
 
       it "generates footnotes elements" do
         should eq <<-EOS.strip_heredoc
-          <p><sup id="fnref1"><a href="#fn1" title="test">1</a></sup></p>
+          <p><sup id="fnref1"><a href="#fn1" rel="footnote" title="test">1</a></sup></p>
 
           <div class="footnotes">
           <hr>
@@ -764,13 +764,13 @@ describe Qiita::Markdown::Processor do
     context "with manually written link inside of <sup> tag" do
       let(:markdown) do
         <<-EOS.strip_heredoc
-          <sup>[Qiita](http://qiita.com/)</sup>
+          <sup>[Example](http://example.com/)</sup>
         EOS
       end
 
       it "does not confuse the structure with automatically generated footnote reference" do
         should eq <<-EOS.strip_heredoc
-          <p><sup><a href="http://qiita.com/">Qiita</a></sup></p>
+          <p><sup><a href="http://example.com/">Example</a></sup></p>
         EOS
       end
     end
@@ -844,6 +844,138 @@ describe Qiita::Markdown::Processor do
 
         should_not include(
           '<img class="emoji" title=":x:" alt=":x:"'
+        )
+      end
+    end
+
+    context "with internal URL" do
+      let(:markdown) do
+        "http://qiita.com/?a=b"
+      end
+
+      let(:context) do
+        { hostname: "qiita.com" }
+      end
+
+      it "creates link which does not have rel='nofollow' and target='_blank'" do
+        should eq(
+          '<p><a href="http://qiita.com/?a=b" class="autolink">' \
+          "http://qiita.com/?a=b</a></p>\n"
+        )
+      end
+    end
+
+    context "with external URL" do
+      let(:markdown) do
+        "http://external.com/?a=b"
+      end
+
+      let(:context) do
+        { hostname: "qiita.com" }
+      end
+
+      it "creates link which has rel='nofollow' and target='_blank'" do
+        should eq(
+          '<p><a href="http://external.com/?a=b" class="autolink" rel="nofollow" target="_blank">' \
+          "http://external.com/?a=b</a></p>\n"
+        )
+      end
+    end
+
+    context "with internal anchor tag" do
+      let(:markdown) do
+        '<a href="http://qiita.com/?a=b">foobar</a>'
+      end
+
+      let(:context) do
+        { hostname: "qiita.com" }
+      end
+
+      it "creates link which does not have rel='nofollow' and target='_blank'" do
+        should eq(
+          "<p><a href=\"http://qiita.com/?a=b\">foobar</a></p>\n"
+        )
+      end
+    end
+
+    context "with external anchor tag" do
+      let(:markdown) do
+        '<a href="http://external.com/?a=b">foobar</a>'
+      end
+
+      let(:context) do
+        { hostname: "qiita.com" }
+      end
+
+      it "creates link which has rel='nofollow' and target='_blank'" do
+        should eq(
+          "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow\" target=\"_blank\">foobar</a></p>\n"
+        )
+      end
+    end
+
+    context "with external URL which ends with the hostname parameter" do
+      let(:markdown) do
+        "http://qqqqqqiita.com/?a=b"
+      end
+
+      let(:context) do
+        { hostname: "qiita.com" }
+      end
+
+      it "creates link which has rel='nofollow' and target='_blank'" do
+        should eq(
+          '<p><a href="http://qqqqqqiita.com/?a=b" class="autolink" rel="nofollow" target="_blank">' \
+          "http://qqqqqqiita.com/?a=b</a></p>\n"
+        )
+      end
+    end
+
+    context "with external anchor tag which ends with the hostname parameter" do
+      let(:markdown) do
+        '<a href="http://qqqqqqiita.com/?a=b">foobar</a>'
+      end
+
+      let(:context) do
+        { hostname: "qiita.com" }
+      end
+
+      it "creates link which has rel='nofollow' and target='_blank'" do
+        should eq(
+          "<p><a href=\"http://qqqqqqiita.com/?a=b\" rel=\"nofollow\" target=\"_blank\">foobar</a></p>\n"
+        )
+      end
+    end
+
+    context "with sub-domain URL of hostname parameter" do
+      let(:markdown) do
+        "http://sub.qiita.com/?a=b"
+      end
+
+      let(:context) do
+        { hostname: "qiita.com" }
+      end
+
+      it "creates link which has rel='nofollow' and target='_blank'" do
+        should eq(
+          '<p><a href="http://sub.qiita.com/?a=b" class="autolink" rel="nofollow" target="_blank">' \
+          "http://sub.qiita.com/?a=b</a></p>\n"
+        )
+      end
+    end
+
+    context "with external anchor tag which has rel attribute" do
+      let(:markdown) do
+        '<a href="http://external.com/?a=b" rel="url">foobar</a>'
+      end
+
+      let(:context) do
+        { hostname: "qiita.com" }
+      end
+
+      it "creates link which has rel='nofollow' and target='_blank', and rel value is overwritten" do
+        should eq(
+          "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow\" target=\"_blank\">foobar</a></p>\n"
         )
       end
     end

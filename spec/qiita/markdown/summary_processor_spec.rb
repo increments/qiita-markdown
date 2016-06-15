@@ -7,7 +7,7 @@ describe Qiita::Markdown::SummaryProcessor do
     end
 
     let(:context) do
-      {}
+      { hostname: "example.com" }
     end
 
     let(:markdown) do
@@ -185,17 +185,17 @@ describe Qiita::Markdown::SummaryProcessor do
 
     context "with a long document consisting of nested elements" do
       before do
-        context[:truncate] = { length: 10 }
+        context[:truncate] = { length: 12 }
       end
 
       let(:markdown) do
         <<-EOS.strip_heredoc
-          _[Qiita](http://qiita.com/) is **a technical knowledge sharing and collaboration platform for programmers**._
+          _[Example](http://example.com/) is **a technical knowledge sharing and collaboration platform for programmers**._
         EOS
       end
 
       it "truncates it while honoring the document structure" do
-        should eq '<em><a href="http://qiita.com/">Qiita</a> is <strong>…</strong></em>'
+        should eq '<em><a href="http://example.com/">Example</a> is <strong>…</strong></em>'
       end
     end
 
@@ -206,13 +206,13 @@ describe Qiita::Markdown::SummaryProcessor do
 
       let(:markdown) do
         <<-EOS.strip_heredoc
-          **12**   4 [ 6](http://qiita.com/)_7
+          **12**   4 [ 6](http://example.com/)_7
           9_ 123
         EOS
       end
 
       it "truncates it while counting the consecutive whilespaces as one" do
-        should eq "<strong>12</strong>   4 <a href=\"http://qiita.com/\"> 6</a><em>7\n9</em>…"
+        should eq "<strong>12</strong>   4 <a href=\"http://example.com/\"> 6</a><em>7\n9</em>…"
       end
     end
 
