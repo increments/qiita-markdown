@@ -16,6 +16,10 @@ Style/EmptyCaseCondition:
 Style/GuardClause:
   Enabled: false
 
+Style/PredicateName:
+  NamePrefixBlacklist:
+    - is_
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 

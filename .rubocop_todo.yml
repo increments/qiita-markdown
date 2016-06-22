@@ -94,22 +94,6 @@ Style/PerlBackrefs:
   Exclude:
     - 'lib/qiita/markdown/filters/mention.rb'
 
-# Offense count: 13
-# Configuration parameters: NamePrefix, NamePrefixBlacklist, NameWhitelist.
-# NamePrefix: is_, has_, have_
-# NamePrefixBlacklist: is_, has_, have_
-# NameWhitelist: is_a?
-Style/PredicateName:
-  Exclude:
-    - 'spec/**/*'
-    - 'benchmark/heading_anchor_rendering.rb'
-    - 'lib/qiita/markdown/filters/checkbox.rb'
-    - 'lib/qiita/markdown/filters/code.rb'
-    - 'lib/qiita/markdown/filters/mention.rb'
-    - 'lib/qiita/markdown/filters/sanitize.rb'
-    - 'lib/qiita/markdown/filters/syntax_highlight.rb'
-    - 'lib/qiita/markdown/greenmat/heading_rendering.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
