@@ -457,6 +457,40 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with group mention" do
+      let(:markdown) do
+        "@alice/bob"
+      end
+
+      it "does not replace it" do
+        is_expected.to eq <<-EOS.strip_heredoc
+          <p>@alice/bob</p>
+        EOS
+      end
+    end
+
+    context "with group mention" do
+      let(:context) do
+        super().merge(group_mention_url_generator: lambda do |group|
+          "https://#{group[:team_url_name]}.example.com/groups/#{group[:group_url_name]}"
+        end)
+      end
+
+      let(:markdown) do
+        "@alice/bob"
+      end
+
+      it "replaces it with preferred link and updates :mentioned_groups" do
+        is_expected.to eq <<-EOS.strip_heredoc
+          <p><a href="https://alice.example.com/groups/bob">@alice/bob</a></p>
+        EOS
+        expect(result[:mentioned_groups]).to eq [{
+          group_url_name: "bob",
+          team_url_name: "alice",
+        }]
+      end
+    end
+
     context "with normal link" do
       let(:markdown) do
         "[](/example)"
