@@ -1,3 +1,6 @@
+## 0.13.0
+- Support group mention
+
 ## 0.12.0
 - Add custom emoji support via `:emoji_names` and `:emoji_url_generator` contexts
 
