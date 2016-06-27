@@ -14,6 +14,7 @@ module Qiita
         Filters::Emoji,
         Filters::SyntaxHighlight,
         Filters::Mention,
+        Filters::GroupMention,
         Filters::Sanitize,
       ]
 
