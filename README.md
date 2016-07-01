@@ -57,9 +57,10 @@ processor.call(text)
                        The original implementation is used when the generator returned a falsey value.
 :hostname            - FQDN. Used to check whether or not each URL of `href` attributes is external site. (String)
 :language_aliases    - Alias table for some language names. (Hash)
+:markdown            - A hash for enabling / disabling optional Markdown syntax. (Hash)
+                       Currently only :footnotes (default: true) is supported.
 :rule                - Sanitization rule table. (Hash)
 :script              - A flag to allow to embed script element. (Boolean)
-markdown: {:footnotes} - A flag to enable / disable footnotes in document. (Default: true)
 ```
 
 ```ruby

@@ -244,7 +244,7 @@ describe Qiita::Markdown::SummaryProcessor do
       end
     end
 
-    context "with footenotes syntax" do
+    context "with footenote syntax" do
       let(:markdown) do
         <<-EOS.strip_heredoc
           [^1]
@@ -252,7 +252,7 @@ describe Qiita::Markdown::SummaryProcessor do
         EOS
       end
 
-      it "does not generates footnotes elements by default" do
+      it "does not generate footnote elements by default" do
         should eq <<-EOS.strip_heredoc
           <a href="test">^1</a>
         EOS

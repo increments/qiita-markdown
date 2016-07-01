@@ -3,7 +3,7 @@ module Qiita
     module Filters
       class Greenmat < HTML::Pipeline::TextFilter
         DEFAULT_OPTIONS = {
-          footnotes: true
+          footnotes: true,
         }.freeze
 
         # @return [Nokogiri::HTML::DocumentFragment]
@@ -27,7 +27,6 @@ module Qiita
             tables: true,
           )
         end
-
 
         def options
           @options ||= DEFAULT_OPTIONS.merge(context[:markdown] || {})

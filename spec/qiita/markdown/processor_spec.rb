@@ -789,7 +789,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-   context "with markdown: { footnotes: false } context" do
+    context "with markdown: { footnotes: false } context" do
       before do
         context[:markdown] = { footnotes: false }
       end
@@ -801,7 +801,7 @@ describe Qiita::Markdown::Processor do
         EOS
       end
 
-      it 'does not generates footnotes elements' do
+      it "does not generate footnote elements" do
         should eq <<-EOS.strip_heredoc
           <p><a href="test">^1</a></p>
         EOS

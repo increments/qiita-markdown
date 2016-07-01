@@ -1,7 +1,6 @@
 module Qiita
   module Markdown
-    # A base processor for rendering a markdown document.
-    # This class must be inherited and defined.
+    # An abstract base processor for rendering a Markdown document.
     class BaseProcessor
       # @return [Hash] the default context for HTML::Pipeline
       def self.default_context
