@@ -31,3 +31,6 @@ Style/TrailingCommaInLiteral:
 
 Style/UnneededPercentQ:
   Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
