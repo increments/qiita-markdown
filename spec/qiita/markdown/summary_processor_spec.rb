@@ -240,7 +240,7 @@ describe Qiita::Markdown::SummaryProcessor do
       end
 
       it "replaces mention with link" do
-        should eq %{<a href="/alice" class="user-mention" title="alice">@alice</a>\n}
+        should eq %{<a href="/alice" class="user-mention js-hovercard" title="alice" data-hovercard-target-type="user" data-hovercard-target-name="alice">@alice</a>\n}
       end
     end
   end

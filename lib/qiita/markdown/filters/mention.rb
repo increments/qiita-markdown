@@ -53,7 +53,7 @@ module Qiita
               url = File.join(base_url, name)
               match.sub(
                 "@#{name}",
-                %[<a href="#{url}" class="user-mention" title="#{name}">@#{name}</a>]
+                %[<a href="#{url}" class="user-mention js-hovercard" title="#{name}" data-hovercard-target-type="user" data-hovercard-target-name="#{name}">@#{name}</a>]
               )
             end
           end
