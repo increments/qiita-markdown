@@ -46,6 +46,8 @@ module Qiita
         RULE = {
           attributes: {
             "a" => [
+              "data-hovercard-target-name",
+              "data-hovercard-target-type",
               "href",
             ],
             "iframe" => [

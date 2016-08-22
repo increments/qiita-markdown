@@ -294,7 +294,7 @@ describe Qiita::Markdown::Processor do
 
       it "replaces mention with link" do
         should include(<<-EOS.strip_heredoc.rstrip)
-          <a href="/alice" class="user-mention" title="alice">@alice</a>
+          <a href="/alice" class="user-mention js-hovercard" title="alice" data-hovercard-target-type="user" data-hovercard-target-name="alice">@alice</a>
         EOS
       end
     end
@@ -306,7 +306,7 @@ describe Qiita::Markdown::Processor do
 
       it "replaces mention with link" do
         should include(<<-EOS.strip_heredoc.rstrip)
-          <a href="/al" class="user-mention" title="al">@al</a>
+          <a href="/al" class="user-mention js-hovercard" title="al" data-hovercard-target-type="user" data-hovercard-target-name="al">@al</a>
         EOS
       end
     end
@@ -393,7 +393,7 @@ describe Qiita::Markdown::Processor do
 
       it "does not emphasize the name" do
         should include(<<-EOS.strip_heredoc.rstrip)
-          <a href="/_alice_" class="user-mention" title="_alice_">@_alice_</a>
+          <a href="/_alice_" class="user-mention js-hovercard" title="_alice_" data-hovercard-target-type="user" data-hovercard-target-name="_alice_">@_alice_</a>
         EOS
       end
     end
