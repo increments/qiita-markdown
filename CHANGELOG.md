@@ -1,3 +1,6 @@
+## 0.14.0
+- Add some attributes to mentions for rendering hovercard
+
 ## 0.13.0
 - Support group mention
 
