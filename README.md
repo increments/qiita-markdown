@@ -15,7 +15,7 @@ Qiita-specified markdown processor.
 Qiita::Markdown::Processor provides markdown rendering logic.
 
 ```ruby
-processor = Qiita::Markdown::Processor.new
+processor = Qiita::Markdown::Processor.new(hostname: "example.com")
 processor.call(markdown)
 # => {
 #   codes: [
@@ -38,7 +38,7 @@ Qiita::Markdown is built on [jch/html-pipeline](https://github.com/jch/html-pipe
 Add your favorite html-pipeline-compatible filters.
 
 ```ruby
-processor = Qiita::Markdown::Processor.new
+processor = Qiita::Markdown::Processor.new(hostname: "example.com")
 processor.filters << HTML::Pipeline::ImageMaxWidthFilter
 processor.call(text)
 ```
@@ -55,13 +55,14 @@ processor.call(text)
 :emoji_names         - A list of allowed emoji names. (Array<String>)
 :emoji_url_generator - #call'able object that accepts emoji name as argument and returns emoji image URL. (#call)
                        The original implementation is used when the generator returned a falsey value.
+:hostname            - FQDN. Used to check whether or not each URL of `href` attributes is external site. (String)
 :language_aliases    - Alias table for some language names. (Hash)
 :rule                - Sanitization rule table. (Hash)
 :script              - A flag to allow to embed script element. (Boolean)
 ```
 
 ```ruby
-processor = Qiita::Markdown::Processor.new(asset_root: "http://example.com/assets")
+processor = Qiita::Markdown::Processor.new(asset_root: "http://example.com/assets", hostname: "example.com")
 processor.call(text)
 ```
 
@@ -87,6 +88,6 @@ SummaryProcessor accepts the following context in addition to the Processor's co
 ```
 
 ```ruby
-processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 80 })
+processor = Qiita::Markdown::SummaryProcessor.new(truncate: { length: 80 }, hostname: "example.com")
 processor.call(text)
 ```

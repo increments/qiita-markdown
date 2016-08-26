@@ -49,6 +49,7 @@ module Qiita
               "data-hovercard-target-name",
               "data-hovercard-target-type",
               "href",
+              "rel",
             ],
             "iframe" => [
               "allowfullscreen",

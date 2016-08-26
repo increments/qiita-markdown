@@ -15,6 +15,7 @@ module Qiita
         Filters::SyntaxHighlight,
         Filters::Mention,
         Filters::GroupMention,
+        Filters::ExternalLink,
         Filters::Sanitize,
       ]
 

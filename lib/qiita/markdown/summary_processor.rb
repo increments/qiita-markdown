@@ -9,6 +9,7 @@ module Qiita
         Filters::Simplify,
         Filters::Emoji,
         Filters::Mention,
+        Filters::ExternalLink,
         Filters::Sanitize,
         Filters::Truncate,
       ]
