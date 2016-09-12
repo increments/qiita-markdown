@@ -482,7 +482,7 @@ describe Qiita::Markdown::Processor do
 
       it "replaces it with preferred link and updates :mentioned_groups" do
         is_expected.to eq <<-EOS.strip_heredoc
-          <p><a href="https://alice.example.com/groups/bob" rel="nofollow" target="_blank">@alice/bob</a></p>
+          <p><a href="https://alice.example.com/groups/bob" rel="nofollow noopener" target="_blank">@alice/bob</a></p>
         EOS
         expect(result[:mentioned_groups]).to eq [{
           group_url_name: "bob",
@@ -857,7 +857,7 @@ describe Qiita::Markdown::Processor do
         { hostname: "qiita.com" }
       end
 
-      it "creates link which does not have rel='nofollow' and target='_blank'" do
+      it "creates link which does not have rel='nofollow noopener' and target='_blank'" do
         should eq(
           '<p><a href="http://qiita.com/?a=b" class="autolink">' \
           "http://qiita.com/?a=b</a></p>\n"
@@ -874,9 +874,9 @@ describe Qiita::Markdown::Processor do
         { hostname: "qiita.com" }
       end
 
-      it "creates link which has rel='nofollow' and target='_blank'" do
+      it "creates link which has rel='nofollow noopener' and target='_blank'" do
         should eq(
-          '<p><a href="http://external.com/?a=b" class="autolink" rel="nofollow" target="_blank">' \
+          '<p><a href="http://external.com/?a=b" class="autolink" rel="nofollow noopener" target="_blank">' \
           "http://external.com/?a=b</a></p>\n"
         )
       end
@@ -891,7 +891,7 @@ describe Qiita::Markdown::Processor do
         { hostname: "qiita.com" }
       end
 
-      it "creates link which does not have rel='nofollow' and target='_blank'" do
+      it "creates link which does not have rel='nofollow noopener' and target='_blank'" do
         should eq(
           "<p><a href=\"http://qiita.com/?a=b\">foobar</a></p>\n"
         )
@@ -907,9 +907,9 @@ describe Qiita::Markdown::Processor do
         { hostname: "qiita.com" }
       end
 
-      it "creates link which has rel='nofollow' and target='_blank'" do
+      it "creates link which has rel='nofollow noopener' and target='_blank'" do
         should eq(
-          "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow\" target=\"_blank\">foobar</a></p>\n"
+          "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n"
         )
       end
     end
@@ -923,9 +923,9 @@ describe Qiita::Markdown::Processor do
         { hostname: "qiita.com" }
       end
 
-      it "creates link which has rel='nofollow' and target='_blank'" do
+      it "creates link which has rel='nofollow noopener' and target='_blank'" do
         should eq(
-          '<p><a href="http://qqqqqqiita.com/?a=b" class="autolink" rel="nofollow" target="_blank">' \
+          '<p><a href="http://qqqqqqiita.com/?a=b" class="autolink" rel="nofollow noopener" target="_blank">' \
           "http://qqqqqqiita.com/?a=b</a></p>\n"
         )
       end
@@ -940,9 +940,9 @@ describe Qiita::Markdown::Processor do
         { hostname: "qiita.com" }
       end
 
-      it "creates link which has rel='nofollow' and target='_blank'" do
+      it "creates link which has rel='nofollow noopener' and target='_blank'" do
         should eq(
-          "<p><a href=\"http://qqqqqqiita.com/?a=b\" rel=\"nofollow\" target=\"_blank\">foobar</a></p>\n"
+          "<p><a href=\"http://qqqqqqiita.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n"
         )
       end
     end
@@ -956,9 +956,9 @@ describe Qiita::Markdown::Processor do
         { hostname: "qiita.com" }
       end
 
-      it "creates link which has rel='nofollow' and target='_blank'" do
+      it "creates link which has rel='nofollow noopener' and target='_blank'" do
         should eq(
-          '<p><a href="http://sub.qiita.com/?a=b" class="autolink" rel="nofollow" target="_blank">' \
+          '<p><a href="http://sub.qiita.com/?a=b" class="autolink" rel="nofollow noopener" target="_blank">' \
           "http://sub.qiita.com/?a=b</a></p>\n"
         )
       end
@@ -973,9 +973,9 @@ describe Qiita::Markdown::Processor do
         { hostname: "qiita.com" }
       end
 
-      it "creates link which has rel='nofollow' and target='_blank', and rel value is overwritten" do
+      it "creates link which has rel='nofollow noopener' and target='_blank', and rel value is overwritten" do
         should eq(
-          "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow\" target=\"_blank\">foobar</a></p>\n"
+          "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n"
         )
       end
     end
