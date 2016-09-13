@@ -3,21 +3,26 @@ module Qiita
     # A processor for rendering a summary of markdown document. This simplifies
     # a document by removing complex markups and also truncates it to a
     # specific length without breaking the document structure.
-    class SummaryProcessor < Processor
-      DEFAULT_FILTERS = [
-        Filters::Greenmat,
-        Filters::Simplify,
-        Filters::Emoji,
-        Filters::Mention,
-        Filters::ExternalLink,
-        Filters::Sanitize,
-        Filters::Truncate,
-      ]
+    class SummaryProcessor < BaseProcessor
+      def self.default_context
+        {
+          asset_root: "/images",
+          markdown: {
+            footnotes: false,
+          },
+        }
+      end
 
-      # @note Modify filters if you want.
-      # @return [Array<HTML::Pipeline::Filter>]
-      def filters
-        @filters ||= DEFAULT_FILTERS.clone
+      def self.default_filters
+        [
+          Filters::Greenmat,
+          Filters::Simplify,
+          Filters::Emoji,
+          Filters::Mention,
+          Filters::ExternalLink,
+          Filters::Sanitize,
+          Filters::Truncate,
+        ]
       end
     end
   end

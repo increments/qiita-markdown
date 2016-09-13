@@ -1,48 +1,26 @@
 module Qiita
   module Markdown
-    class Processor
-      DEFAULT_CONTEXT = {
-        asset_root: "/images",
-      }
-
-      DEFAULT_FILTERS = [
-        Filters::Greenmat,
-        Filters::ImageLink,
-        Filters::Footnote,
-        Filters::Code,
-        Filters::Checkbox,
-        Filters::Emoji,
-        Filters::SyntaxHighlight,
-        Filters::Mention,
-        Filters::GroupMention,
-        Filters::ExternalLink,
-        Filters::Sanitize,
-      ]
-
-      # @param [Hash] context Optional context for HTML::Pipeline.
-      def initialize(context = {})
-        @context = DEFAULT_CONTEXT.merge(context)
+    class Processor < BaseProcessor
+      def self.default_context
+        {
+          asset_root: "/images",
+        }
       end
 
-      # Converts Markdown text into HTML string with extracted metadata.
-      #
-      # @param [String] input Markdown text.
-      # @param [Hash] context Optional context merged into default context.
-      # @return [Hash] Process result.
-      # @example
-      #   Qiita::Markdown::Processor.new.call(markdown) #=> {
-      #     codes: [...],
-      #     mentioned_usernames: [...],
-      #     output: "...",
-      #   }
-      def call(input, context = {})
-        HTML::Pipeline.new(filters, @context).call(input, context)
-      end
-
-      # @note Modify filters if you want.
-      # @return [Array<HTML::Pipeline::Filter>]
-      def filters
-        @filters ||= DEFAULT_FILTERS.clone
+      def self.default_filters
+        [
+          Filters::Greenmat,
+          Filters::ImageLink,
+          Filters::Footnote,
+          Filters::Code,
+          Filters::Checkbox,
+          Filters::Emoji,
+          Filters::SyntaxHighlight,
+          Filters::Mention,
+          Filters::GroupMention,
+          Filters::ExternalLink,
+          Filters::Sanitize,
+        ]
       end
     end
   end
