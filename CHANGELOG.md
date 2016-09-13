@@ -1,5 +1,5 @@
 ## 0.15.0
-- Append rel=nofollow and target=_blank to all external a tags
+- Append `rel=nofollow` and `target=_blank` to `a` tags for external link
 
 ## 0.14.0
 - Add some attributes to mentions for rendering hovercard
