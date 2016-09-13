@@ -1,5 +1,6 @@
 ## master
 - Add rel=noopener to all external a tags
+- Support HTML5 `<details>` and `<summary>` elements
 
 ## 0.15.0
 - Append `rel=nofollow` and `target=_blank` to `a` tags for external link
