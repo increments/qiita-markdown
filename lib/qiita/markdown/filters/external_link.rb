@@ -11,7 +11,7 @@ module Qiita
             href_host = host_of(href)
             next unless href_host
             if href_host != hostname
-              anchor["rel"] = "nofollow"
+              anchor["rel"] = "nofollow noopener"
               anchor["target"] = "_blank"
             end
           end

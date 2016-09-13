@@ -1,3 +1,6 @@
+## master
+- Add rel=noopener to all external a tags
+
 ## 0.15.0
 - Append `rel=nofollow` and `target=_blank` to `a` tags for external link
 
