@@ -1,4 +1,4 @@
-## master
+## 0.16.0
 - Add rel=noopener to all external a tags
 - Support HTML5 `<details>` and `<summary>` elements
 - Enable to change settings for footnotes
