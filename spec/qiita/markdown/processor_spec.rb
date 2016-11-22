@@ -457,7 +457,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    context "with group mention" do
+    context "with group mention without group_memberion_url_generator" do
       let(:markdown) do
         "@alice/bob"
       end
