@@ -1,17 +1,23 @@
-# Qiita::Markdown [![Build Status](https://travis-ci.org/increments/qiita-markdown.svg)](https://travis-ci.org/increments/qiita-markdown) [![Code Climate](https://codeclimate.com/github/increments/qiita-markdown/badges/gpa.svg)](https://codeclimate.com/github/increments/qiita-markdown) [![Test Coverage](https://codeclimate.com/github/increments/qiita-markdown/badges/coverage.svg)](https://codeclimate.com/github/increments/qiita-markdown)
+# Qiita::Markdown
+
+[![Build Status](https://travis-ci.org/increments/qiita-markdown.svg)](https://travis-ci.org/increments/qiita-markdown)
+[![Code Climate](https://codeclimate.com/github/increments/qiita-markdown/badges/gpa.svg)](https://codeclimate.com/github/increments/qiita-markdown)
+[![Test Coverage](https://codeclimate.com/github/increments/qiita-markdown/badges/coverage.svg)](https://codeclimate.com/github/increments/qiita-markdown)
+
 Qiita-specified markdown processor.
 
-* Markdown conversion
-* Sanitization
-* Code and language detection
-* Task list
-* ToC
-* Emoji
-* Syntax highlighting
-* Mention
-* Footnotes
+- Markdown conversion
+- Sanitization
+- Code and language detection
+- Task list
+- ToC
+- Emoji
+- Syntax highlighting
+- Mention
+- Footnotes
 
 ## Basic Usage
+
 Qiita::Markdown::Processor provides markdown rendering logic.
 
 ```ruby
@@ -34,6 +40,7 @@ processor.call(markdown)
 ```
 
 ### Filters
+
 Qiita::Markdown is built on [jch/html-pipeline](https://github.com/jch/html-pipeline).
 Add your favorite html-pipeline-compatible filters.
 
@@ -44,6 +51,7 @@ processor.call(text)
 ```
 
 ### Context
+
 `.new` and `#call` can take optional context as a Hash with following keys:
 
 ```
@@ -69,6 +77,7 @@ processor.call(text)
 ```
 
 ## Rendering Summary
+
 There's another processor Qiita::Markdown::SummaryProcessor,
 which is for rendering a summary of markdown document.
 It simplifies a document by removing complex markups
