@@ -59,13 +59,16 @@ module Qiita
 
           # @return [String]
           def replaced_html
-            @replaced_html ||= html.gsub(GROUP_IDENTIFIER_PATTERN) do |_match|
+            @replaced_html ||= html.gsub(GROUP_IDENTIFIER_PATTERN) do |string|
               team_url_name = ::Regexp.last_match(1)
               group_url_name = ::Regexp.last_match(2)
               group = { group_url_name: group_url_name, team_url_name: team_url_name }
               groups << group
-              %(<a href="#{@group_mention_url_generator.call(group)}">) +
-                %(@#{team_url_name}/#{group_url_name}</a>)
+              string.sub(
+                "@#{team_url_name}/#{group_url_name}",
+                %(<a href="#{@group_mention_url_generator.call(group)}">) +
+                  %(@#{team_url_name}/#{group_url_name}</a>),
+              )
             end
           end
 

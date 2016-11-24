@@ -491,6 +491,22 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with group mention following another text" do
+      let(:context) do
+        super().merge(group_mention_url_generator: lambda do |group|
+          "https://#{group[:team_url_name]}.example.com/groups/#{group[:group_url_name]}"
+        end)
+      end
+
+      let(:markdown) do
+        "FYI @alice/bob"
+      end
+
+      it "preserves space after preceding text" do
+        is_expected.to start_with("<p>FYI <a ")
+      end
+    end
+
     context "with normal link" do
       let(:markdown) do
         "[](/example)"
