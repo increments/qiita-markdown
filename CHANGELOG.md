@@ -1,3 +1,7 @@
+## 0.16.1
+
+- Fix a group mention bug that unexpectedly removes preceding space
+
 ## 0.16.0
 
 - Add rel=noopener to all external a tags
