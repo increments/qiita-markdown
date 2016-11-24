@@ -1,5 +1,6 @@
 # Qiita::Markdown
 
+[[![Gem](https://img.shields.io/gem/v/qiita-markdown.svg)]()](https://rubygems.org/gems/qiita-markdown)
 [![Build Status](https://travis-ci.org/increments/qiita-markdown.svg)](https://travis-ci.org/increments/qiita-markdown)
 [![Code Climate](https://codeclimate.com/github/increments/qiita-markdown/badges/gpa.svg)](https://codeclimate.com/github/increments/qiita-markdown)
 [![Test Coverage](https://codeclimate.com/github/increments/qiita-markdown/badges/coverage.svg)](https://codeclimate.com/github/increments/qiita-markdown)
