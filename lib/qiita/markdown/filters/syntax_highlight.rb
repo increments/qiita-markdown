@@ -7,14 +7,19 @@ module Qiita
 
         def call
           elapsed = 0
+          timeout_fallback_language = nil
           doc.search("pre").each do |node|
             elapsed += measure_time do
               Highlighter.call(
                 default_language: default_language,
                 node: node,
+                specific_language: timeout_fallback_language,
               )
             end
-            break if elapsed >= timeout
+            if elapsed >= timeout
+              timeout_fallback_language = DEFAULT_LANGUAGE
+              result[:syntax_highlight_timed_out] = true
+            end
           end
           doc
         end
@@ -41,9 +46,10 @@ module Qiita
             new(*args).call
           end
 
-          def initialize(default_language: nil, node: nil)
+          def initialize(default_language: nil, node: nil, specific_language: nil)
             @default_language = default_language
             @node = node
+            @specific_language = specific_language
           end
 
           def call
@@ -105,7 +111,7 @@ module Qiita
           end
 
           def specific_language
-            @node["lang"]
+            @specific_language || @node["lang"]
           end
         end
       end
