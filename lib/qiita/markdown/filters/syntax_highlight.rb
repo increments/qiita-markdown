@@ -61,7 +61,7 @@ module Qiita
           end
 
           def highlighted_node
-            if specific_language
+            if specific_language && Pygments::Lexer.find(specific_language)
               begin
                 highlight(specific_language).presence or raise
               rescue
