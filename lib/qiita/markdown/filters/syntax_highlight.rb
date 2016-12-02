@@ -3,13 +3,23 @@ module Qiita
     module Filters
       class SyntaxHighlight < HTML::Pipeline::Filter
         DEFAULT_LANGUAGE = "text"
+        DEFAULT_TIMEOUT = Float::INFINITY
 
         def call
+          elapsed = 0
+          timeout_fallback_language = nil
           doc.search("pre").each do |node|
-            Highlighter.call(
-              default_language: default_language,
-              node: node,
-            )
+            elapsed += measure_time do
+              Highlighter.call(
+                default_language: default_language,
+                node: node,
+                specific_language: timeout_fallback_language,
+              )
+            end
+            if elapsed >= timeout
+              timeout_fallback_language = DEFAULT_LANGUAGE
+              result[:syntax_highlight_timed_out] = true
+            end
           end
           doc
         end
@@ -20,14 +30,26 @@ module Qiita
           context[:default_language] || DEFAULT_LANGUAGE
         end
 
+        def measure_time
+          t1 = Time.now
+          yield
+          t2 = Time.now
+          t2 - t1
+        end
+
+        def timeout
+          context[:syntax_highlight_timeout] || DEFAULT_TIMEOUT
+        end
+
         class Highlighter
           def self.call(*args)
             new(*args).call
           end
 
-          def initialize(default_language: nil, node: nil)
+          def initialize(default_language: nil, node: nil, specific_language: nil)
             @default_language = default_language
             @node = node
+            @specific_language = specific_language
           end
 
           def call
@@ -89,7 +111,7 @@ module Qiita
           end
 
           def specific_language
-            @node["lang"]
+            @specific_language || @node["lang"]
           end
         end
       end
