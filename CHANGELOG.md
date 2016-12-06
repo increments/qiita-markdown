@@ -1,3 +1,8 @@
+## 0.16.2
+
+- Add timeout support to `SyntaxHighlightFilter`
+- Make `SyntaxHighlightFilter` process code blocks faster when their specified language is unknown to Pygments
+
 ## 0.16.1
 
 - Fix a group mention bug that unexpectedly removes preceding space
