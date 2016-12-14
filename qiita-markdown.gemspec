@@ -18,14 +18,14 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.0.0"
 
+  spec.add_dependency "addressable"
   spec.add_dependency "gemoji"
   spec.add_dependency "github-linguist", "~> 4.0"
+  spec.add_dependency "greenmat", ">= 3.2.0.2", "< 4"
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
-  spec.add_dependency "pygments.rb"
-  spec.add_dependency "greenmat", ">= 3.2.0.2", "< 4"
+  spec.add_dependency "rouge"
   spec.add_dependency "sanitize"
-  spec.add_dependency "addressable"
   spec.add_development_dependency "activesupport", "4.2.6"
   spec.add_development_dependency "benchmark-ips", "~> 1.2"
   spec.add_development_dependency "bundler", "~> 1.7"

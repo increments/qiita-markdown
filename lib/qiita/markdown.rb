@@ -4,7 +4,7 @@ require "html/pipeline"
 require "linguist"
 require "mem"
 require "nokogiri"
-require "pygments"
+require "rouge"
 require "sanitize"
 
 require "qiita/markdown/filters/checkbox"
