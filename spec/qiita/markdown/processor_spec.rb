@@ -149,7 +149,7 @@ describe Qiita::Markdown::Processor do
           should eq <<-EOS.strip_heredoc
             <div class="code-frame" data-lang="ruby">
             <div class="code-lang"><span class="bold">example.rb</span></div>
-            <div class="highlight"><pre><span></span><span class="mi">1</span>
+            <div class="highlight"><pre><span class="mi">1</span>
             </pre></div>
             </div>
           EOS
@@ -169,7 +169,7 @@ describe Qiita::Markdown::Processor do
           should eq <<-EOS.strip_heredoc
             <div class="code-frame" data-lang="php">
             <div class="code-lang"><span class="bold">example.php</span></div>
-            <div class="highlight"><pre><span></span><span class="mi">1</span>
+            <div class="highlight"><pre><span class="mi">1</span>
             </pre></div>
             </div>
           EOS
@@ -187,7 +187,7 @@ describe Qiita::Markdown::Processor do
 
         it "returns code-frame and highlighted pre element" do
           should eq <<-EOS.strip_heredoc
-            <div class="code-frame" data-lang="ruby"><div class="highlight"><pre><span></span><span class="mi">1</span>
+            <div class="code-frame" data-lang="ruby"><div class="highlight"><pre><span class="mi">1</span>
             </pre></div></div>
           EOS
         end
@@ -226,7 +226,7 @@ describe Qiita::Markdown::Processor do
 
         it "does not strip the newlines" do
           should eq <<-EOS.strip_heredoc
-            <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>
+            <div class="code-frame" data-lang="text"><div class="highlight"><pre>
             foo
 
             </pre></div></div>
@@ -311,7 +311,7 @@ describe Qiita::Markdown::Processor do
           should include(<<-EOS.strip_heredoc.rstrip)
             <div class="code-frame" data-lang="ruby">
             <div class="code-lang"><span class="bold">@alice</span></div>
-            <div class="highlight"><pre><span></span><span class="mi">1</span>
+            <div class="highlight"><pre><span class="mi">1</span>
             </pre></div>
             </div>
           EOS
@@ -659,7 +659,7 @@ describe Qiita::Markdown::Processor do
 
         it "does not replace checkbox" do
           should eq <<-EOS.strip_heredoc
-            <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>- [ ] a
+            <div class="code-frame" data-lang="text"><div class="highlight"><pre>- [ ] a
             - [x] b
             </pre></div></div>
           EOS
@@ -1080,7 +1080,7 @@ describe Qiita::Markdown::Processor do
             should eq <<-EOS.strip_heredoc
               <div class="code-frame" data-lang="js">
               <div class="code-lang"><span class="bold">test<script>alert(1)</script></span></div>
-              <div class="highlight"><pre><span></span><span class="mi">1</span>
+              <div class="highlight"><pre><span class="mi">1</span>
               </pre></div>
               </div>
             EOS
@@ -1090,7 +1090,7 @@ describe Qiita::Markdown::Processor do
             should eq <<-EOS.strip_heredoc
               <div class="code-frame" data-lang="js">
               <div class="code-lang"><span class="bold">test</span></div>
-              <div class="highlight"><pre><span></span><span class="mi">1</span>
+              <div class="highlight"><pre><span class="mi">1</span>
               </pre></div>
               </div>
             EOS
