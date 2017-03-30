@@ -28,9 +28,6 @@ module Qiita
                 filename: filename,
                 language: language,
               }
-              # a leading newline character immediately following the pre element start tag is stripped.
-              # http://dev.w3.org/html5/spec-preview/the-pre-element.html
-              pre.content = "\n#{pre.content}"
             end
           end
           doc
