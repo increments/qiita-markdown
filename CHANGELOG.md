@@ -1,3 +1,8 @@
+## 0.17.0
+
+- Require pygments.rb 1.0 or later
+- Remove superfluous leading newline in rendered HTML with pygments.rb 1.0
+
 ## 0.16.2
 
 - Add timeout support to `SyntaxHighlightFilter`
