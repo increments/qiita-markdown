@@ -15,9 +15,9 @@ module Qiita
       #   `Sanitize` filter later.
       #   https://github.com/rgrove/sanitize/blob/v3.1.2/lib/sanitize.rb#L77-L100
       class Simplify < HTML::Pipeline::Filter
-        SIMPLE_ELEMENTS = %w(a b code em i ins q s samp span strike strong sub sup var)
+        SIMPLE_ELEMENTS = %w[a b code em i ins q s samp span strike strong sub sup var]
 
-        COMPLEX_CONTENT_ELEMENTS = %w(table)
+        COMPLEX_CONTENT_ELEMENTS = %w[table]
 
         def call
           remove_complex_contents

@@ -23,13 +23,13 @@ module Qiita
           private
 
           def has_invalid_list_node?
-            name == "li" && !node.ancestors.any? do |ancestor|
+            name == "li" && node.ancestors.none? do |ancestor|
               %w[ol ul].include?(ancestor.name)
             end
           end
 
           def has_invalid_table_node?
-            %w[thead tbody tfoot tr td th].include?(name) && !node.ancestors.any? do |ancestor|
+            %w[thead tbody tfoot tr td th].include?(name) && node.ancestors.none? do |ancestor|
               ancestor.name == "table"
             end
           end
@@ -213,7 +213,7 @@ module Qiita
             "script",
           ],
           transformers: TransformableNode,
-        }
+        }.freeze
 
         SCRIPTABLE_RULE = RULE.dup.tap do |rule|
           rule[:attributes] = RULE[:attributes].dup
