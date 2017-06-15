@@ -20,7 +20,7 @@ module Qiita
           Filters::Emoji,
           Filters::Mention,
           Filters::ExternalLink,
-          Filters::Sanitize,
+          Filters::FinalSanitizer,
           Filters::Truncate,
         ]
       end

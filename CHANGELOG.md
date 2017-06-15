@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Drop 2.0 and 2.1 from support Ruby versions
+- Rename `Sanitize` as `FinalSanitizer`
 
 ## 0.18.0
 

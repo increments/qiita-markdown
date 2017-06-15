@@ -20,7 +20,7 @@ module Qiita
           Filters::Mention,
           Filters::GroupMention,
           Filters::ExternalLink,
-          Filters::Sanitize,
+          Filters::FinalSanitizer,
         ]
       end
     end

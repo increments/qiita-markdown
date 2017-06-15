@@ -4,7 +4,7 @@ module Qiita
       # A filter for simplifying document structure by removing complex markups
       # (mainly block elements) and complex contents.
       #
-      # The logic of this filter is similar to the `Sanitize` filter, but this
+      # The logic of this filter is similar to the `FinalSanitizer` filter, but this
       # does not use the `sanitize` gem internally for the following reasons:
       #
       # * Each filter should do only its own responsibility, and this filter is
@@ -12,7 +12,7 @@ module Qiita
       #
       # * The `sanitize` gem automatically adds extra transformers even if we
       #   want to clean up only some elements, and they would be run in the
-      #   `Sanitize` filter later.
+      #   `FinalSanitizer` filter later.
       #   https://github.com/rgrove/sanitize/blob/v3.1.2/lib/sanitize.rb#L77-L100
       class Simplify < HTML::Pipeline::Filter
         SIMPLE_ELEMENTS = %w[a b code em i ins q s samp span strike strong sub sup var]

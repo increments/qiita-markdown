@@ -3,7 +3,7 @@ module Qiita
     module Filters
       # Sanitizes undesirable elements by whitelist-based rule.
       # You can pass optional :rule and :script context.
-      class Sanitize < HTML::Pipeline::Filter
+      class FinalSanitizer < HTML::Pipeline::Filter
         # Wraps a node env to transform invalid node.
         class TransformableNode
           def self.call(*args)
