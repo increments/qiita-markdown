@@ -34,3 +34,8 @@ Style/UnneededPercentQ:
 
 Metrics/LineLength:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - qiita-markdown.gemspec
+    - spec/**/*

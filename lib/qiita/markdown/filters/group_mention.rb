@@ -32,13 +32,13 @@ module Qiita
             )
           }x
 
-          IGNORED_ANCESTOR_ELEMENT_NAMES = %w(
+          IGNORED_ANCESTOR_ELEMENT_NAMES = %w[
             a
             blockquote
             code
             pre
             style
-          ).freeze
+          ].freeze
 
           # @param node [Nokogiri::XML::Node]
           # @param group_mention_url_generator [Proc]

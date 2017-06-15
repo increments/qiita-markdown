@@ -171,7 +171,7 @@ module Rendering
             # no-op
           end
 
-          private # rubocop:disable Lint/UselessAccessModifier
+          private
 
           def content
             body

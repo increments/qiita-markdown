@@ -4,4 +4,4 @@ require "rubocop/rake_task"
 
 RSpec::Core::RakeTask.new(:spec)
 RuboCop::RakeTask.new(:style)
-task default: [:spec, :style]
+task default: %i[spec style]
