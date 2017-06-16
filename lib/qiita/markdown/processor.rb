@@ -10,6 +10,7 @@ module Qiita
       def self.default_filters
         [
           Filters::Greenmat,
+          Filters::UserInputSanitizer,
           Filters::ImageLink,
           Filters::Footnote,
           Filters::Code,
@@ -20,7 +21,7 @@ module Qiita
           Filters::Mention,
           Filters::GroupMention,
           Filters::ExternalLink,
-          Filters::Sanitize,
+          Filters::FinalSanitizer,
         ]
       end
     end
