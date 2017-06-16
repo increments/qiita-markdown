@@ -55,7 +55,7 @@ describe Qiita::Markdown::SummaryProcessor do
 
       it "returns simple code element" do
         should eq <<-EOS.strip_heredoc
-          <code class="ruby">puts 'hello world'
+          <code>puts 'hello world'
           </code>
         EOS
       end
