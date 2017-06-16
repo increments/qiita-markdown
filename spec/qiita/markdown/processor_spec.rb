@@ -84,6 +84,37 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    context "with heading whose title includes special HTML characters" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          # <b>R&amp;B</b>
+        EOS
+      end
+
+      it "generates fragment identifier by sanitizing the special characters in the title" do
+        should eq <<-EOS.strip_heredoc
+
+          <h1>
+          <span id="rb" class="fragment"></span><a href="#rb"><i class="fa fa-link"></i></a><b>R&amp;B</b>
+          </h1>
+        EOS
+      end
+    end
+
+    context "with manually inputted heading HTML tags without id attribute" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          <h1>foo</h1>
+        EOS
+      end
+
+      it "does nothing" do
+        should eq <<-EOS.strip_heredoc
+          <h1>foo</h1>
+        EOS
+      end
+    end
+
     context "with code" do
       let(:markdown) do
         <<-EOS.strip_heredoc

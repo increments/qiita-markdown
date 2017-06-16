@@ -14,6 +14,7 @@ module Qiita
           Filters::Footnote,
           Filters::Code,
           Filters::Checkbox,
+          Filters::Toc,
           Filters::Emoji,
           Filters::SyntaxHighlight,
           Filters::Mention,
