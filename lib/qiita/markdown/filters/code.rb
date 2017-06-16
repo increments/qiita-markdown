@@ -17,9 +17,9 @@ module Qiita
           result[:codes] ||= []
           doc.search("pre").each do |pre|
             if (code = pre.at("code"))
-              label = Label.new(code["class"])
-              filename = label.filename
-              language = label.language
+              metadata = Metadata.new(code["data-metadata"])
+              filename = metadata.filename
+              language = metadata.language
               language = language_aliases[language] || language
               pre["filename"] = filename if filename
               pre["lang"] = language if language
@@ -39,8 +39,8 @@ module Qiita
           context[:language_aliases] || DEFAULT_LANGUAGE_ALIASES
         end
 
-        # Detects language from code block label.
-        class Label
+        # Detects language from code block metadata.
+        class Metadata
           # @param text [String, nil]
           def initialize(text)
             @text = text
@@ -59,10 +59,10 @@ module Qiita
           end
 
           # @example
-          #   Label.new(nil).language #=> nil
-          #   Label.new("ruby").language #=> "ruby"
-          #   Label.new("ruby:foo.rb").language #=> "ruby"
-          #   Label.new("foo.rb").language #=> "ruby"
+          #   Metadata.new(nil).language #=> nil
+          #   Metadata.new("ruby").language #=> "ruby"
+          #   Metadata.new("ruby:foo.rb").language #=> "ruby"
+          #   Metadata.new("foo.rb").language #=> "ruby"
           # @return [String, nil]
           def language
             case
