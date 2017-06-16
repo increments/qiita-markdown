@@ -47,17 +47,11 @@ module Qiita
 
         class HeadingWithAnchor < AbstractHeading
           def to_s
-            "\n<h#{level}>#{anchor_element}#{body}</h#{level}>\n"
+            %(\n<h#{level} id="#{suffixed_id}">#{body}</h#{level}>\n)
           end
 
           def increment
             counter[id] += 1
-          end
-
-          private
-
-          def anchor_element
-            %(<span id="#{suffixed_id}" class="fragment"></span><a href="##{suffixed_id}"><i class="fa fa-link"></i></a>)
           end
         end
       end

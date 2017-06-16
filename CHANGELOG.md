@@ -1,3 +1,7 @@
+## Unreleased
+
+- Extract heading decoration logic from Greenmat renderer to `Toc` filter
+
 ## 0.17.0
 
 - Require pygments.rb 1.0 or later
