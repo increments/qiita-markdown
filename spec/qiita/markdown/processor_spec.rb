@@ -477,6 +477,18 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with link with title" do
+        let(:markdown) do
+          '[](/example "Title")'
+        end
+
+        it "creates link for that with the title" do
+          should eq <<-EOS.strip_heredoc
+            <p><a href="/example" title="Title"></a></p>
+          EOS
+        end
+      end
+
       context "with raw URL" do
         let(:markdown) do
           "http://example.com/search?q=日本語"
@@ -532,8 +544,30 @@ describe Qiita::Markdown::Processor do
         end
 
         it "wraps it in a element" do
-          should eq '<p><a href="http://example.com/b.png" target="_blank">' +
+          should eq %(<p><a href="http://example.com/b.png" target="_blank">) +
                     %(<img src="http://example.com/b.png" alt="a"></a></p>\n)
+        end
+      end
+
+      context "with image notation with title" do
+        let(:markdown) do
+          '![a](http://example.com/b.png "Title")'
+        end
+
+        it "generates <img> tag with the title" do
+          should eq %(<p><a href="http://example.com/b.png" target="_blank">) +
+                    %(<img src="http://example.com/b.png" alt="a" title="Title"></a></p>\n)
+        end
+      end
+
+      context "with <img> tag with width and height attribute (for Retina image)" do
+        let(:markdown) do
+          '<img width="80" height="48" alt="a" src="http://example.com/b.png">'
+        end
+
+        it "wraps it in a element while keeping the width attribute" do
+          should eq %(<p><a href="http://example.com/b.png" target="_blank">) +
+                    %(<img width="80" height="48" alt="a" src="http://example.com/b.png"></a></p>\n)
         end
       end
 
@@ -927,6 +961,16 @@ describe Qiita::Markdown::Processor do
           )
         end
       end
+
+      context "with blockquote syntax" do
+        let(:markdown) do
+          "> foo"
+        end
+
+        it "does not confuse it with HTML tag angle brackets" do
+          should eq "<blockquote>\n<p>foo</p>\n</blockquote>\n"
+        end
+      end
     end
 
     shared_examples_for "script element" do |allowed:|
@@ -1040,7 +1084,7 @@ describe Qiita::Markdown::Processor do
     end
 
     shared_examples_for "class attribute" do |allowed:|
-      context "with class attribute" do
+      context "with class attribute for general tags" do
         let(:markdown) do
           '<i class="fa fa-user"></i>user'
         end
@@ -1055,11 +1099,36 @@ describe Qiita::Markdown::Processor do
           end
         end
       end
+
+      context "with class attribute for <a> tag" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <a href="foo" class="malicious-class">foo</a>
+            http://qiita.com/
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize the classes" do
+            should eq <<-EOS.strip_heredoc
+              <p><a href="foo" class="malicious-class">foo</a><br>
+              <a href="http://qiita.com/" class="autolink" rel="nofollow noopener" target="_blank">http://qiita.com/</a></p>
+            EOS
+          end
+        else
+          it "sanitizes classes except `autolink`" do
+            should eq <<-EOS.strip_heredoc
+              <p><a href="foo" class="">foo</a><br>
+              <a href="http://qiita.com/" class="autolink" rel="nofollow noopener" target="_blank">http://qiita.com/</a></p>
+            EOS
+          end
+        end
+      end
     end
 
-    context "without script context" do
+    context "without script and strict context" do
       let(:context) do
-        super().merge(script: false)
+        super().merge(script: false, strict: false)
       end
 
       include_examples "basic markdown syntax"
@@ -1072,7 +1141,7 @@ describe Qiita::Markdown::Processor do
 
     context "with script context" do
       let(:context) do
-        super().merge(script: true)
+        super().merge(script: true, strict: false)
       end
 
       include_examples "basic markdown syntax"
@@ -1081,6 +1150,32 @@ describe Qiita::Markdown::Processor do
       include_examples "iframe element", allowed: true
       include_examples "data-attributes", allowed: true
       include_examples "class attribute", allowed: true
+    end
+
+    context "with strict context" do
+      let(:context) do
+        super().merge(script: false, strict: true)
+      end
+
+      include_examples "basic markdown syntax"
+      include_examples "script element", allowed: false
+      include_examples "malicious script in filename", allowed: false
+      include_examples "iframe element", allowed: false
+      include_examples "data-attributes", allowed: false
+      include_examples "class attribute", allowed: false
+    end
+
+    context "with script and strict context" do
+      let(:context) do
+        super().merge(script: true, strict: true)
+      end
+
+      include_examples "basic markdown syntax"
+      include_examples "script element", allowed: false
+      include_examples "malicious script in filename", allowed: true
+      include_examples "iframe element", allowed: false
+      include_examples "data-attributes", allowed: false
+      include_examples "class attribute", allowed: false
     end
   end
 end
