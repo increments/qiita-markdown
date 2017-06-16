@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.19.1
+
+- Add missing sanitization for `<div>` class attribute
+
 ## 0.19.0
 
 - Drop 2.0 and 2.1 from support Ruby versions
