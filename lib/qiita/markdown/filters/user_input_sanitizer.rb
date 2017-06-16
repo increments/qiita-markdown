@@ -10,6 +10,9 @@ module Qiita
               "rel" => %w[footnote url],
               "rev" => %w[footnote],
             },
+            "div" => {
+              "class" => %w[footnotes],
+            },
             "sup" => {
               "id" => /\Afnref\d+\z/,
             },
