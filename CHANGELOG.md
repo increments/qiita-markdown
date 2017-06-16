@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.18.0
+
 - Extract heading decoration logic from Greenmat renderer to `Toc` filter
 - Use greenmat 3.2.2.3
 
