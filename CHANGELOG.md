@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Drop 2.0 and 2.1 from support Ruby versions
+
 ## 0.18.0
 
 - Extract heading decoration logic from Greenmat renderer to `Toc` filter
