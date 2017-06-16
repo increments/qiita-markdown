@@ -1124,6 +1124,28 @@ describe Qiita::Markdown::Processor do
           end
         end
       end
+
+      context "with class attribute for <div> tag" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <div class="footnotes malicious-class">foo</div>
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize the classes" do
+            should eq <<-EOS.strip_heredoc
+              <div class="footnotes malicious-class">foo</div>
+            EOS
+          end
+        else
+          it "sanitizes classes except `footnotes`" do
+            should eq <<-EOS.strip_heredoc
+              <div class="footnotes">foo</div>
+            EOS
+          end
+        end
+      end
     end
 
     context "without script and strict context" do
