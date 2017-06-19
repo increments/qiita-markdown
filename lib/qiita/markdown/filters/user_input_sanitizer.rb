@@ -10,6 +10,9 @@ module Qiita
               "rel" => %w[footnote url],
               "rev" => %w[footnote],
             },
+            "blockquote" => {
+              "class" => %w[twitter-tweet],
+            },
             "div" => {
               "class" => %w[footnotes],
             },
@@ -63,7 +66,7 @@ module Qiita
           ],
           attributes: {
             "a"          => %w[class href rel title],
-            "blockquote" => %w[cite],
+            "blockquote" => %w[cite class],
             "code"       => %w[data-metadata],
             "div"        => %w[class],
             "font"       => %w[color],
