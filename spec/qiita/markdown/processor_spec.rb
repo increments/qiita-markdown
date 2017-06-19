@@ -1125,6 +1125,28 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with class attribute for <blockquote> tag" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <blockquote class="twitter-tweet malicious-class">foo</blockquote>
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize the classes" do
+            should eq <<-EOS.strip_heredoc
+              <blockquote class="twitter-tweet malicious-class">foo</blockquote>
+            EOS
+          end
+        else
+          it "sanitizes classes except `twitter-tweet`" do
+            should eq <<-EOS.strip_heredoc
+              <blockquote class="twitter-tweet">foo</blockquote>
+            EOS
+          end
+        end
+      end
+
       context "with class attribute for <div> tag" do
         let(:markdown) do
           <<-EOS.strip_heredoc
