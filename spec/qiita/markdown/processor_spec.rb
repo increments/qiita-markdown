@@ -1086,16 +1086,32 @@ describe Qiita::Markdown::Processor do
     shared_examples_for "class attribute" do |allowed:|
       context "with class attribute for general tags" do
         let(:markdown) do
-          '<i class="fa fa-user"></i>user'
+          '<input type="button" class="btn">submit'
         end
 
         if allowed
           it "does not sanitize the attribute" do
-            should eq "<p><i class=\"fa fa-user\"></i>user</p>\n"
+            should eq %(<p><input type="button" class="btn">submit</p>\n)
           end
         else
           it "sanitizes the attribute" do
-            should eq "<p><i></i>user</p>\n"
+            should eq %(<p><input>submit</p>\n)
+          end
+        end
+      end
+
+      context "with class attribute for <i> tags" do
+        let(:markdown) do
+          '<i class="fa fa-user fa-spin btn"></i>user'
+        end
+
+        if allowed
+          it "does not sanitize the classes" do
+            should eq %(<p><i class="fa fa-user fa-spin btn"></i>user</p>\n)
+          end
+        else
+          it "sanitizes the classes just `fa` or start with `fa-` except `fa-spin`" do
+            should eq %(<p><i class="fa fa-user"></i>user</p>\n)
           end
         end
       end
