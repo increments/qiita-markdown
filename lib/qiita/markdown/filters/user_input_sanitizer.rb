@@ -22,6 +22,9 @@ module Qiita
             "li" => {
               "id" => /\Afn\d+\z/,
             },
+            "i" => {
+              "class" => /\Afa(?!-spin)(?:-[\w\-]+)*\z/,
+            },
           }.freeze
 
           DELIMITER = " ".freeze
@@ -83,6 +86,7 @@ module Qiita
             "sup"        => %w[id],
             "td"         => %w[colspan rowspan style],
             "th"         => %w[colspan rowspan style],
+            "i"          => %w[class],
           },
           protocols: {
             "a"          => { "href" => ["http", "https", "mailto", :relative] },
