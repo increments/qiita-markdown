@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.20.0
+
+- Allow `<blockquote class="twitter-tweet">`
+
 ## 0.19.1
 
 - Add missing sanitization for `<div>` class attribute
