@@ -1170,6 +1170,24 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    shared_examples_for "embed CodePen" do |allowed:|
+      context "with CodePen url" do
+        let(:markdown) do
+          "https://codepen.io/hanachin/pen/KqayLz"
+        end
+
+        if allowed
+          it "creates CodePen embed iframe" do
+            should eq(%(<p><iframe height="500" scrolling="no" title="KqayLz" src="//codepen.io/hanachin/embed/KqayLz/?height=500&amp;theme-id=light&amp;default-tab=html,result&amp;embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;"><a href="https://codepen.io/hanachin/pen/KqayLz" class="autolink" rel="nofollow noopener" target="_blank">https://codepen.io/hanachin/pen/KqayLz</a></iframe></p>\n))
+          end
+        else
+          it "creates CodePen link" do
+            should eq(%(<p><a href="https://codepen.io/hanachin/pen/KqayLz" class="autolink" rel="nofollow noopener" target="_blank">https://codepen.io/hanachin/pen/KqayLz</a></p>\n))
+          end
+        end
+      end
+    end
+
     context "without script and strict context" do
       let(:context) do
         super().merge(script: false, strict: false)
@@ -1181,6 +1199,7 @@ describe Qiita::Markdown::Processor do
       include_examples "iframe element", allowed: false
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: true
+      include_examples "embed CodePen", allowed: false
     end
 
     context "with script context" do
@@ -1194,6 +1213,7 @@ describe Qiita::Markdown::Processor do
       include_examples "iframe element", allowed: true
       include_examples "data-attributes", allowed: true
       include_examples "class attribute", allowed: true
+      include_examples "embed CodePen", allowed: true
     end
 
     context "with strict context" do
@@ -1207,6 +1227,7 @@ describe Qiita::Markdown::Processor do
       include_examples "iframe element", allowed: false
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
+      include_examples "embed CodePen", allowed: false
     end
 
     context "with script and strict context" do
@@ -1220,6 +1241,7 @@ describe Qiita::Markdown::Processor do
       include_examples "iframe element", allowed: false
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
+      include_examples "embed CodePen", allowed: true
     end
   end
 end
