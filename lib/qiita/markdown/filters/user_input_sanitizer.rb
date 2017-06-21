@@ -61,7 +61,7 @@ module Qiita
         RULE = {
           elements: %w[
             a b blockquote br code dd del details div dl dt em font h1 h2 h3 h4 h5 h6
-            hr i img input ins kbd li ol p pre q rp rt ruby s samp strike strong sub
+            hr i img ins kbd li ol p pre q rp rt ruby s samp strike strong sub
             summary sup table tbody td tfoot th thead tr ul var
           ],
           attributes: {
