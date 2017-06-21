@@ -1059,6 +1059,26 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    shared_examples_for "input element" do |allowed:|
+      context "with input" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <input type="checkbox"> foo
+          EOS
+        end
+
+        if allowed
+          it "allows input with some attributes" do
+            should eq "<p><input type=\"checkbox\"> foo</p>\n"
+          end
+        else
+          it "sanitizes input element" do
+            should eq "<p> foo</p>\n"
+          end
+        end
+      end
+    end
+
     shared_examples_for "data-attributes" do |allowed:|
       context "with data-attributes" do
         let(:markdown) do
@@ -1179,6 +1199,7 @@ describe Qiita::Markdown::Processor do
       include_examples "script element", allowed: false
       include_examples "malicious script in filename", allowed: false
       include_examples "iframe element", allowed: false
+      include_examples "input element", allowed: true
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: true
     end
@@ -1192,6 +1213,7 @@ describe Qiita::Markdown::Processor do
       include_examples "script element", allowed: true
       include_examples "malicious script in filename", allowed: true
       include_examples "iframe element", allowed: true
+      include_examples "input element", allowed: true
       include_examples "data-attributes", allowed: true
       include_examples "class attribute", allowed: true
     end
@@ -1205,6 +1227,7 @@ describe Qiita::Markdown::Processor do
       include_examples "script element", allowed: false
       include_examples "malicious script in filename", allowed: false
       include_examples "iframe element", allowed: false
+      include_examples "input element", allowed: false
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
     end
@@ -1218,6 +1241,7 @@ describe Qiita::Markdown::Processor do
       include_examples "script element", allowed: false
       include_examples "malicious script in filename", allowed: true
       include_examples "iframe element", allowed: false
+      include_examples "input element", allowed: false
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
     end

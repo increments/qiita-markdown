@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Fix to sanitize `<input>` which was unexpectedly permitted
+
 ## 0.20.0
 
 - Allow `<blockquote class="twitter-tweet">`
