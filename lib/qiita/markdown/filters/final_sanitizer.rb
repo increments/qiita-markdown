@@ -59,6 +59,7 @@ module Qiita
             ],
             "iframe" => [
               "allowfullscreen",
+              "allowtransparency",
               "frameborder",
               "height",
               "marginheight",
@@ -66,6 +67,7 @@ module Qiita
               "scrolling",
               "src",
               "style",
+              "title",
               "width",
             ],
             "img" => [
@@ -129,6 +131,7 @@ module Qiita
           css: {
             properties: [
               "text-align",
+              "width",
             ],
           },
           elements: [

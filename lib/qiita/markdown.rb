@@ -9,6 +9,7 @@ require "sanitize"
 
 require "qiita/markdown/filters/checkbox"
 require "qiita/markdown/filters/code"
+require "qiita/markdown/filters/code_pen"
 require "qiita/markdown/filters/emoji"
 require "qiita/markdown/filters/external_link"
 require "qiita/markdown/filters/final_sanitizer"
