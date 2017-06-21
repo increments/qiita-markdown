@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.20.1
+
 - Fix to sanitize `<input>` which was unexpectedly permitted
 
 ## 0.20.0
