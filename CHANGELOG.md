@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Don't sanitize `data-canonical-src` attribute of `<img>`
+
 ## 0.20.1
 
 - Fix to sanitize `<input>` which was unexpectedly permitted
