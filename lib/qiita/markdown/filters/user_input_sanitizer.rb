@@ -76,7 +76,7 @@ module Qiita
             "h4"         => %w[id],
             "h5"         => %w[id],
             "h6"         => %w[id],
-            "img"        => %w[alt height src title width],
+            "img"        => %w[alt height src title width data-canonical-src],
             "ins"        => %w[cite datetime],
             "li"         => %w[id],
             "q"          => %w[cite],

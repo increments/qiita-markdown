@@ -70,6 +70,7 @@ module Qiita
             ],
             "img" => [
               "src",
+              "data-canonical-src",
             ],
             "input" => [
               "checked",
