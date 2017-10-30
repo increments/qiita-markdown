@@ -12,7 +12,7 @@ module Qiita
       # 3. Adds detected code data into `result[:codes]`.
       #
       # You can pass language aliases table via context[:language_aliases].
-      class Code < HTML::Pipeline::Filter
+      class CodeBlock < HTML::Pipeline::Filter
         def call
           result[:codes] ||= []
           doc.search("pre").each do |pre|

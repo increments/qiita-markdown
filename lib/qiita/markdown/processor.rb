@@ -13,7 +13,7 @@ module Qiita
           Filters::UserInputSanitizer,
           Filters::ImageLink,
           Filters::Footnote,
-          Filters::Code,
+          Filters::CodeBlock,
           Filters::Checkbox,
           Filters::Toc,
           Filters::Emoji,

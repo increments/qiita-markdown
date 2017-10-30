@@ -53,7 +53,7 @@ Style/FileName:
 Style/MutableConstant:
   Exclude:
     - 'lib/qiita/markdown/filters/checkbox.rb'
-    - 'lib/qiita/markdown/filters/code.rb'
+    - 'lib/qiita/markdown/filters/code_block.rb'
     - 'lib/qiita/markdown/filters/sanitize.rb'
     - 'lib/qiita/markdown/filters/simplify.rb'
     - 'lib/qiita/markdown/filters/syntax_highlight.rb'
@@ -67,7 +67,7 @@ Style/MutableConstant:
 # SupportedStyles: skip_modifier_ifs, always
 Style/Next:
   Exclude:
-    - 'lib/qiita/markdown/filters/code.rb'
+    - 'lib/qiita/markdown/filters/code_block.rb'
     - 'lib/qiita/markdown/filters/image_link.rb'
 
 # Offense count: 11
