@@ -971,6 +971,66 @@ describe Qiita::Markdown::Processor do
           should eq "<blockquote>\n<p>foo</p>\n</blockquote>\n"
         end
       end
+
+      context "with inline code containing hexadecimal color only" do
+        let(:markdown) do
+          "`#FF0000`"
+        end
+
+        it "returns code element with its color" do
+          should eq "<p><code>#FF0000<span class=\"inline-code-color\" style=\"background-color: #FF0000;\"></span></code></p>\n"
+        end
+
+        context "with class name of inline code color parameter" do
+          let(:context) do
+            super().merge(inline_code_color_class_name: "qiita-inline-code-color")
+          end
+
+          it "returns returns code element with its color whose class name is parameter value" do
+            should eq "<p><code>#FF0000<span class=\"qiita-inline-code-color\" style=\"background-color: #FF0000;\"></span></code></p>\n"
+          end
+        end
+      end
+
+      context "with inline code containing rgb color only" do
+        let(:markdown) do
+          "`rgb(255, 0, 0)`"
+        end
+
+        it "returns code element with its color" do
+          should eq "<p><code>rgb(255, 0, 0)<span class=\"inline-code-color\" style=\"background-color: rgb(255, 0, 0);\"></span></code></p>\n"
+        end
+
+        context "with class name of inline code color parameter" do
+          let(:context) do
+            super().merge(inline_code_color_class_name: "qiita-inline-code-color")
+          end
+
+          it "returns returns code element with its color whose class name is parameter value" do
+            should eq "<p><code>rgb(255, 0, 0)<span class=\"qiita-inline-code-color\" style=\"background-color: rgb(255, 0, 0);\"></span></code></p>\n"
+          end
+        end
+      end
+
+      context "with inline code containing hsl color only" do
+        let(:markdown) do
+          "`hsl(0, 100%, 50%)`"
+        end
+
+        it "returns code element with its color" do
+          should eq "<p><code>hsl(0, 100%, 50%)<span class=\"inline-code-color\" style=\"background-color: hsl(0, 100%, 50%);\"></span></code></p>\n"
+        end
+
+        context "with class name of inline code color parameter" do
+          let(:context) do
+            super().merge(inline_code_color_class_name: "qiita-inline-code-color")
+          end
+
+          it "returns returns code element with its color whose class name is parameter value" do
+            should eq "<p><code>hsl(0, 100%, 50%)<span class=\"qiita-inline-code-color\" style=\"background-color: hsl(0, 100%, 50%);\"></span></code></p>\n"
+          end
+        end
+      end
     end
 
     shared_examples_for "script element" do |allowed:|
@@ -1190,6 +1250,24 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    shared_examples_for "background-color" do |allowed:|
+      context "with style attribute" do
+        let(:markdown) do
+          "<span style=\"background-color: #000000\"></span>"
+        end
+
+        if allowed
+          it "does not sanitize span element" do
+            should eq "<p><span style=\"background-color: #000000\"></span></p>\n"
+          end
+        else
+          it "sanitizes span element" do
+            should eq "<p></p>\n"
+          end
+        end
+      end
+    end
+
     context "without script and strict context" do
       let(:context) do
         super().merge(script: false, strict: false)
@@ -1202,6 +1280,7 @@ describe Qiita::Markdown::Processor do
       include_examples "input element", allowed: true
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: true
+      include_examples "background-color", allowed: true
     end
 
     context "with script context" do
@@ -1216,6 +1295,7 @@ describe Qiita::Markdown::Processor do
       include_examples "input element", allowed: true
       include_examples "data-attributes", allowed: true
       include_examples "class attribute", allowed: true
+      include_examples "background-color", allowed: true
     end
 
     context "with strict context" do
@@ -1230,6 +1310,7 @@ describe Qiita::Markdown::Processor do
       include_examples "input element", allowed: false
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
+      include_examples "background-color", allowed: false
     end
 
     context "with script and strict context" do
@@ -1244,6 +1325,7 @@ describe Qiita::Markdown::Processor do
       include_examples "input element", allowed: false
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
+      include_examples "background-color", allowed: false
     end
   end
 end

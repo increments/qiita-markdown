@@ -21,6 +21,7 @@ module Qiita
           Filters::Mention,
           Filters::GroupMention,
           Filters::ExternalLink,
+          Filters::InlineCodeColor,
           Filters::FinalSanitizer,
         ]
       end

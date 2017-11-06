@@ -56,20 +56,21 @@ processor.call(text)
 `.new` and `#call` can take optional context as a Hash with following keys:
 
 ```
-:allowed_usernames   - A list of usernames allowed to be username. (Array<String>)
-:asset_path          - URL path to link to emoji sprite. (String)
-:asset_root          - Base URL to link to emoji sprite. (String)
-:base_url            - Used to construct links to user profile pages for each. (String)
-:default_language    - Default language used if no language detected from code. (String)
-:emoji_names         - A list of allowed emoji names. (Array<String>)
-:emoji_url_generator - #call'able object that accepts emoji name as argument and returns emoji image URL. (#call)
-                       The original implementation is used when the generator returned a falsey value.
-:hostname            - FQDN. Used to check whether or not each URL of `href` attributes is external site. (String)
-:language_aliases    - Alias table for some language names. (Hash)
-:markdown            - A hash for enabling / disabling optional Markdown syntax. (Hash)
-                       Currently only :footnotes (default: true) is supported.
-:rule                - Sanitization rule table. (Hash)
-:script              - A flag to allow to embed script element. (Boolean)
+:allowed_usernames            - A list of usernames allowed to be username. (Array<String>)
+:asset_path                   - URL path to link to emoji sprite. (String)
+:asset_root                   - Base URL to link to emoji sprite. (String)
+:base_url                     - Used to construct links to user profile pages for each. (String)
+:default_language             - Default language used if no language detected from code. (String)
+:emoji_names                  - A list of allowed emoji names. (Array<String>)
+:emoji_url_generator          - #call'able object that accepts emoji name as argument and returns emoji image URL. (#call)
+                                The original implementation is used when the generator returned a falsey value.
+:hostname                     - FQDN. Used to check whether or not each URL of `href` attributes is external site. (String)
+:inline_code_color_class_name - Class name for inline code color. (String)
+:language_aliases             - Alias table for some language names. (Hash)
+:markdown                     - A hash for enabling / disabling optional Markdown syntax. (Hash)
+                                Currently only :footnotes (default: true) is supported.
+:rule                         - Sanitization rule table. (Hash)
+:script                       - A flag to allow to embed script element. (Boolean)
 ```
 
 ```ruby

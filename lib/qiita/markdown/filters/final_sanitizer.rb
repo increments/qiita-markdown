@@ -85,6 +85,9 @@ module Qiita
               "src",
               "type",
             ],
+            "span" => [
+              "style",
+            ],
             "td" => [
               "style",
             ],
@@ -129,6 +132,7 @@ module Qiita
           css: {
             properties: [
               "text-align",
+              "background-color",
             ],
           },
           elements: [

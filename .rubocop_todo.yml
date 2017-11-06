@@ -95,6 +95,7 @@ Style/PerlBackrefs:
 Style/RegexpLiteral:
   Exclude:
     - 'lib/qiita/markdown/filters/mention.rb'
+    - 'lib/qiita/markdown/filters/inline_code_color.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
