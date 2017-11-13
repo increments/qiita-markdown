@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.21.0
+
 - Rename `Code` to `CodeBlock`
 - Support CSS color in inline code
 
