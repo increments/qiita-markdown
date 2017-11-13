@@ -1,5 +1,8 @@
 ## Unreleased
 
+- Rename `Code` to `CodeBlock`
+- Support CSS color in inline code
+
 ## 0.20.1
 
 - Fix to sanitize `<input>` which was unexpectedly permitted

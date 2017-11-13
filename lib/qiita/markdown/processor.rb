@@ -13,7 +13,7 @@ module Qiita
           Filters::UserInputSanitizer,
           Filters::ImageLink,
           Filters::Footnote,
-          Filters::Code,
+          Filters::CodeBlock,
           Filters::Checkbox,
           Filters::Toc,
           Filters::Emoji,
@@ -21,6 +21,7 @@ module Qiita
           Filters::Mention,
           Filters::GroupMention,
           Filters::ExternalLink,
+          Filters::InlineCodeColor,
           Filters::FinalSanitizer,
         ]
       end
