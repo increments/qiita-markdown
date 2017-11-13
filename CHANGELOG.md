@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Support embed CodePen
+
 ## 0.21.0
 
 - Rename `Code` to `CodeBlock`

@@ -1140,7 +1140,7 @@ describe Qiita::Markdown::Processor do
     end
 
     shared_examples_for "data-attributes" do |allowed:|
-      context "with data-attributes" do
+      context "with data-attributes for general tags" do
         let(:markdown) do
           <<-EOS.strip_heredoc
             <div data-a="b"></div>
@@ -1157,6 +1157,28 @@ describe Qiita::Markdown::Processor do
           it "sanitizes data-attributes" do
             should eq <<-EOS.strip_heredoc
               <div></div>
+            EOS
+          end
+        end
+      end
+
+      context "with data-attributes for <p> tag" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <p data-slug-hash="a" data-malicious="b"></p>
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize data-attributes" do
+            should eq <<-EOS.strip_heredoc
+              <p data-slug-hash="a" data-malicious="b"></p>
+            EOS
+          end
+        else
+          it "sanitizes data-attributes except the attributes used by codepen" do
+            should eq <<-EOS.strip_heredoc
+              <p data-slug-hash="a"></p>
             EOS
           end
         end
@@ -1248,6 +1270,28 @@ describe Qiita::Markdown::Processor do
           end
         end
       end
+
+      context "with class attribute for <p> tag" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <p class="codepen malicious-class">foo</p>
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize the classes" do
+            should eq <<-EOS.strip_heredoc
+              <p class="codepen malicious-class">foo</p>
+            EOS
+          end
+        else
+          it "sanitizes classes except `codepen`" do
+            should eq <<-EOS.strip_heredoc
+              <p class="codepen">foo</p>
+            EOS
+          end
+        end
+      end
     end
 
     shared_examples_for "background-color" do |allowed:|
@@ -1268,6 +1312,33 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    shared_examples_for "override codepen attributes" do |allowed:|
+      context "with HTML embed code for CodePen" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
+            <script src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-EOS.strip_heredoc
+              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
+              <script src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            EOS
+          end
+        else
+          it "sanitizes data-attributes except the minimum attributes and force async attribute" do
+            should eq <<-EOS.strip_heredoc
+              <p data-slug-hash="foo" data-embed-version="2" class="codepen"></p>\n
+              <script src="https://production-assets.codepen.io/assets/embed/ei.js" async="async"></script>
+            EOS
+          end
+        end
+      end
+    end
+
     context "without script and strict context" do
       let(:context) do
         super().merge(script: false, strict: false)
@@ -1281,6 +1352,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: true
       include_examples "background-color", allowed: true
+      include_examples "override codepen attributes", allowed: false
     end
 
     context "with script context" do
@@ -1296,6 +1368,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: true
       include_examples "class attribute", allowed: true
       include_examples "background-color", allowed: true
+      include_examples "override codepen attributes", allowed: true
     end
 
     context "with strict context" do
@@ -1311,6 +1384,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
       include_examples "background-color", allowed: false
+      include_examples "override codepen attributes", allowed: false
     end
 
     context "with script and strict context" do
@@ -1326,6 +1400,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
       include_examples "background-color", allowed: false
+      include_examples "override codepen attributes", allowed: false
     end
   end
 end
