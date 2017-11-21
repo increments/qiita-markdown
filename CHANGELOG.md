@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.22.0
+
 - Support embed CodePen
 
 ## 0.21.0
