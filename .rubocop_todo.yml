@@ -57,6 +57,7 @@ Style/MutableConstant:
     - 'lib/qiita/markdown/filters/sanitize.rb'
     - 'lib/qiita/markdown/filters/simplify.rb'
     - 'lib/qiita/markdown/filters/syntax_highlight.rb'
+    - 'lib/qiita/markdown/code_pen.rb'
     - 'lib/qiita/markdown/processor.rb'
     - 'lib/qiita/markdown/summary_processor.rb'
     - 'lib/qiita/markdown/version.rb'

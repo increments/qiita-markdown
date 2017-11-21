@@ -10,45 +10,6 @@ module Qiita
       #
       # @see Qiita::Markdown::Filters::UserInputSanitizerr
       class FinalSanitizer < HTML::Pipeline::Filter
-        # Wraps a node env to transform invalid node.
-        class TransformableNode
-          def self.call(*args)
-            new(*args).transform
-          end
-
-          def initialize(env)
-            @env = env
-          end
-
-          def transform
-            if has_invalid_list_node? || has_invalid_table_node?
-              node.replace(node.children)
-            end
-          end
-
-          private
-
-          def has_invalid_list_node?
-            name == "li" && node.ancestors.none? do |ancestor|
-              %w[ol ul].include?(ancestor.name)
-            end
-          end
-
-          def has_invalid_table_node?
-            %w[thead tbody tfoot tr td th].include?(name) && node.ancestors.none? do |ancestor|
-              ancestor.name == "table"
-            end
-          end
-
-          def name
-            @env[:node_name]
-          end
-
-          def node
-            @env[:node]
-          end
-        end
-
         RULE = {
           attributes: {
             "a" => [
@@ -80,6 +41,7 @@ module Qiita
               "itemscope",
               "itemtype",
             ],
+            "p" => CodePen::ATTRIBUTES,
             "script" => [
               "async",
               "src",
@@ -173,6 +135,7 @@ module Qiita
             "ruby",
             "s",
             "samp",
+            "script",
             "span",
             "strike",
             "strong",
@@ -219,17 +182,17 @@ module Qiita
               ],
             },
           },
-          remove_contents: [
-            "script",
+          transformers: [
+            Transformers::StripInvalidNode,
+            Transformers::FilterScript,
           ],
-          transformers: TransformableNode,
         }.freeze
 
         SCRIPTABLE_RULE = RULE.dup.tap do |rule|
           rule[:attributes] = RULE[:attributes].dup
           rule[:attributes][:all] = rule[:attributes][:all] + [:data]
           rule[:elements] = RULE[:elements] + ["iframe", "script", "video"]
-          rule[:remove_contents] = []
+          rule[:transformers] = rule[:transformers] - [Transformers::FilterScript]
         end
 
         def call

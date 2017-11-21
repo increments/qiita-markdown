@@ -3,65 +3,10 @@ module Qiita
     module Filters
       # Sanitizes user input if :strict context is given.
       class UserInputSanitizer < HTML::Pipeline::Filter
-        class AttributeFilter
-          FILTERS = {
-            "a" => {
-              "class" => %w[autolink],
-              "rel" => %w[footnote url],
-              "rev" => %w[footnote],
-            },
-            "blockquote" => {
-              "class" => %w[twitter-tweet],
-            },
-            "div" => {
-              "class" => %w[footnotes],
-            },
-            "sup" => {
-              "id" => /\Afnref\d+\z/,
-            },
-            "li" => {
-              "id" => /\Afn\d+\z/,
-            },
-          }.freeze
-
-          DELIMITER = " ".freeze
-
-          def self.call(*args)
-            new(*args).transform
-          end
-
-          def initialize(env)
-            @env = env
-          end
-
-          def transform
-            return unless FILTERS.key?(name)
-            FILTERS[name].each_pair do |attr, pattern|
-              filter_attribute(attr, pattern) if node.attributes.key?(attr)
-            end
-          end
-
-          private
-
-          def filter_attribute(attr, pattern)
-            node[attr] = node[attr].split(DELIMITER).select do |value|
-              pattern.is_a?(Array) ? pattern.include?(value) : (pattern =~ value)
-            end.join(DELIMITER)
-          end
-
-          def name
-            @env[:node_name]
-          end
-
-          def node
-            @env[:node]
-          end
-        end
-
         RULE = {
           elements: %w[
             a b blockquote br code dd del details div dl dt em font h1 h2 h3 h4 h5 h6
-            hr i img ins kbd li ol p pre q rp rt ruby s samp strike strong sub
+            hr i img ins kbd li ol p pre q rp rt ruby s samp script strike strong sub
             summary sup table tbody td tfoot th thead tr ul var
           ],
           attributes: {
@@ -79,7 +24,9 @@ module Qiita
             "img"        => %w[alt height src title width],
             "ins"        => %w[cite datetime],
             "li"         => %w[id],
+            "p"          => CodePen::ATTRIBUTES,
             "q"          => %w[cite],
+            "script"     => %w[async src],
             "sup"        => %w[id],
             "td"         => %w[colspan rowspan style],
             "th"         => %w[colspan rowspan style],
@@ -92,10 +39,10 @@ module Qiita
           css: {
             properties: %w[text-align],
           },
-          remove_contents: %w[
-            script
+          transformers: [
+            Transformers::FilterAttributes,
+            Transformers::FilterScript,
           ],
-          transformers: AttributeFilter,
         }.freeze
 
         def call
