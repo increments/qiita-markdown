@@ -41,7 +41,7 @@ module Qiita
               "itemscope",
               "itemtype",
             ],
-            "p" => CodePen::ATTRIBUTES,
+            "p" => Embed::CodePen::ATTRIBUTES,
             "script" => [
               "async",
               "src",

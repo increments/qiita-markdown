@@ -3,8 +3,8 @@ module Qiita
     module Transformers
       class FilterScript
         WHITE_LIST = [
-          CodePen::SCRIPT_URL,
-          Tweet::SCRIPT_URL,
+          Embed::CodePen::SCRIPT_URL,
+          Embed::Tweet::SCRIPT_URL,
         ].freeze
 
         def self.call(*args)

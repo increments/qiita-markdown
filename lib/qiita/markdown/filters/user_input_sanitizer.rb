@@ -24,7 +24,7 @@ module Qiita
             "img"        => %w[alt height src title width],
             "ins"        => %w[cite datetime],
             "li"         => %w[id],
-            "p"          => CodePen::ATTRIBUTES,
+            "p"          => Embed::CodePen::ATTRIBUTES,
             "q"          => %w[cite],
             "script"     => %w[async src],
             "sup"        => %w[id],

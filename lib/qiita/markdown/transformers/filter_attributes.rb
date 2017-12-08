@@ -9,7 +9,7 @@ module Qiita
             "rev" => %w[footnote],
           },
           "blockquote" => {
-            "class" => Tweet::CLASS_NAME,
+            "class" => Embed::Tweet::CLASS_NAME,
           },
           "div" => {
             "class" => %w[footnotes],
