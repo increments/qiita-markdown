@@ -8,6 +8,7 @@ require "pygments"
 require "sanitize"
 
 require "qiita/markdown/code_pen"
+require "qiita/markdown/tweet"
 require "qiita/markdown/transformers/filter_attributes"
 require "qiita/markdown/transformers/filter_script"
 require "qiita/markdown/transformers/strip_invalid_node"

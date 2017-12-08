@@ -191,7 +191,7 @@ module Qiita
         SCRIPTABLE_RULE = RULE.dup.tap do |rule|
           rule[:attributes] = RULE[:attributes].dup
           rule[:attributes][:all] = rule[:attributes][:all] + [:data]
-          rule[:elements] = RULE[:elements] + ["iframe", "script", "video"]
+          rule[:elements] = RULE[:elements] + ["iframe", "video"]
           rule[:transformers] = rule[:transformers] - [Transformers::FilterScript]
         end
 

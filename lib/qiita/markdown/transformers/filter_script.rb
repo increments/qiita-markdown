@@ -4,6 +4,7 @@ module Qiita
       class FilterScript
         WHITE_LIST = [
           CodePen::SCRIPT_URL,
+          Tweet::SCRIPT_URL,
         ].freeze
 
         def self.call(*args)

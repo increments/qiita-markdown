@@ -1312,7 +1312,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    shared_examples_for "override codepen attributes" do |allowed:|
+    shared_examples_for "override embed code attributes" do |allowed:|
       context "with HTML embed code for CodePen" do
         let(:markdown) do
           <<-EOS.strip_heredoc
@@ -1337,6 +1337,31 @@ describe Qiita::Markdown::Processor do
           end
         end
       end
+
+      context "with embed code for Tweet" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <blockquote class="twitter-tweet" data-cards="hidden" data-conversation="none">foo</blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-EOS.strip_heredoc
+              <blockquote class="twitter-tweet" data-cards="hidden" data-conversation="none">foo</blockquote>\n
+              <script async src="https://platform.twitter.com/widgets.js"></script>
+            EOS
+          end
+        else
+          it "sanitizes attributes except `twitter-tweet` class" do
+            should eq <<-EOS.strip_heredoc
+              <blockquote class="twitter-tweet">foo</blockquote>\n
+              <script async src="https://platform.twitter.com/widgets.js"></script>
+            EOS
+          end
+        end
+      end
     end
 
     context "without script and strict context" do
@@ -1352,7 +1377,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: true
       include_examples "background-color", allowed: true
-      include_examples "override codepen attributes", allowed: false
+      include_examples "override embed code attributes", allowed: false
     end
 
     context "with script context" do
@@ -1368,7 +1393,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: true
       include_examples "class attribute", allowed: true
       include_examples "background-color", allowed: true
-      include_examples "override codepen attributes", allowed: true
+      include_examples "override embed code attributes", allowed: true
     end
 
     context "with strict context" do
@@ -1384,7 +1409,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
       include_examples "background-color", allowed: false
-      include_examples "override codepen attributes", allowed: false
+      include_examples "override embed code attributes", allowed: false
     end
 
     context "with script and strict context" do
@@ -1400,7 +1425,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
       include_examples "background-color", allowed: false
-      include_examples "override codepen attributes", allowed: false
+      include_examples "override embed code attributes", allowed: false
     end
   end
 end
