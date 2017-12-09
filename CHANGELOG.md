@@ -1,6 +1,8 @@
 ## Unreleased
 
-- Allow script for embedding tweets
+## 0.23.0
+
+- Support embed Tweet
 
 ## 0.22.0
 
