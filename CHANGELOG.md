@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Allow script for embedding tweets
+
 ## 0.22.0
 
 - Support embed CodePen
