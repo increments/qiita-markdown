@@ -133,4 +133,94 @@ describe Qiita::Markdown::Greenmat::HTMLToCRenderer do
       EOS
     end
   end
+
+  context "with anchor tag" do
+    let(:markdown) do
+      <<-EOS.strip_heredoc
+        # <a href="#">foo</a>
+      EOS
+    end
+
+    it "strips anchor tag" do
+      should eq <<-EOS.strip_heredoc
+        <ul>
+        <li>
+        <a href="#foo">foo</a>
+        </li>
+        </ul>
+      EOS
+    end
+  end
+
+  context "with <ol> tag" do
+    let(:markdown) do
+      <<-EOS.strip_heredoc
+        # <ol>foo</ol>
+      EOS
+    end
+
+    it "strips <ol> tag" do
+      should eq <<-EOS.strip_heredoc
+        <ul>
+        <li>
+        <a href="#foo">foo</a>
+        </li>
+        </ul>
+      EOS
+    end
+  end
+
+  context "with <ul> tag" do
+    let(:markdown) do
+      <<-EOS.strip_heredoc
+        # <ul>foo</ul>
+      EOS
+    end
+
+    it "strips <ul> tag" do
+      should eq <<-EOS.strip_heredoc
+        <ul>
+        <li>
+        <a href="#foo">foo</a>
+        </li>
+        </ul>
+      EOS
+    end
+  end
+
+  context "with <li> tag" do
+    let(:markdown) do
+      <<-EOS.strip_heredoc
+        # <li>foo</li>
+      EOS
+    end
+
+    it "strips <li> tag" do
+      should eq <<-EOS.strip_heredoc
+        <ul>
+        <li>
+        <a href="#foo">foo</a>
+        </li>
+        </ul>
+      EOS
+    end
+  end
+
+  context "with <li> tag inside of <ul> tag" do
+    let(:markdown) do
+      <<-EOS.strip_heredoc
+        # <ul><li>foo</li></ul>
+      EOS
+    end
+
+    it "strips <ul> and <li> tag" do
+      should eq <<-EOS.strip_heredoc
+        <ul>
+        <li>
+        <a href="#foo">foo</a>
+        </li>
+        </ul>
+      EOS
+    end
+  end
 end

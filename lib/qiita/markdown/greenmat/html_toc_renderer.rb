@@ -65,6 +65,23 @@ module Qiita
           def increment
             counter[id] += 1
           end
+
+          private
+
+          def body
+            escape_html? ? CGI.escape_html(raw_body) : html_valid_body
+          end
+
+          def html_valid_body
+            fragments = Nokogiri::HTML.fragment(raw_body)
+            strip_invalid_node(fragments)
+            fragments.to_s
+          end
+
+          def strip_invalid_node(node)
+            node.children.each { |child| strip_invalid_node(child) }
+            node.replace(node.children) if %w[ol ul li a].include?(node.name)
+          end
         end
       end
     end
