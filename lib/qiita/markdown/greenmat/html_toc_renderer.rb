@@ -65,6 +65,12 @@ module Qiita
           def increment
             counter[id] += 1
           end
+
+          private
+
+          def body
+            escape_html? ? CGI.escape_html(text) : raw_body
+          end
         end
       end
     end

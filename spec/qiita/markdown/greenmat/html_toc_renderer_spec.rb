@@ -117,20 +117,40 @@ describe Qiita::Markdown::Greenmat::HTMLToCRenderer do
   context "with :escape_html extension" do
     let(:extension) { { escape_html: true } }
 
-    let(:markdown) do
-      <<-EOS.strip_heredoc
-        # <b>R&amp;B</b>
-      EOS
+    context "with heading title including HTML tags" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          # <b>R&amp;B</b>
+        EOS
+      end
+
+      it "strips HTML characters in heading title" do
+        should eq <<-EOS.strip_heredoc
+          <ul>
+          <li>
+          <a href="#rb">R&amp;B</a>
+          </li>
+          </ul>
+        EOS
+      end
     end
 
-    it "escapes special HTML characters in heading title" do
-      should eq <<-EOS.strip_heredoc
-        <ul>
-        <li>
-        <a href="#rb">&lt;b&gt;R&amp;amp;B&lt;/b&gt;</a>
-        </li>
-        </ul>
-      EOS
+    context "with heading title including HTML tags inside of code" do
+      let(:markdown) do
+        <<-EOS.strip_heredoc
+          # `<div>`
+        EOS
+      end
+
+      it "escapes HTML tags inside of code" do
+        should eq <<-EOS.strip_heredoc
+          <ul>
+          <li>
+          <a href="#div">&lt;div&gt;</a>
+          </li>
+          </ul>
+        EOS
+      end
     end
   end
 end
