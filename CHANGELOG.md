@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Fix to strip some tags in ToC
+- Fix to strip HTML tags in ToC
 
 ## 0.23.0
 
