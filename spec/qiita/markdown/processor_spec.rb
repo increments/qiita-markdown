@@ -1162,6 +1162,28 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with data-attributes for <blockquote> tag" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <blockquote data-theme="a" data-malicious="b"></blockquote>
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize data-attributes" do
+            should eq <<-EOS.strip_heredoc
+              <blockquote data-theme="a" data-malicious="b"></blockquote>
+            EOS
+          end
+        else
+          it "sanitizes data-attributes except the attributes used by tweet" do
+            should eq <<-EOS.strip_heredoc
+              <blockquote data-theme="a"></blockquote>
+            EOS
+          end
+        end
+      end
+
       context "with data-attributes for <p> tag" do
         let(:markdown) do
           <<-EOS.strip_heredoc
@@ -1329,9 +1351,9 @@ describe Qiita::Markdown::Processor do
             EOS
           end
         else
-          it "sanitizes data-attributes except the minimum attributes and force async attribute" do
+          it "forces async attribute on script" do
             should eq <<-EOS.strip_heredoc
-              <p data-slug-hash="foo" data-embed-version="2" class="codepen"></p>\n
+              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
               <script src="https://production-assets.codepen.io/assets/embed/ei.js" async="async"></script>
             EOS
           end
@@ -1341,25 +1363,16 @@ describe Qiita::Markdown::Processor do
       context "with embed code for Tweet" do
         let(:markdown) do
           <<-EOS.strip_heredoc
-            <blockquote class="twitter-tweet" data-cards="hidden" data-conversation="none">foo</blockquote>
+            <blockquote class="twitter-tweet" data-lang="es" data-cards="hidden" data-conversation="none">foo</blockquote>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           EOS
         end
 
-        if allowed
-          it "does not sanitize embed code" do
-            should eq <<-EOS.strip_heredoc
-              <blockquote class="twitter-tweet" data-cards="hidden" data-conversation="none">foo</blockquote>\n
-              <script async src="https://platform.twitter.com/widgets.js"></script>
-            EOS
-          end
-        else
-          it "sanitizes attributes except `twitter-tweet` class" do
-            should eq <<-EOS.strip_heredoc
-              <blockquote class="twitter-tweet">foo</blockquote>\n
-              <script async src="https://platform.twitter.com/widgets.js"></script>
-            EOS
-          end
+        it "does not sanitize embed code" do
+          should eq <<-EOS.strip_heredoc
+            <blockquote class="twitter-tweet" data-lang="es" data-cards="hidden" data-conversation="none">foo</blockquote>\n
+            <script async src="https://platform.twitter.com/widgets.js"></script>
+          EOS
         end
       end
     end

@@ -18,6 +18,7 @@ module Qiita
               "href",
               "rel",
             ],
+            "blockquote" => Embed::Tweet::ATTRIBUTES,
             "iframe" => [
               "allowfullscreen",
               "frameborder",
