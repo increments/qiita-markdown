@@ -1,6 +1,9 @@
 ## Unreleased
 
+## 0.24.0
+
 - Fix to strip HTML tags in ToC
+- Allow to use data-\* attributes when embedding Tweet and CodePen
 
 ## 0.23.0
 
