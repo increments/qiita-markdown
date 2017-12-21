@@ -15,7 +15,7 @@ module Qiita
             "class" => %w[footnotes],
           },
           "p" => {
-            "class" => %w[codepen],
+            "class" => Embed::CodePen::CLASS_NAME,
           },
           "sup" => {
             "id" => /\Afnref\d+\z/,
