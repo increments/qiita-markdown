@@ -21,9 +21,9 @@ describe Qiita::Markdown::Processor do
     shared_examples_for "basic markdown syntax" do
       context "with valid condition" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             example
-          EOS
+          MARKDOWN
         end
 
         it "returns a Hash with HTML output and other metadata" do
@@ -39,9 +39,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "sanitizes them" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p>&lt;&gt;&amp;</p>
-          EOS
+          HTML
         end
       end
 
@@ -51,24 +51,24 @@ describe Qiita::Markdown::Processor do
         end
 
         it "replaces with mailto link" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><a href="mailto:test@example.com" class="autolink">test@example.com</a></p>
-          EOS
+          HTML
         end
       end
 
       context "with headings" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             # a
             ## a
             ### a
             ### a
-          EOS
+          MARKDOWN
         end
 
         it "adds ID for ToC" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
 
             <h1>
             <span id="a" class="fragment"></span><a href="#a"><i class="fa fa-link"></i></a>a</h1>
@@ -81,48 +81,48 @@ describe Qiita::Markdown::Processor do
 
             <h3>
             <span id="a-3" class="fragment"></span><a href="#a-3"><i class="fa fa-link"></i></a>a</h3>
-          EOS
+          HTML
         end
       end
 
       context "with heading whose title includes special HTML characters" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             # <b>R&amp;B</b>
-          EOS
+          MARKDOWN
         end
 
         it "generates fragment identifier by sanitizing the special characters in the title" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
 
             <h1>
             <span id="rb" class="fragment"></span><a href="#rb"><i class="fa fa-link"></i></a><b>R&amp;B</b>
             </h1>
-          EOS
+          HTML
         end
       end
 
       context "with manually inputted heading HTML tags without id attribute" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <h1>foo</h1>
-          EOS
+          MARKDOWN
         end
 
         it "does nothing" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <h1>foo</h1>
-          EOS
+          HTML
         end
       end
 
       context "with code" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```foo.rb
             puts 'hello world'
             ```
-          EOS
+          MARKDOWN
         end
 
         it "returns detected codes" do
@@ -138,68 +138,68 @@ describe Qiita::Markdown::Processor do
 
       context "with code & filename" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```example.rb
             1
             ```
-          EOS
+          MARKDOWN
         end
 
         it "returns code-frame, code-lang, and highlighted pre element" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <div class="code-frame" data-lang="ruby">
             <div class="code-lang"><span class="bold">example.rb</span></div>
             <div class="highlight"><pre><span></span><span class="mi">1</span>
             </pre></div>
             </div>
-          EOS
+          HTML
         end
       end
 
       context "with code & filename with .php" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```example.php
             1
             ```
-          EOS
+          MARKDOWN
         end
 
         it "returns PHP code-frame" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <div class="code-frame" data-lang="php">
             <div class="code-lang"><span class="bold">example.php</span></div>
             <div class="highlight"><pre><span></span><span class="mi">1</span>
             </pre></div>
             </div>
-          EOS
+          HTML
         end
       end
 
       context "with code & no filename" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```ruby
             1
             ```
-          EOS
+          MARKDOWN
         end
 
         it "returns code-frame and highlighted pre element" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <div class="code-frame" data-lang="ruby"><div class="highlight"><pre><span></span><span class="mi">1</span>
             </pre></div></div>
-          EOS
+          HTML
         end
       end
 
       context "with undefined but aliased language" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```zsh
             true
             ```
-          EOS
+          MARKDOWN
         end
 
         it "returns aliased language name" do
@@ -215,22 +215,22 @@ describe Qiita::Markdown::Processor do
 
       context "with code with leading and trailing newlines" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```
 
             foo
 
             ```
-          EOS
+          MARKDOWN
         end
 
         it "does not strip the newlines" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>
             foo
 
             </pre></div></div>
-           EOS
+           HTML
         end
       end
 
@@ -240,9 +240,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "replaces mention with link" do
-          should include(<<-EOS.strip_heredoc.rstrip)
+          should include(<<-HTML.strip_heredoc.rstrip)
             <a href="/alice" class="user-mention js-hovercard" title="alice" data-hovercard-target-type="user" data-hovercard-target-name="alice">@alice</a>
-          EOS
+          HTML
         end
       end
 
@@ -252,15 +252,15 @@ describe Qiita::Markdown::Processor do
         end
 
         it "replaces mention with link" do
-          should include(<<-EOS.strip_heredoc.rstrip)
+          should include(<<-HTML.strip_heredoc.rstrip)
             <a href="/al" class="user-mention js-hovercard" title="al" data-hovercard-target-type="user" data-hovercard-target-name="al">@al</a>
-          EOS
+          HTML
         end
       end
 
       context "with mentions in complex patterns" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             @alice
 
             ```
@@ -280,7 +280,7 @@ describe Qiita::Markdown::Processor do
             @-o
             @o_
             @_o
-          EOS
+          MARKDOWN
         end
 
         it "extracts mentions correctly" do
@@ -300,21 +300,21 @@ describe Qiita::Markdown::Processor do
 
       context "with mention-like filename on code block" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```ruby:@alice
             1
             ```
-          EOS
+          MARKDOWN
         end
 
         it "does not treat it as mention" do
-          should include(<<-EOS.strip_heredoc.rstrip)
+          should include(<<-HTML.strip_heredoc.rstrip)
             <div class="code-frame" data-lang="ruby">
             <div class="code-lang"><span class="bold">@alice</span></div>
             <div class="highlight"><pre><span></span><span class="mi">1</span>
             </pre></div>
             </div>
-          EOS
+          HTML
         end
       end
 
@@ -324,11 +324,11 @@ describe Qiita::Markdown::Processor do
         end
 
         it "does not replace mention with link" do
-          should include(<<-EOS.strip_heredoc.rstrip)
+          should include(<<-HTML.strip_heredoc.rstrip)
             <blockquote>
             <p>@alice</p>
             </blockquote>
-          EOS
+          HTML
         end
       end
 
@@ -338,9 +338,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "does not emphasize the name" do
-          should include(<<-EOS.strip_heredoc.rstrip)
+          should include(<<-HTML.strip_heredoc.rstrip)
             <a href="/_alice_" class="user-mention js-hovercard" title="_alice_" data-hovercard-target-type="user" data-hovercard-target-name="_alice_">@_alice_</a>
-          EOS
+          HTML
         end
       end
 
@@ -350,10 +350,10 @@ describe Qiita::Markdown::Processor do
         end
 
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             @alice
             @bob
-          EOS
+          MARKDOWN
         end
 
         it "limits mentions to allowed usernames" do
@@ -371,9 +371,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "links it and reports all allowed users as mentioned user names" do
-          should include(<<-EOS.strip_heredoc.rstrip)
+          should include(<<-HTML.strip_heredoc.rstrip)
             <a href="/" class="user-mention" title="all">@all</a>
-          EOS
+          HTML
           expect(result[:mentioned_usernames]).to eq context[:allowed_usernames]
         end
       end
@@ -409,9 +409,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "does not replace it" do
-          is_expected.to eq <<-EOS.strip_heredoc
+          is_expected.to eq <<-HTML.strip_heredoc
             <p>@alice/bob</p>
-          EOS
+          HTML
         end
       end
 
@@ -427,9 +427,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "replaces it with preferred link and updates :mentioned_groups" do
-          is_expected.to eq <<-EOS.strip_heredoc
+          is_expected.to eq <<-HTML.strip_heredoc
             <p><a href="https://alice.example.com/groups/bob" rel="nofollow noopener" target="_blank">@alice/bob</a></p>
-          EOS
+          HTML
           expect(result[:mentioned_groups]).to eq [{
             group_url_name: "bob",
             team_url_name: "alice",
@@ -459,9 +459,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "creates link for that" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><a href="/example"></a></p>
-          EOS
+          HTML
         end
       end
 
@@ -471,9 +471,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "creates link for that" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><a href="#example"></a></p>
-          EOS
+          HTML
         end
       end
 
@@ -483,9 +483,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "creates link for that with the title" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><a href="/example" title="Title"></a></p>
-          EOS
+          HTML
         end
       end
 
@@ -508,9 +508,9 @@ describe Qiita::Markdown::Processor do
         end
 
         it "removes that link by creating empty a element" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><a></a></p>
-          EOS
+          HTML
         end
       end
 
@@ -526,11 +526,11 @@ describe Qiita::Markdown::Processor do
 
       context "with emoji in pre or code element" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```
             :+1:
             ```
-          EOS
+          MARKDOWN
         end
 
         it "does not replace it" do
@@ -573,11 +573,11 @@ describe Qiita::Markdown::Processor do
 
       context "with colon-only label" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```:
             1
             ```
-          EOS
+          MARKDOWN
         end
 
         it "does not replace it" do
@@ -597,42 +597,42 @@ describe Qiita::Markdown::Processor do
         end
 
         it "allows font element with color attribute" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p>#{markdown}</p>
-          EOS
+          HTML
         end
       end
 
       context "with task list" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             - [ ] a
             - [x] b
-          EOS
+          MARKDOWN
         end
 
         it "inserts checkbox" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <ul>
             <li class="task-list-item">
             <input type="checkbox" class="task-list-item-checkbox" disabled>a</li>
             <li class="task-list-item">
             <input type="checkbox" class="task-list-item-checkbox" checked disabled>b</li>
             </ul>
-          EOS
+          HTML
         end
       end
 
       context "with nested task list" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             - [ ] a
              - [ ] b
-          EOS
+          MARKDOWN
         end
 
         it "inserts checkbox" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <ul>
             <li class="task-list-item">
             <input type="checkbox" class="task-list-item-checkbox" disabled>a
@@ -643,45 +643,45 @@ describe Qiita::Markdown::Processor do
             </ul>
             </li>
             </ul>
-          EOS
+          HTML
         end
       end
 
       context "with task list in code block" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```
             - [ ] a
             - [x] b
             ```
-          EOS
+          MARKDOWN
         end
 
         it "does not replace checkbox" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>- [ ] a
             - [x] b
             </pre></div></div>
-          EOS
+          HTML
         end
       end
 
       context "with empty line between task list" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             - [ ] a
 
             - [x] b
-          EOS
+          MARKDOWN
         end
 
         it "inserts checkbox" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <ul>
             <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" disabled>a</p></li>
             <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" checked disabled>b</p></li>
             </ul>
-          EOS
+          HTML
         end
       end
 
@@ -691,25 +691,25 @@ describe Qiita::Markdown::Processor do
         end
 
         it "inserts checkbox" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <ul>
             <li>
             </ul>
-          EOS
+          HTML
         end
       end
 
       context "with text-aligned table" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             | a  | b  | c   |
             |:---|---:|:---:|
             | a  | b  | c   |
-          EOS
+          MARKDOWN
         end
 
         it "creates table element with text-align style" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <table>
             <thead>
             <tr>
@@ -726,20 +726,20 @@ describe Qiita::Markdown::Processor do
             </tr>
             </tbody>
             </table>
-          EOS
+          HTML
         end
       end
 
       context "with footenotes syntax" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             [^1]
             [^1]: test
-          EOS
+          MARKDOWN
         end
 
         it "generates footnotes elements" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><sup id="fnref1"><a href="#fn1" rel="footnote" title="test">1</a></sup></p>
 
             <div class="footnotes">
@@ -752,35 +752,35 @@ describe Qiita::Markdown::Processor do
 
             </ol>
             </div>
-          EOS
+          HTML
         end
       end
 
       context "with manually written link inside of <sup> tag" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <sup>[Example](http://example.com/)</sup>
-          EOS
+          MARKDOWN
         end
 
         it "does not confuse the structure with automatically generated footnote reference" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><sup><a href="http://example.com/">Example</a></sup></p>
-          EOS
+          HTML
         end
       end
 
       context "with manually written <a> tag with strange href inside of <sup> tag" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <sup><a href="#foo.1">Link</a></sup>
-          EOS
+          MARKDOWN
         end
 
         it "does not confuse the structure with automatically generated footnote reference" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><sup><a href="#foo.1">Link</a></sup></p>
-          EOS
+          HTML
         end
       end
 
@@ -790,16 +790,16 @@ describe Qiita::Markdown::Processor do
         end
 
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             [^1]
             [^1]: test
-          EOS
+          MARKDOWN
         end
 
         it "does not generate footnote elements" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <p><a href="test">^1</a></p>
-          EOS
+          HTML
         end
       end
 
@@ -813,9 +813,9 @@ describe Qiita::Markdown::Processor do
         end
 
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             :foo: :o: :x:
-          EOS
+          MARKDOWN
         end
 
         it "replaces only the specified emoji names with img elements with custom URL" do
@@ -1036,9 +1036,9 @@ describe Qiita::Markdown::Processor do
     shared_examples_for "script element" do |allowed:|
       context "with script element" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <script>alert(1)</script>
-          EOS
+          MARKDOWN
         end
 
         if allowed
@@ -1048,9 +1048,9 @@ describe Qiita::Markdown::Processor do
 
           context "and allowed attributes" do
             let(:markdown) do
-              <<-EOS.strip_heredoc
+              <<-MARKDOWN.strip_heredoc
                 <p><script async data-a="b" type="text/javascript">alert(1)</script></p>
-              EOS
+              MARKDOWN
             end
 
             it "allows data-attributes" do
@@ -1068,32 +1068,32 @@ describe Qiita::Markdown::Processor do
     shared_examples_for "malicious script in filename" do |allowed:|
       context "with malicious script in filename" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             ```js:test<script>alert(1)</script>
             1
             ```
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize script element" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <div class="code-frame" data-lang="js">
               <div class="code-lang"><span class="bold">test<script>alert(1)</script></span></div>
               <div class="highlight"><pre><span></span><span class="mi">1</span>
               </pre></div>
               </div>
-            EOS
+            HTML
           end
         else
           it "sanitizes script element" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <div class="code-frame" data-lang="js">
               <div class="code-lang"><span class="bold">test</span></div>
               <div class="highlight"><pre><span></span><span class="mi">1</span>
               </pre></div>
               </div>
-            EOS
+            HTML
           end
         end
       end
@@ -1102,9 +1102,9 @@ describe Qiita::Markdown::Processor do
     shared_examples_for "iframe element" do |allowed:|
       context "with iframe" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <iframe width="1" height="2" src="//example.com" frameborder="0" allowfullscreen></iframe>
-          EOS
+          MARKDOWN
         end
 
         if allowed
@@ -1122,9 +1122,9 @@ describe Qiita::Markdown::Processor do
     shared_examples_for "input element" do |allowed:|
       context "with input" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <input type="checkbox"> foo
-          EOS
+          MARKDOWN
         end
 
         if allowed
@@ -1142,66 +1142,66 @@ describe Qiita::Markdown::Processor do
     shared_examples_for "data-attributes" do |allowed:|
       context "with data-attributes for general tags" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <div data-a="b"></div>
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize data-attributes" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <div data-a="b"></div>
-            EOS
+            HTML
           end
         else
           it "sanitizes data-attributes" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <div></div>
-            EOS
+            HTML
           end
         end
       end
 
       context "with data-attributes for <blockquote> tag" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <blockquote data-theme="a" data-malicious="b"></blockquote>
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize data-attributes" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <blockquote data-theme="a" data-malicious="b"></blockquote>
-            EOS
+            HTML
           end
         else
           it "sanitizes data-attributes except the attributes used by tweet" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <blockquote data-theme="a"></blockquote>
-            EOS
+            HTML
           end
         end
       end
 
       context "with data-attributes for <p> tag" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <p data-slug-hash="a" data-malicious="b"></p>
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize data-attributes" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p data-slug-hash="a" data-malicious="b"></p>
-            EOS
+            HTML
           end
         else
           it "sanitizes data-attributes except the attributes used by codepen" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p data-slug-hash="a"></p>
-            EOS
+            HTML
           end
         end
       end
@@ -1226,91 +1226,91 @@ describe Qiita::Markdown::Processor do
 
       context "with class attribute for <a> tag" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <a href="foo" class="malicious-class">foo</a>
             http://qiita.com/
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize the classes" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p><a href="foo" class="malicious-class">foo</a><br>
               <a href="http://qiita.com/" class="autolink" rel="nofollow noopener" target="_blank">http://qiita.com/</a></p>
-            EOS
+            HTML
           end
         else
           it "sanitizes classes except `autolink`" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p><a href="foo" class="">foo</a><br>
               <a href="http://qiita.com/" class="autolink" rel="nofollow noopener" target="_blank">http://qiita.com/</a></p>
-            EOS
+            HTML
           end
         end
       end
 
       context "with class attribute for <blockquote> tag" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <blockquote class="twitter-tweet malicious-class">foo</blockquote>
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize the classes" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <blockquote class="twitter-tweet malicious-class">foo</blockquote>
-            EOS
+            HTML
           end
         else
           it "sanitizes classes except `twitter-tweet`" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <blockquote class="twitter-tweet">foo</blockquote>
-            EOS
+            HTML
           end
         end
       end
 
       context "with class attribute for <div> tag" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <div class="footnotes malicious-class">foo</div>
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize the classes" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <div class="footnotes malicious-class">foo</div>
-            EOS
+            HTML
           end
         else
           it "sanitizes classes except `footnotes`" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <div class="footnotes">foo</div>
-            EOS
+            HTML
           end
         end
       end
 
       context "with class attribute for <p> tag" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <p class="codepen malicious-class">foo</p>
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize the classes" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p class="codepen malicious-class">foo</p>
-            EOS
+            HTML
           end
         else
           it "sanitizes classes except `codepen`" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p class="codepen">foo</p>
-            EOS
+            HTML
           end
         end
       end
@@ -1337,67 +1337,67 @@ describe Qiita::Markdown::Processor do
     shared_examples_for "override embed code attributes" do |allowed:|
       context "with HTML embed code for CodePen using old script url" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
             <script src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize embed code" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
               <script src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-            EOS
+            HTML
           end
         else
           it "forces async attribute on script" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
               <script src="https://production-assets.codepen.io/assets/embed/ei.js" async="async"></script>
-            EOS
+            HTML
           end
         end
       end
 
       context "with HTML embed code for CodePen" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
             <script src="https://static.codepen.io/assets/embed/ei.js"></script>
-          EOS
+          MARKDOWN
         end
 
         if allowed
           it "does not sanitize embed code" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
               <script src="https://static.codepen.io/assets/embed/ei.js"></script>
-            EOS
+            HTML
           end
         else
           it "forces async attribute on script" do
-            should eq <<-EOS.strip_heredoc
+            should eq <<-HTML.strip_heredoc
               <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
               <script src="https://static.codepen.io/assets/embed/ei.js" async="async"></script>
-            EOS
+            HTML
           end
         end
       end
 
       context "with embed code for Tweet" do
         let(:markdown) do
-          <<-EOS.strip_heredoc
+          <<-MARKDOWN.strip_heredoc
             <blockquote class="twitter-tweet" data-lang="es" data-cards="hidden" data-conversation="none">foo</blockquote>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-          EOS
+          MARKDOWN
         end
 
         it "does not sanitize embed code" do
-          should eq <<-EOS.strip_heredoc
+          should eq <<-HTML.strip_heredoc
             <blockquote class="twitter-tweet" data-lang="es" data-cards="hidden" data-conversation="none">foo</blockquote>\n
             <script async src="https://platform.twitter.com/widgets.js"></script>
-          EOS
+          HTML
         end
       end
     end
