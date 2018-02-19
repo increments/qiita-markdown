@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.25.0
+
+- Accept new codepen script url (static.codepen.io)
+
 ## 0.24.0
 
 - Fix to strip HTML tags in ToC
