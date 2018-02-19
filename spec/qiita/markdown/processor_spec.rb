@@ -1335,7 +1335,7 @@ describe Qiita::Markdown::Processor do
     end
 
     shared_examples_for "override embed code attributes" do |allowed:|
-      context "with HTML embed code for CodePen" do
+      context "with HTML embed code for CodePen using old script url" do
         let(:markdown) do
           <<-EOS.strip_heredoc
             <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
@@ -1355,6 +1355,31 @@ describe Qiita::Markdown::Processor do
             should eq <<-EOS.strip_heredoc
               <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
               <script src="https://production-assets.codepen.io/assets/embed/ei.js" async="async"></script>
+            EOS
+          end
+        end
+      end
+
+      context "with HTML embed code for CodePen" do
+        let(:markdown) do
+          <<-EOS.strip_heredoc
+            <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
+            <script src="https://static.codepen.io/assets/embed/ei.js"></script>
+          EOS
+        end
+
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-EOS.strip_heredoc
+              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
+              <script src="https://static.codepen.io/assets/embed/ei.js"></script>
+            EOS
+          end
+        else
+          it "forces async attribute on script" do
+            should eq <<-EOS.strip_heredoc
+              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
+              <script src="https://static.codepen.io/assets/embed/ei.js" async="async"></script>
             EOS
           end
         end
