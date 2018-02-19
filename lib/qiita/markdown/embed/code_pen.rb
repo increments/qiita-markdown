@@ -2,7 +2,10 @@ module Qiita
   module Markdown
     module Embed
       module CodePen
-        SCRIPT_URL = "https://production-assets.codepen.io/assets/embed/ei.js"
+        SCRIPT_URLS = [
+          "https://production-assets.codepen.io/assets/embed/ei.js",
+          "https://static.codepen.io/assets/embed/ei.js",
+        ]
         CLASS_NAME = %w[codepen]
         DATA_ATTRIBUTES = %w[
           data-active-link-color data-active-tab-color data-animations data-border
