@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.26.0
+
+- Use greenmat 3.2.2.4
+
 ## 0.25.0
 
 - Accept new codepen script url (static.codepen.io)
