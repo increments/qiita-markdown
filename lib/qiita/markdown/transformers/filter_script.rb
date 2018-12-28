@@ -2,9 +2,13 @@ module Qiita
   module Markdown
     module Transformers
       class FilterScript
-        WHITE_LIST = [
+        URL_WHITE_LIST = [
           Embed::CodePen::SCRIPT_URLS,
           Embed::Tweet::SCRIPT_URL,
+        ].flatten.freeze
+
+        HOST_WHITE_LIST = [
+          Embed::Asciinema::SCRIPT_HOST,
         ].flatten.freeze
 
         def self.call(*args)
@@ -17,7 +21,7 @@ module Qiita
 
         def transform
           if name == "script"
-            if WHITE_LIST.include?(node["src"])
+            if URL_WHITE_LIST.include?(node["src"]) || HOST_WHITE_LIST.include?(host_of(node["src"]))
               node["async"] = "async" unless node.attributes.key?("async")
               node.children.unlink
             else
@@ -34,6 +38,12 @@ module Qiita
 
         def node
           @env[:node]
+        end
+
+        def host_of(url)
+          Addressable::URI.parse(url).host if url
+        rescue Addressable::URI::InvalidURIError
+          nil
         end
       end
     end

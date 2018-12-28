@@ -9,6 +9,7 @@ require "sanitize"
 
 require "qiita/markdown/embed/code_pen"
 require "qiita/markdown/embed/tweet"
+require "qiita/markdown/embed/asciinema"
 require "qiita/markdown/transformers/filter_attributes"
 require "qiita/markdown/transformers/filter_script"
 require "qiita/markdown/transformers/strip_invalid_node"
