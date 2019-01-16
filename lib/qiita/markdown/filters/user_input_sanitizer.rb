@@ -26,7 +26,7 @@ module Qiita
             "li"         => %w[id],
             "p"          => Embed::CodePen::ATTRIBUTES,
             "q"          => %w[cite],
-            "script"     => %w[async src],
+            "script"     => %w[async src id],
             "sup"        => %w[id],
             "td"         => %w[colspan rowspan style],
             "th"         => %w[colspan rowspan style],
