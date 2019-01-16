@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.27.0
+
+- Support embed Asciinema
+
 ## 0.26.0
 
 - Use greenmat 3.2.2.4
