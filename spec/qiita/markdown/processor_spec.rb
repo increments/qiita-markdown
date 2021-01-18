@@ -756,6 +756,25 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with footenotes syntax with code block" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            ```
+            [^1]
+            [^1]: test
+            ```
+          MARKDOWN
+        end
+
+        it "generates only code blocks without footnotes" do
+          should eq <<-HTML.strip_heredoc
+            <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>[^1]
+            [^1]: test
+            </pre></div></div>
+          HTML
+        end
+      end
+
       context "with manually written link inside of <sup> tag" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
