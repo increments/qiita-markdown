@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.28.0
+
+- Accept new codepen script url (cpwebassets.codepen.io)
+
 ## 0.27.0
 
 - Support embed Asciinema
