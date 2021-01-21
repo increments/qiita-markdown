@@ -5,6 +5,7 @@ module Qiita
         SCRIPT_URLS = [
           "https://production-assets.codepen.io/assets/embed/ei.js",
           "https://static.codepen.io/assets/embed/ei.js",
+          "https://cpwebassets.codepen.io/assets/embed/ei.js",
         ]
         CLASS_NAME = %w[codepen]
         DATA_ATTRIBUTES = %w[
