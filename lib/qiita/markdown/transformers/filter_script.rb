@@ -5,6 +5,7 @@ module Qiita
         URL_WHITE_LIST = [
           Embed::CodePen::SCRIPT_URLS,
           Embed::Tweet::SCRIPT_URL,
+          Embed::SpeekerDeck::SCRIPT_URLS,
         ].flatten.freeze
 
         HOST_WHITE_LIST = [

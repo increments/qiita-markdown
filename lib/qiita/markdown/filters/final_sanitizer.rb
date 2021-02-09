@@ -47,7 +47,9 @@ module Qiita
               "async",
               "src",
               "type",
-            ],
+            ].concat(
+              Embed::SpeekerDeck::ATTRIBUTES,
+            ),
             "span" => [
               "style",
             ],

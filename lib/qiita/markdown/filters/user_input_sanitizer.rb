@@ -26,7 +26,7 @@ module Qiita
             "li"         => %w[id],
             "p"          => Embed::CodePen::ATTRIBUTES,
             "q"          => %w[cite],
-            "script"     => %w[async src id],
+            "script"     => %w[async src id].concat(Embed::SpeekerDeck::ATTRIBUTES),
             "iframe"     => %w[
               allowfullscreen
               frameborder

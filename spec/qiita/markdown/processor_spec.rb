@@ -1471,6 +1471,28 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for SpeekerDeck" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+          MARKDOWN
+        end
+
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+            HTML
+          end
+        else
+          it "forces async attribute on script" do
+            should eq <<-HTML.strip_heredoc
+              <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+            HTML
+          end
+        end
+      end
+
       context "with embed code for Tweet" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
