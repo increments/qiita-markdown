@@ -1442,7 +1442,7 @@ describe Qiita::Markdown::Processor do
           HTML
         end
 
-        context 'when url is privacy enhanced mode' do
+        context "when url is privacy enhanced mode" do
           let(:markdown) do
             <<-MARKDOWN.strip_heredoc
               <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
@@ -1457,6 +1457,19 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for SlideShare" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
+          MARKDOWN
+        end
+
+        it "does not sanitize embed code" do
+          should eq <<-HTML.strip_heredoc
+            <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
+          HTML
+        end
+      end
 
       context "with embed code for Tweet" do
         let(:markdown) do
