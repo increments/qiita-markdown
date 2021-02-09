@@ -137,6 +137,7 @@ module Qiita
             "s",
             "samp",
             "script",
+            "iframe",
             "span",
             "strike",
             "strong",
@@ -186,14 +187,15 @@ module Qiita
           transformers: [
             Transformers::StripInvalidNode,
             Transformers::FilterScript,
+            Transformers::FilterIframe,
           ],
         }.freeze
 
         SCRIPTABLE_RULE = RULE.dup.tap do |rule|
           rule[:attributes] = RULE[:attributes].dup
           rule[:attributes][:all] = rule[:attributes][:all] + [:data]
-          rule[:elements] = RULE[:elements] + ["iframe", "video"]
-          rule[:transformers] = rule[:transformers] - [Transformers::FilterScript]
+          rule[:elements] = RULE[:elements] + ["video"]
+          rule[:transformers] = rule[:transformers] - [Transformers::FilterScript, Transformers::FilterIframe]
         end
 
         def call
