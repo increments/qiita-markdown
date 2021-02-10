@@ -8,6 +8,7 @@ module Qiita
         HOST_WHITE_LIST = [
           Embed::Youtube::SCRIPT_HOSTS,
           Embed::SlideShare::SCRIPT_HOST,
+          Embed::GoogleSlide::SCRIPT_HOST,
         ].flatten.freeze
 
         def self.call(*args)

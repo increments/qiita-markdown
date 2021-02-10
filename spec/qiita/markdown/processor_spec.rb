@@ -1471,6 +1471,20 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for GoogleSlide" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          MARKDOWN
+        end
+
+        it "does not sanitize embed code" do
+          should eq <<-HTML.strip_heredoc
+            <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
+          HTML
+        end
+      end
+
       context "with HTML embed code for SpeekerDeck" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
