@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 0.29.0
+
+- Accept new embeded script and iframes
+    - Gist
+    - Youtube
+    - SlideShare
+    - SpeekerDeck
+    - GoogleSlide
+
 ## 0.28.0
 
 - Accept new codepen script url (cpwebassets.codepen.io)
