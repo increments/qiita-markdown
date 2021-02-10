@@ -6,7 +6,7 @@ module Qiita
         RULE = {
           elements: %w[
             a b blockquote br code dd del details div dl dt em font h1 h2 h3 h4 h5 h6
-            hr i img ins kbd li ol p pre q rp rt ruby s samp script strike strong sub
+            hr i img ins kbd li ol p pre q rp rt ruby s samp script iframe strike strong sub
             summary sup table tbody td tfoot th thead tr ul var
           ],
           attributes: {
@@ -26,7 +26,18 @@ module Qiita
             "li"         => %w[id],
             "p"          => Embed::CodePen::ATTRIBUTES,
             "q"          => %w[cite],
-            "script"     => %w[async src id],
+            "script"     => %w[async src id].concat(Embed::SpeekerDeck::ATTRIBUTES),
+            "iframe"     => %w[
+              allowfullscreen
+              frameborder
+              height
+              marginheight
+              marginwidth
+              scrolling
+              src
+              style
+              width
+            ],
             "sup"        => %w[id],
             "td"         => %w[colspan rowspan style],
             "th"         => %w[colspan rowspan style],
@@ -42,6 +53,7 @@ module Qiita
           transformers: [
             Transformers::FilterAttributes,
             Transformers::FilterScript,
+            Transformers::FilterIframe,
           ],
         }.freeze
 

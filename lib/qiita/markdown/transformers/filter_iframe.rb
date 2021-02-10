@@ -1,16 +1,14 @@
 module Qiita
   module Markdown
     module Transformers
-      class FilterScript
+      class FilterIframe
         URL_WHITE_LIST = [
-          Embed::CodePen::SCRIPT_URLS,
-          Embed::Tweet::SCRIPT_URL,
-          Embed::SpeekerDeck::SCRIPT_URLS,
         ].flatten.freeze
 
         HOST_WHITE_LIST = [
-          Embed::Asciinema::SCRIPT_HOST,
-          Embed::Gist::SCRIPT_HOST,
+          Embed::Youtube::SCRIPT_HOSTS,
+          Embed::SlideShare::SCRIPT_HOST,
+          Embed::GoogleSlide::SCRIPT_HOST,
         ].flatten.freeze
 
         def self.call(*args)
@@ -22,9 +20,8 @@ module Qiita
         end
 
         def transform
-          if name == "script"
+          if name == "iframe"
             if URL_WHITE_LIST.include?(node["src"]) || HOST_WHITE_LIST.include?(host_of(node["src"]))
-              node["async"] = "async" unless node.attributes.key?("async")
               node.children.unlink
             else
               node.unlink

@@ -1407,6 +1407,106 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for Gist" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <script id="example" src="https://gist.github.com/a/example.js"></script>
+          MARKDOWN
+        end
+
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <script id="example" src="https://gist.github.com/a/example.js"></script>
+            HTML
+          end
+        else
+          it "forces async attribute on script" do
+            should eq <<-HTML.strip_heredoc
+              <script id="example" src="https://gist.github.com/a/example.js" async="async"></script>
+            HTML
+          end
+        end
+      end
+
+      context "with HTML embed code for Youtube" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <iframe width="100" height="100" src="https://www.youtube.com/embed/example"></iframe>
+          MARKDOWN
+        end
+
+        it "does not sanitize embed code" do
+          should eq <<-HTML.strip_heredoc
+            <iframe width="100" height="100" src="https://www.youtube.com/embed/example"></iframe>
+          HTML
+        end
+
+        context "when url is privacy enhanced mode" do
+          let(:markdown) do
+            <<-MARKDOWN.strip_heredoc
+              <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+            MARKDOWN
+          end
+
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+            HTML
+          end
+        end
+      end
+
+      context "with HTML embed code for SlideShare" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
+          MARKDOWN
+        end
+
+        it "does not sanitize embed code" do
+          should eq <<-HTML.strip_heredoc
+            <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
+          HTML
+        end
+      end
+
+      context "with HTML embed code for GoogleSlide" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          MARKDOWN
+        end
+
+        it "does not sanitize embed code" do
+          should eq <<-HTML.strip_heredoc
+            <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
+          HTML
+        end
+      end
+
+      context "with HTML embed code for SpeekerDeck" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+          MARKDOWN
+        end
+
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+            HTML
+          end
+        else
+          it "forces async attribute on script" do
+            should eq <<-HTML.strip_heredoc
+              <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+            HTML
+          end
+        end
+      end
+
       context "with embed code for Tweet" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
