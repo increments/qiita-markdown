@@ -740,7 +740,7 @@ describe Qiita::Markdown::Processor do
 
         it "generates footnotes elements" do
           should eq <<-HTML.strip_heredoc
-            <p><sup id="fnref1"><a href="#fn1" rel="footnote" title="test">1</a></sup></p>
+            <p><sup id="fnref1"><a href="#fn1" title="test">1</a></sup></p>
 
             <div class="footnotes">
             <hr>
@@ -752,6 +752,25 @@ describe Qiita::Markdown::Processor do
 
             </ol>
             </div>
+          HTML
+        end
+      end
+
+      context "with footenotes syntax with code block" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            ```
+            [^1]
+            [^1]: test
+            ```
+          MARKDOWN
+        end
+
+        it "generates only code blocks without footnotes" do
+          should eq <<-HTML.strip_heredoc
+            <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>[^1]
+            [^1]: test
+            </pre></div></div>
           HTML
         end
       end
