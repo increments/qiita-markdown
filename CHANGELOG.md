@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Use pygments.rb 2.2.0
+
 ## 0.33.0
 
 - Fix XSS possibility bug
