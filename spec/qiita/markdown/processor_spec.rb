@@ -1050,6 +1050,31 @@ describe Qiita::Markdown::Processor do
           end
         end
       end
+
+      context "with details tag" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <details><summary>Folding sample</summary><div>
+
+            ```rb
+            puts "Hello, World"
+            ```
+            </div></details>
+          MARKDOWN
+        end
+
+        it "returns HTML output parsed as markdown" do
+          expect(subject).to eq <<-HTML.strip_heredoc
+            <p><details><summary>Folding sample</summary><div>
+
+            <div class="code-frame" data-lang="rb"><div class="highlight"><pre><span></span><span class="nb">puts</span> <span class="s2">"Hello, World"</span>
+            </pre></div></div>
+
+            <p></p>
+            </div></details></p>
+          HTML
+        end
+      end
     end
 
     shared_examples_for "script element" do |allowed:|
