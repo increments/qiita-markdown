@@ -41,7 +41,10 @@ module Qiita
         end
 
         def host_of(url)
-          Addressable::URI.parse(url).host if url
+          if url
+            port = URI.parse(url).port
+            Addressable::URI.parse(url).host if [443, 80].include? port
+          end
         rescue Addressable::URI::InvalidURIError
           nil
         end

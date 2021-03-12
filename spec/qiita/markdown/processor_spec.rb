@@ -1598,6 +1598,34 @@ describe Qiita::Markdown::Processor do
           HTML
         end
       end
+
+      context "with embed script code with xss" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="javascript://speakerdeck.com/assets/embed.js"></script>
+          MARKDOWN
+
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              \n
+            HTML
+          end
+        end
+      end
+
+      context "with embed iframe code with xss" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <iframe src="javascript://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          MARKDOWN
+
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              \n
+            HTML
+          end
+        end
+      end
     end
 
     context "without script and strict context" do
