@@ -22,6 +22,7 @@ module Qiita
         def transform
           if name == "iframe"
             if URL_WHITE_LIST.include?(node["src"]) || HOST_WHITE_LIST.include?(host_of(node["src"]))
+              node["width"] = "100%"
               node.children.unlink
             else
               node.unlink

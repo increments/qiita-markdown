@@ -1480,10 +1480,18 @@ describe Qiita::Markdown::Processor do
           MARKDOWN
         end
 
-        it "does not sanitize embed code" do
-          should eq <<-HTML.strip_heredoc
-            <iframe width="100" height="100" src="https://www.youtube.com/embed/example"></iframe>
-          HTML
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100" height="100" src="https://www.youtube.com/embed/example"></iframe>
+            HTML
+          end
+        else
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100%" height="100" src="https://www.youtube.com/embed/example"></iframe>
+            HTML
+          end
         end
 
         context "when url is privacy enhanced mode" do
@@ -1493,10 +1501,18 @@ describe Qiita::Markdown::Processor do
             MARKDOWN
           end
 
-          it "does not sanitize embed code" do
-            should eq <<-HTML.strip_heredoc
-              <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
-            HTML
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+                <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<-HTML.strip_heredoc
+                <iframe width="100%" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+              HTML
+            end
           end
         end
       end
@@ -1508,10 +1524,18 @@ describe Qiita::Markdown::Processor do
           MARKDOWN
         end
 
-        it "does not sanitize embed code" do
-          should eq <<-HTML.strip_heredoc
-            <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
-          HTML
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
+            HTML
+          end
+        else
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100%" height="100" src="https://www.slideshare.net/embed/example"></iframe>
+            HTML
+          end
         end
       end
 
@@ -1522,10 +1546,18 @@ describe Qiita::Markdown::Processor do
           MARKDOWN
         end
 
-        it "does not sanitize embed code" do
-          should eq <<-HTML.strip_heredoc
-            <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
-          HTML
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
+            HTML
+          end
+        else
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="100%" height="300" allowfullscreen="true"></iframe>
+            HTML
+          end
         end
       end
 
