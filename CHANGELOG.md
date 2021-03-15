@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 0.32.0
+
+- Fixed XSS possibility bug
+- Fix iframe width to be fixed at 100%
+
 ## 0.31.0
 
 - Use greenmat 3.5.1.1
