@@ -1480,10 +1480,18 @@ describe Qiita::Markdown::Processor do
           MARKDOWN
         end
 
-        it "does not sanitize embed code" do
-          should eq <<-HTML.strip_heredoc
-            <iframe width="100" height="100" src="https://www.youtube.com/embed/example"></iframe>
-          HTML
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100" height="100" src="https://www.youtube.com/embed/example"></iframe>
+            HTML
+          end
+        else
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100%" height="100" src="https://www.youtube.com/embed/example"></iframe>
+            HTML
+          end
         end
 
         context "when url is privacy enhanced mode" do
@@ -1493,10 +1501,18 @@ describe Qiita::Markdown::Processor do
             MARKDOWN
           end
 
-          it "does not sanitize embed code" do
-            should eq <<-HTML.strip_heredoc
-              <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
-            HTML
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+                <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<-HTML.strip_heredoc
+                <iframe width="100%" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+              HTML
+            end
           end
         end
       end
@@ -1508,10 +1524,18 @@ describe Qiita::Markdown::Processor do
           MARKDOWN
         end
 
-        it "does not sanitize embed code" do
-          should eq <<-HTML.strip_heredoc
-            <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
-          HTML
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
+            HTML
+          end
+        else
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              <iframe width="100%" height="100" src="https://www.slideshare.net/embed/example"></iframe>
+            HTML
+          end
         end
       end
 
@@ -1522,10 +1546,18 @@ describe Qiita::Markdown::Processor do
           MARKDOWN
         end
 
-        it "does not sanitize embed code" do
-          should eq <<-HTML.strip_heredoc
-            <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
-          HTML
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
+            HTML
+          end
+        else
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="100%" height="300" allowfullscreen="true"></iframe>
+            HTML
+          end
         end
       end
 
@@ -1564,6 +1596,34 @@ describe Qiita::Markdown::Processor do
             <blockquote class="twitter-tweet" data-lang="es" data-cards="hidden" data-conversation="none">foo</blockquote>\n
             <script async src="https://platform.twitter.com/widgets.js"></script>
           HTML
+        end
+      end
+
+      context "with embed script code with xss" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="javascript://speakerdeck.com/assets/embed.js"></script>
+          MARKDOWN
+
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              \n
+            HTML
+          end
+        end
+      end
+
+      context "with embed iframe code with xss" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <iframe src="javascript://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          MARKDOWN
+
+          it "forces width attribute on iframe" do
+            should eq <<-HTML.strip_heredoc
+              \n
+            HTML
+          end
         end
       end
     end

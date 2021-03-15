@@ -22,6 +22,7 @@ module Qiita
         def transform
           if name == "iframe"
             if URL_WHITE_LIST.include?(node["src"]) || HOST_WHITE_LIST.include?(host_of(node["src"]))
+              node["width"] = "100%"
               node.children.unlink
             else
               node.unlink
@@ -40,7 +41,10 @@ module Qiita
         end
 
         def host_of(url)
-          Addressable::URI.parse(url).host if url
+          if url
+            port = URI.parse(url).port
+            Addressable::URI.parse(url).host if [443, 80].include? port
+          end
         rescue Addressable::URI::InvalidURIError
           nil
         end
