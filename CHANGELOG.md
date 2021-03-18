@@ -1,8 +1,12 @@
 ## Unreleased
 
+## 0.33.0
+
+- Fix XSS possibility bug
+
 ## 0.32.0
 
-- Fixed XSS possibility bug
+- Fix XSS possibility bug
 - Fix iframe width to be fixed at 100%
 
 ## 0.31.0
