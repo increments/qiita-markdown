@@ -44,10 +44,10 @@ module Qiita
 
         def host_of(url)
           if url
-            port = URI.parse(url).port
-            Addressable::URI.parse(url).host if [443, 80].include? port
+            scheme = URI.parse(url).scheme
+            Addressable::URI.parse(url).host if ["http", "https"].include? scheme
           end
-        rescue Addressable::URI::InvalidURIError
+        rescue Addressable::URI::InvalidURIError, URI::InvalidURIError
           nil
         end
       end
