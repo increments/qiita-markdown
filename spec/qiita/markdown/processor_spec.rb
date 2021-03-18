@@ -1124,7 +1124,7 @@ describe Qiita::Markdown::Processor do
             should eq <<-HTML.strip_heredoc
               <div class="code-frame" data-lang="js">
               <div class="code-lang"><span class="bold">test<script>alert(1)</script></span></div>
-              <div class="highlight"><pre><span></span><span class="mi">1</span>
+              <div class="highlight"><pre><span></span><span class="mf">1</span>
               </pre></div>
               </div>
             HTML
@@ -1134,7 +1134,7 @@ describe Qiita::Markdown::Processor do
             should eq <<-HTML.strip_heredoc
               <div class="code-frame" data-lang="js">
               <div class="code-lang"><span class="bold">test</span></div>
-              <div class="highlight"><pre><span></span><span class="mi">1</span>
+              <div class="highlight"><pre><span></span><span class="mf">1</span>
               </pre></div>
               </div>
             HTML

@@ -16,13 +16,13 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 2.2.0"
+  spec.required_ruby_version = ">= 2.3.0"
 
   spec.add_dependency "gemoji"
   spec.add_dependency "github-linguist", "~> 4.0"
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
-  spec.add_dependency "pygments.rb", "~> 1.0"
+  spec.add_dependency "pygments.rb", "~> 2.2.0"
   spec.add_dependency "greenmat", "3.5.1.1"
   spec.add_dependency "sanitize"
   spec.add_dependency "addressable"
