@@ -1616,7 +1616,7 @@ describe Qiita::Markdown::Processor do
       context "with embed iframe code with xss" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
-            <iframe src="javascript://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            <iframe src="javascript://docs.google.com:80/%0d%0aalert(document.domain)" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
           MARKDOWN
 
           it "forces width attribute on iframe" do
