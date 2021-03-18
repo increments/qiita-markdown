@@ -47,7 +47,7 @@ module Qiita
             scheme = URI.parse(url).scheme
             Addressable::URI.parse(url).host if ["http", "https"].include? scheme
           end
-        rescue Addressable::URI::InvalidURIError
+        rescue Addressable::URI::InvalidURIError, URI::InvalidURIError
           nil
         end
       end
