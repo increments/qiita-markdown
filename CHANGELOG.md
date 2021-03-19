@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.34.0
+
+- Delete gist embed rule to avoid XSS
+
 ## 0.33.0
 
 - Fix XSS possibility bug
