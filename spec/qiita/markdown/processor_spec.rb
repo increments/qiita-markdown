@@ -1582,11 +1582,15 @@ describe Qiita::Markdown::Processor do
           <<-MARKDOWN.strip_heredoc
             <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="javascript://speakerdeck.com/assets/embed.js"></script>
           MARKDOWN
+        end
 
+        if allowed
+          it "does not sanitize embed code" do
+            should eq markdown
+          end
+        else
           it "forces width attribute on iframe" do
-            should eq <<-HTML.strip_heredoc
-              \n
-            HTML
+            should eq "\n"
           end
         end
       end
@@ -1596,11 +1600,17 @@ describe Qiita::Markdown::Processor do
           <<-MARKDOWN.strip_heredoc
             <iframe src="javascript://docs.google.com:80/%0d%0aalert(document.domain)" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
           MARKDOWN
+        end
 
-          it "forces width attribute on iframe" do
+        if allowed
+          it "does not sanitize embed code" do
             should eq <<-HTML.strip_heredoc
-              \n
+              <iframe src="javascript://docs.google.com:80/%0d%0aalert(document.domain)" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
             HTML
+          end
+        else
+          it "forces width attribute on iframe" do
+            should eq "\n"
           end
         end
       end
