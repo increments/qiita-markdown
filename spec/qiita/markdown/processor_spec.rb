@@ -1144,12 +1144,13 @@ describe Qiita::Markdown::Processor do
     end
 
     shared_examples_for "iframe element" do |allowed:|
-      context "with iframe" do
+      shared_examples "iframe element example" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
-            <iframe width="1" height="2" src="//example.com" frameborder="0" allowfullscreen></iframe>
+            <iframe width="1" height="2" src="#{url}" frameborder="0" allowfullscreen></iframe>
           MARKDOWN
         end
+        let(:url) { "#{scheme}//example.com" }
 
         if allowed
           it "allows iframe with some attributes" do
@@ -1159,6 +1160,20 @@ describe Qiita::Markdown::Processor do
           it "sanitizes iframe element" do
             should eq "\n"
           end
+        end
+      end
+
+      context "with iframe" do
+        context "with scheme" do
+          let(:scheme) { "https:" }
+
+          include_examples "iframe element example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+
+          include_examples "iframe element example"
         end
       end
     end
@@ -1452,90 +1467,136 @@ describe Qiita::Markdown::Processor do
       end
 
       context "with HTML embed code for Youtube" do
-        let(:markdown) do
-          <<-MARKDOWN.strip_heredoc
-            <iframe width="100" height="100" src="https://www.youtube.com/embed/example"></iframe>
-          MARKDOWN
-        end
-
-        if allowed
-          it "does not sanitize embed code" do
-            should eq <<-HTML.strip_heredoc
-              <iframe width="100" height="100" src="https://www.youtube.com/embed/example"></iframe>
-            HTML
-          end
-        else
-          it "forces width attribute on iframe" do
-            should eq <<-HTML.strip_heredoc
-              <iframe width="100%" height="100" src="https://www.youtube.com/embed/example"></iframe>
-            HTML
-          end
-        end
-
-        context "when url is privacy enhanced mode" do
+        shared_examples "embed code youtube example" do
           let(:markdown) do
             <<-MARKDOWN.strip_heredoc
-              <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+              <iframe width="100" height="100" src="#{url}"></iframe>
             MARKDOWN
           end
+          let(:url) { "#{scheme}//www.youtube.com/embed/example" }
 
           if allowed
             it "does not sanitize embed code" do
               should eq <<-HTML.strip_heredoc
-                <iframe width="100" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+                <iframe width="100" height="100" src="#{url}"></iframe>
               HTML
             end
           else
             it "forces width attribute on iframe" do
               should eq <<-HTML.strip_heredoc
-                <iframe width="100%" height="100" src="https://www.youtube-nocookie.com/embed/example"></iframe>
+                <iframe width="100%" height="100" src="#{url}"></iframe>
               HTML
             end
           end
+
+          context "when url is privacy enhanced mode" do
+            let(:markdown) do
+              <<-MARKDOWN.strip_heredoc
+                <iframe width="100" height="100" src="#{url}"></iframe>
+              MARKDOWN
+            end
+            let(:url) { "#{scheme}//www.youtube-nocookie.com/embed/example" }
+
+            if allowed
+              it "does not sanitize embed code" do
+                should eq <<-HTML.strip_heredoc
+                  <iframe width="100" height="100" src="#{url}"></iframe>
+                HTML
+              end
+            else
+              it "forces width attribute on iframe" do
+                should eq <<-HTML.strip_heredoc
+                  <iframe width="100%" height="100" src="#{url}"></iframe>
+                HTML
+              end
+            end
+          end
+        end
+
+        context "with scheme" do
+          let(:scheme) { "https:" }
+
+          include_examples "embed code youtube example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+
+          include_examples "embed code youtube example"
         end
       end
 
       context "with HTML embed code for SlideShare" do
-        let(:markdown) do
-          <<-MARKDOWN.strip_heredoc
-            <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
-          MARKDOWN
+        shared_examples "embed code slideshare example" do
+          let(:markdown) do
+            <<-MARKDOWN.strip_heredoc
+              <iframe width="100" height="100" src="#{url}"></iframe>
+            MARKDOWN
+          end
+          let(:url) { "#{scheme}//www.slideshare.net/embed/example" }
+
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+                <iframe width="100" height="100" src="#{url}"></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<-HTML.strip_heredoc
+                <iframe width="100%" height="100" src="#{url}"></iframe>
+              HTML
+            end
+          end
         end
 
-        if allowed
-          it "does not sanitize embed code" do
-            should eq <<-HTML.strip_heredoc
-              <iframe width="100" height="100" src="https://www.slideshare.net/embed/example"></iframe>
-            HTML
-          end
-        else
-          it "forces width attribute on iframe" do
-            should eq <<-HTML.strip_heredoc
-              <iframe width="100%" height="100" src="https://www.slideshare.net/embed/example"></iframe>
-            HTML
-          end
+        context "with scheme" do
+          let(:scheme) { "https:" }
+
+          include_examples "embed code slideshare example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+
+          include_examples "embed code slideshare example"
         end
       end
 
       context "with HTML embed code for GoogleSlide" do
-        let(:markdown) do
-          <<-MARKDOWN.strip_heredoc
-            <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-          MARKDOWN
+        shared_examples "embed code googleslide example" do
+          let(:markdown) do
+            <<-MARKDOWN.strip_heredoc
+            <iframe src="#{url}" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            MARKDOWN
+          end
+          let(:url) { "#{scheme}//docs.google.com/presentation/d/example/embed" }
+
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+              <iframe src="#{url}" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<-HTML.strip_heredoc
+              <iframe src="#{url}" frameborder="0" width="100%" height="300" allowfullscreen="true"></iframe>
+              HTML
+            end
+          end
         end
 
-        if allowed
-          it "does not sanitize embed code" do
-            should eq <<-HTML.strip_heredoc
-              <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
-            HTML
-          end
-        else
-          it "forces width attribute on iframe" do
-            should eq <<-HTML.strip_heredoc
-              <iframe src="https://docs.google.com/presentation/d/example/embed" frameborder="0" width="100%" height="300" allowfullscreen="true"></iframe>
-            HTML
-          end
+        context "with scheme" do
+          let(:scheme) { "https:" }
+
+          include_examples "embed code googleslide example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+
+          include_examples "embed code googleslide example"
         end
       end
 
@@ -1582,11 +1643,15 @@ describe Qiita::Markdown::Processor do
           <<-MARKDOWN.strip_heredoc
             <script async class="speakerdeck-embed" data-id="example" data-ratio="1.33333333333333" src="javascript://speakerdeck.com/assets/embed.js"></script>
           MARKDOWN
+        end
 
+        if allowed
+          it "does not sanitize embed code" do
+            should eq markdown
+          end
+        else
           it "forces width attribute on iframe" do
-            should eq <<-HTML.strip_heredoc
-              \n
-            HTML
+            should eq "\n"
           end
         end
       end
@@ -1596,11 +1661,17 @@ describe Qiita::Markdown::Processor do
           <<-MARKDOWN.strip_heredoc
             <iframe src="javascript://docs.google.com:80/%0d%0aalert(document.domain)" frameborder="0" width="482" height="300" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
           MARKDOWN
+        end
 
-          it "forces width attribute on iframe" do
+        if allowed
+          it "does not sanitize embed code" do
             should eq <<-HTML.strip_heredoc
-              \n
+              <iframe src="javascript://docs.google.com:80/%0d%0aalert(document.domain)" frameborder="0" width="482" height="300" allowfullscreen="true"></iframe>
             HTML
+          end
+        else
+          it "forces width attribute on iframe" do
+            should eq "\n"
           end
         end
       end
