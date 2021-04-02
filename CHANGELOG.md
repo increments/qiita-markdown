@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.35.0
+
+- Allow Relative URL in iframe src attributes
+
 ## 0.34.0
 
 - Delete gist embed rule to avoid XSS
