@@ -1677,6 +1677,115 @@ describe Qiita::Markdown::Processor do
       end
     end
 
+    shared_examples_for "custom block" do |allowed:|
+      context "with custom block" do
+        let(:type) { "" }
+        let(:subtype) { "" }
+
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            :::#{[type, subtype].join(' ').rstrip}
+            Some kind of text is here.
+            :::
+          MARKDOWN
+        end
+
+        context "when type is not allowed" do
+          let(:type) { "anytype" }
+
+          if allowed
+            it "returns simple div element" do
+              should eq <<-HTML.strip_heredoc
+                <div data-type="customblock" data-metadata="anytype">Some kind of text is here.
+                </div>
+              HTML
+            end
+          else
+            it "returns simple div element" do
+              should eq <<-HTML.strip_heredoc
+                <div>Some kind of text is here.
+                </div>
+              HTML
+            end
+          end
+        end
+
+        context "when type is message" do
+          let(:type) { "message" }
+
+          context "when subtype is empty" do
+            if allowed
+              it "returns info message block with class including icon as default type" do
+                should eq <<-HTML.strip_heredoc
+                  <div data-type="customblock" data-metadata="message" class="message info">
+                  <span class="fa fa-fw fa-check-circle"></span><p>Some kind of text is here.
+                  </p>
+                  </div>
+                HTML
+              end
+            else
+              it "returns message block with class including icon" do
+                should eq <<-HTML.strip_heredoc
+                  <div class="message info">
+                  <span class="fa fa-fw fa-check-circle"></span><p>Some kind of text is here.
+                  </p>
+                  </div>
+                HTML
+              end
+            end
+          end
+
+          context "when subtype is warn" do
+            let(:subtype) { "warn" }
+
+            if allowed
+              it "returns warning message block with class including icon" do
+                should eq <<-HTML.strip_heredoc
+                  <div data-type="customblock" data-metadata="message warn" class="message warn">
+                  <span class="fa fa-fw fa-exclamation-circle"></span><p>Some kind of text is here.
+                  </p>
+                  </div>
+                HTML
+              end
+            else
+              it "returns message block with class including icon" do
+                should eq <<-HTML.strip_heredoc
+                  <div class="message warn">
+                  <span class="fa fa-fw fa-exclamation-circle"></span><p>Some kind of text is here.
+                  </p>
+                  </div>
+                HTML
+              end
+            end
+          end
+
+          context "when subtype is alert" do
+            let(:subtype) { "alert" }
+
+            if allowed
+              it "returns alerting message block with class including icon" do
+                should eq <<-HTML.strip_heredoc
+                  <div data-type="customblock" data-metadata="message alert" class="message alert">
+                  <span class="fa fa-fw fa-times-circle"></span><p>Some kind of text is here.
+                  </p>
+                  </div>
+                HTML
+              end
+            else
+              it "returns message block with class including icon" do
+                should eq <<-HTML.strip_heredoc
+                  <div class="message alert">
+                  <span class="fa fa-fw fa-times-circle"></span><p>Some kind of text is here.
+                  </p>
+                  </div>
+                HTML
+              end
+            end
+          end
+        end
+      end
+    end
+
     context "without script and strict context" do
       let(:context) do
         super().merge(script: false, strict: false)
@@ -1691,6 +1800,7 @@ describe Qiita::Markdown::Processor do
       include_examples "class attribute", allowed: true
       include_examples "background-color", allowed: true
       include_examples "override embed code attributes", allowed: false
+      include_examples "custom block", allowed: false
     end
 
     context "with script context" do
@@ -1707,6 +1817,7 @@ describe Qiita::Markdown::Processor do
       include_examples "class attribute", allowed: true
       include_examples "background-color", allowed: true
       include_examples "override embed code attributes", allowed: true
+      include_examples "custom block", allowed: true
     end
 
     context "with strict context" do
@@ -1723,6 +1834,7 @@ describe Qiita::Markdown::Processor do
       include_examples "class attribute", allowed: false
       include_examples "background-color", allowed: false
       include_examples "override embed code attributes", allowed: false
+      include_examples "custom block", allowed: false
     end
 
     context "with script and strict context" do
@@ -1739,6 +1851,7 @@ describe Qiita::Markdown::Processor do
       include_examples "class attribute", allowed: false
       include_examples "background-color", allowed: false
       include_examples "override embed code attributes", allowed: false
+      include_examples "custom block", allowed: true
     end
   end
 end

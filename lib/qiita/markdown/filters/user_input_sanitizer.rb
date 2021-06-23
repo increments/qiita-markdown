@@ -13,7 +13,7 @@ module Qiita
             "a"          => %w[class href rel title],
             "blockquote" => %w[cite] + Embed::Tweet::ATTRIBUTES,
             "code"       => %w[data-metadata],
-            "div"        => %w[class],
+            "div"        => %w[class data-type data-metadata],
             "font"       => %w[color],
             "h1"         => %w[id],
             "h2"         => %w[id],

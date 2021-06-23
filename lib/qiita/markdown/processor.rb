@@ -14,6 +14,7 @@ module Qiita
           Filters::ImageLink,
           Filters::Footnote,
           Filters::CodeBlock,
+          Filters::CustomBlock,
           Filters::Checkbox,
           Filters::Toc,
           Filters::Emoji,

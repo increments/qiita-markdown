@@ -20,6 +20,7 @@ module Qiita
             Qiita::Markdown::Greenmat::HTMLRenderer.new(hard_wrap: true, with_toc_data: true),
             autolink: true,
             fenced_code_blocks: true,
+            fenced_custom_blocks: true,
             footnotes: options[:footnotes],
             no_intra_emphasis: true,
             no_mention_emphasis: true,
