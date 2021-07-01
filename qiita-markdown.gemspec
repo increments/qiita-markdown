@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
   spec.add_dependency "pygments.rb", "~> 1.0"
-  spec.add_dependency "greenmat", "3.5.1.1"
+  spec.add_dependency "greenmat", "3.5.1.2"
   spec.add_dependency "sanitize"
   spec.add_dependency "addressable"
   spec.add_development_dependency "activesupport", "4.2.6"
