@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 0.36.0
+- Support message notation
+
 ## 0.35.0
 
 - Allow Relative URL in iframe src attributes
