@@ -2,7 +2,7 @@ module Qiita
   module Markdown
     module Filters
       class CustomBlock < HTML::Pipeline::Filter
-        ALLOWED_TYPES = %(message).freeze
+        ALLOWED_TYPES = %w[message].freeze
 
         def call
           doc.search('div[data-type="customblock"]').each do |div|
