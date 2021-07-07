@@ -4,6 +4,7 @@ module Qiita
       class SyntaxHighlight < HTML::Pipeline::Filter
         DEFAULT_LANGUAGE = "text"
         DEFAULT_TIMEOUT = Float::INFINITY
+        DEFAULT_OPTION = "html_legacy"
 
         def call
           elapsed = 0
@@ -79,11 +80,11 @@ module Qiita
           end
 
           def highlight(language)
-            Pygments.highlight(code, lexer: language, options: pygments_options)
+            Rouge.highlight(code, language, DEFAULT_OPTION)
           end
 
           def highlighted_node
-            if specific_language && Pygments::Lexer.find(specific_language)
+            if specific_language && Rouge::Lexer.find(specific_language)
               begin
                 highlight(specific_language).presence or raise
               rescue
@@ -100,14 +101,6 @@ module Qiita
 
           def language_node
             Nokogiri::HTML.fragment(%Q[<div class="code-frame" data-lang="#{language}"></div>])
-          end
-
-          def pygments_options
-            @pygments_options ||= begin
-              options = { encoding: "utf-8", stripnl: false }
-              options[:startinline] = true if has_inline_php?
-              options
-            end
           end
 
           def specific_language

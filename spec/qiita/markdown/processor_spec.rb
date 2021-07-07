@@ -149,8 +149,8 @@ describe Qiita::Markdown::Processor do
           should eq <<-HTML.strip_heredoc
             <div class="code-frame" data-lang="ruby">
             <div class="code-lang"><span class="bold">example.rb</span></div>
-            <div class="highlight"><pre><span></span><span class="mi">1</span>
-            </pre></div>
+            <div class="highlight"><pre class="codehilite"><code><span class="mi">1</span>
+            </code></pre></div>
             </div>
           HTML
         end
@@ -169,8 +169,8 @@ describe Qiita::Markdown::Processor do
           should eq <<-HTML.strip_heredoc
             <div class="code-frame" data-lang="php">
             <div class="code-lang"><span class="bold">example.php</span></div>
-            <div class="highlight"><pre><span></span><span class="mi">1</span>
-            </pre></div>
+            <div class="highlight"><pre class="codehilite"><code><span class="mi">1</span>
+            </code></pre></div>
             </div>
           HTML
         end
@@ -187,8 +187,8 @@ describe Qiita::Markdown::Processor do
 
         it "returns code-frame and highlighted pre element" do
           should eq <<-HTML.strip_heredoc
-            <div class="code-frame" data-lang="ruby"><div class="highlight"><pre><span></span><span class="mi">1</span>
-            </pre></div></div>
+            <div class="code-frame" data-lang="ruby"><div class="highlight"><pre class="codehilite"><code><span class="mi">1</span>
+            </code></pre></div></div>
           HTML
         end
       end
@@ -226,10 +226,10 @@ describe Qiita::Markdown::Processor do
 
         it "does not strip the newlines" do
           should eq <<-HTML.strip_heredoc
-            <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>
+            <div class="code-frame" data-lang="text"><div class="highlight"><pre class="codehilite"><code>
             foo
 
-            </pre></div></div>
+            </code></pre></div></div>
            HTML
         end
       end
@@ -311,8 +311,8 @@ describe Qiita::Markdown::Processor do
           should include(<<-HTML.strip_heredoc.rstrip)
             <div class="code-frame" data-lang="ruby">
             <div class="code-lang"><span class="bold">@alice</span></div>
-            <div class="highlight"><pre><span></span><span class="mi">1</span>
-            </pre></div>
+            <div class="highlight"><pre class="codehilite"><code><span class="mi">1</span>
+            </code></pre></div>
             </div>
           HTML
         end
@@ -659,9 +659,9 @@ describe Qiita::Markdown::Processor do
 
         it "does not replace checkbox" do
           should eq <<-HTML.strip_heredoc
-            <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>- [ ] a
+            <div class="code-frame" data-lang="text"><div class="highlight"><pre class="codehilite"><code>- [ ] a
             - [x] b
-            </pre></div></div>
+            </code></pre></div></div>
           HTML
         end
       end
@@ -768,9 +768,9 @@ describe Qiita::Markdown::Processor do
 
         it "generates only code blocks without footnotes" do
           should eq <<-HTML.strip_heredoc
-            <div class="code-frame" data-lang="text"><div class="highlight"><pre><span></span>[^1]
+            <div class="code-frame" data-lang="text"><div class="highlight"><pre class="codehilite"><code>[^1]
             [^1]: test
-            </pre></div></div>
+            </code></pre></div></div>
           HTML
         end
       end
@@ -1067,8 +1067,8 @@ describe Qiita::Markdown::Processor do
           expect(subject).to eq <<-HTML.strip_heredoc
             <p><details><summary>Folding sample</summary><div>
 
-            <div class="code-frame" data-lang="rb"><div class="highlight"><pre><span></span><span class="nb">puts</span> <span class="s2">"Hello, World"</span>
-            </pre></div></div>
+            <div class="code-frame" data-lang="rb"><div class="highlight"><pre class="codehilite"><code><span class="nb">puts</span> <span class="s2">"Hello, World"</span>
+            </code></pre></div></div>
 
             <p></p>
             </div></details></p>
@@ -1124,8 +1124,8 @@ describe Qiita::Markdown::Processor do
             should eq <<-HTML.strip_heredoc
               <div class="code-frame" data-lang="js">
               <div class="code-lang"><span class="bold">test<script>alert(1)</script></span></div>
-              <div class="highlight"><pre><span></span><span class="mi">1</span>
-              </pre></div>
+              <div class="highlight"><pre class="codehilite"><code><span class="mi">1</span>
+              </code></pre></div>
               </div>
             HTML
           end
@@ -1134,8 +1134,8 @@ describe Qiita::Markdown::Processor do
             should eq <<-HTML.strip_heredoc
               <div class="code-frame" data-lang="js">
               <div class="code-lang"><span class="bold">test</span></div>
-              <div class="highlight"><pre><span></span><span class="mi">1</span>
-              </pre></div>
+              <div class="highlight"><pre class="codehilite"><code><span class="mi">1</span>
+              </code></pre></div>
               </div>
             HTML
           end
