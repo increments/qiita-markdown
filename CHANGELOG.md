@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 0.37.0
+- Change keyword of notation
+
 ## 0.36.0
 - Support message notation
 
