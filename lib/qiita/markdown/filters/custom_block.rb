@@ -2,7 +2,7 @@ module Qiita
   module Markdown
     module Filters
       class CustomBlock < HTML::Pipeline::Filter
-        ALLOWED_TYPES = %w[message].freeze
+        ALLOWED_TYPES = %w[note].freeze
 
         def call
           doc.search('div[data-type="customblock"]').each do |div|
@@ -24,7 +24,7 @@ module Qiita
           end
         end
 
-        class Message
+        class Note
           attr_reader :node, :type
 
           ALLOWED_TYPES = %w[info warn alert].freeze
@@ -39,7 +39,7 @@ module Qiita
 
           def convert
             node.inner_html = message
-            node["class"] = "message #{type}"
+            node["class"] = "note #{type}"
             node.children.first.add_previous_sibling(icon) if icon
           end
 

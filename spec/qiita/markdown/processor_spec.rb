@@ -1710,23 +1710,23 @@ describe Qiita::Markdown::Processor do
           end
         end
 
-        context "when type is message" do
-          let(:type) { "message" }
+        context "when type is note" do
+          let(:type) { "note" }
 
           context "when subtype is empty" do
             if allowed
-              it "returns info message block with class including icon as default type" do
+              it "returns info note block with class including icon as default type" do
                 should eq <<-HTML.strip_heredoc
-                  <div data-type="customblock" data-metadata="message" class="message info">
+                  <div data-type="customblock" data-metadata="note" class="note info">
                   <span class="fa fa-fw fa-check-circle"></span><p>Some kind of text is here.
                   </p>
                   </div>
                 HTML
               end
             else
-              it "returns message block with class including icon" do
+              it "returns note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
-                  <div class="message info">
+                  <div class="note info">
                   <span class="fa fa-fw fa-check-circle"></span><p>Some kind of text is here.
                   </p>
                   </div>
@@ -1739,18 +1739,18 @@ describe Qiita::Markdown::Processor do
             let(:subtype) { "warn" }
 
             if allowed
-              it "returns warning message block with class including icon" do
+              it "returns warning note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
-                  <div data-type="customblock" data-metadata="message warn" class="message warn">
+                  <div data-type="customblock" data-metadata="note warn" class="note warn">
                   <span class="fa fa-fw fa-exclamation-circle"></span><p>Some kind of text is here.
                   </p>
                   </div>
                 HTML
               end
             else
-              it "returns message block with class including icon" do
+              it "returns note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
-                  <div class="message warn">
+                  <div class="note warn">
                   <span class="fa fa-fw fa-exclamation-circle"></span><p>Some kind of text is here.
                   </p>
                   </div>
@@ -1763,18 +1763,18 @@ describe Qiita::Markdown::Processor do
             let(:subtype) { "alert" }
 
             if allowed
-              it "returns alerting message block with class including icon" do
+              it "returns alerting note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
-                  <div data-type="customblock" data-metadata="message alert" class="message alert">
+                  <div data-type="customblock" data-metadata="note alert" class="note alert">
                   <span class="fa fa-fw fa-times-circle"></span><p>Some kind of text is here.
                   </p>
                   </div>
                 HTML
               end
             else
-              it "returns message block with class including icon" do
+              it "returns note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
-                  <div class="message alert">
+                  <div class="note alert">
                   <span class="fa fa-fw fa-times-circle"></span><p>Some kind of text is here.
                   </p>
                   </div>
