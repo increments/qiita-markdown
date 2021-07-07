@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 0.38.0
+- Change default syntax highlighter from pygments to rouge
+
 ## 0.37.0
 - Change keyword of notation
 
