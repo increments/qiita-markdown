@@ -1393,7 +1393,7 @@ describe Qiita::Markdown::Processor do
       end
     end
 
-    shared_examples_for "override embed code attributes" do |allowed:|
+    shared_examples_for "override embed code attributes" do |allowed:, script:|
       context "with HTML embed code for CodePen using old script url" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
@@ -1507,6 +1507,31 @@ describe Qiita::Markdown::Processor do
               it "forces width attribute on iframe" do
                 should eq <<-HTML.strip_heredoc
                   <iframe width="100%" height="100" src="#{url}"></iframe>
+                HTML
+              end
+            end
+          end
+
+          context "when url is not embed code" do
+            let(:markdown) do
+              <<-MARKDOWN.strip_heredoc
+                #{url}
+              MARKDOWN
+            end
+
+            let(:url) { "https://www.youtube.com/watch?v=xxxxxx" }
+
+            if allowed || script
+              puts context
+              it "does not sanitize embed code" do
+                should eq <<-HTML.strip_heredoc
+                  <p><iframe width="560" height="420" src="https://www.youtube.com/embed/xxxxxx" frameborder="0" allowfullscreen></iframe></p>
+                HTML
+              end
+            else
+              it "forces width attribute on iframe" do
+                should eq <<-HTML.strip_heredoc
+                  <p><iframe width="100%" height="420" src="https://www.youtube.com/embed/xxxxxx" frameborder="0" allowfullscreen></iframe></p>
                 HTML
               end
             end
@@ -1799,7 +1824,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: true
       include_examples "background-color", allowed: true
-      include_examples "override embed code attributes", allowed: false
+      include_examples "override embed code attributes", allowed: false, script: false
       include_examples "custom block", allowed: false
     end
 
@@ -1816,7 +1841,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: true
       include_examples "class attribute", allowed: true
       include_examples "background-color", allowed: true
-      include_examples "override embed code attributes", allowed: true
+      include_examples "override embed code attributes", allowed: true, script: true
       include_examples "custom block", allowed: true
     end
 
@@ -1833,7 +1858,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
       include_examples "background-color", allowed: false
-      include_examples "override embed code attributes", allowed: false
+      include_examples "override embed code attributes", allowed: false, script: false
       include_examples "custom block", allowed: false
     end
 
@@ -1850,7 +1875,7 @@ describe Qiita::Markdown::Processor do
       include_examples "data-attributes", allowed: false
       include_examples "class attribute", allowed: false
       include_examples "background-color", allowed: false
-      include_examples "override embed code attributes", allowed: false
+      include_examples "override embed code attributes", allowed: false, script: true
       include_examples "custom block", allowed: true
     end
   end

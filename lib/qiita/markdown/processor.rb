@@ -23,6 +23,7 @@ module Qiita
           Filters::GroupMention,
           Filters::ExternalLink,
           Filters::InlineCodeColor,
+          Filters::OpenContent,
           Filters::FinalSanitizer,
         ]
       end
