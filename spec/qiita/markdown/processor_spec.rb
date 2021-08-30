@@ -1690,6 +1690,24 @@ describe Qiita::Markdown::Processor do
           MARKDOWN
         end
 
+        context "when type is empty" do
+          if allowed
+            it "returns simple div element" do
+              should eq <<-HTML.strip_heredoc
+                <div data-type="customblock">Some kind of text is here.
+                </div>
+              HTML
+            end
+          else
+            it "returns simple div element" do
+              should eq <<-HTML.strip_heredoc
+                <div>Some kind of text is here.
+                </div>
+              HTML
+            end
+          end
+        end
+
         context "when type is not allowed" do
           let(:type) { "anytype" }
 
