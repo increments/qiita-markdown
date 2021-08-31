@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 0.39.0
+- Fix an error when custom block type is empty
+
 ## 0.38.0
 - Change default syntax highlighter from pygments to rouge
 
