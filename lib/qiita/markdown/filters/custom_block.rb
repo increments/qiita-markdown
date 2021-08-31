@@ -18,9 +18,11 @@ module Qiita
           attr_reader :type, :subtype
 
           # @param text [String, nil]
+          # @note Attribute `type` will be nil if `text` is nil
+          # @note Attribute `subtype` will be nil if `text` does not include white space.
           def initialize(text)
             # Discared after the second word.
-            @type, @subtype = text.split(" ")
+            @type, @subtype = text && text.split(" ")
           end
         end
 
