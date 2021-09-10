@@ -24,9 +24,9 @@ jobs:
             experimental: true
         exclude:
           - os: 'ubuntu-18.04'
-            ruby: '2.2'
+            ruby: '2.2' # Rugged uses the wrong openssl version on CI and segfaults (similar to https://github.com/libgit2/rugged/issues/718)
           - os: 'ubuntu-18.04'
-            ruby: '2.3'
+            ruby: '2.3' # Rugged uses the wrong openssl version on CI and segfaults (similar to https://github.com/libgit2/rugged/issues/718)
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     steps:
@@ -38,8 +38,11 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Test
-        run: bundle exec rake
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
         env:
-          CODECLIMATE_REPO_TOKEN: ${{ secrets.CC_TEST_REPORTER_ID }}
-          GITHUB_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          GIT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
+          GIT_COMMIT_SHA: ${{ github.sha }}
+        with:
+          coverageCommand: bundle exec rake
