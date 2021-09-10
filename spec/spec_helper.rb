@@ -1,5 +1,30 @@
 if ENV["CI"]
   require "codeclimate-test-reporter"
+
+  module CodeClimate
+    module TestReporter
+      class Ci
+        module GithubActions
+          def service_data(env = ENV)
+            puts "service_data"
+            if env["GITHUB_ACTIONS"]
+              {
+                name:             "github-actions",
+                build_identifier: env["GITHUB_JOB"],
+                branch:           env["GITHUB_BRANCH"],
+                commit_sha:       env["GITHUB_SHA"],
+              }
+            else
+              super(env)
+            end
+          end
+        end
+
+        singleton_class.prepend GithubActions
+      end
+    end
+  end
+
   CodeClimate::TestReporter.start
 end
 
