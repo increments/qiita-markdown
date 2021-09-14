@@ -1,4 +1,5 @@
 ## Unreleased
+- Change ci platform to Github Actions
 
 ## 0.39.0
 - Fix an error when custom block type is empty

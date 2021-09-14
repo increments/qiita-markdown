@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "benchmark-ips", "~> 1.2"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "codeclimate-test-reporter", "0.4.4"
+  spec.add_development_dependency "simplecov", "!= 0.18.0", "!= 0.18.1", "!= 0.18.2", "!= 0.18.3", "!= 0.18.4", "!= 0.18.5", "!= 0.19.0", "!= 0.19.1"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.1"
