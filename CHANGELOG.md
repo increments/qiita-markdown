@@ -1,5 +1,8 @@
 ## Unreleased
-- Change ci platform to Github Actions
+
+## 0.40.0
+- Change ci platform to Github Actions.
+- Fix regular expressions to detect group id(url_name) for group mention.
 
 ## 0.39.0
 - Fix an error when custom block type is empty
