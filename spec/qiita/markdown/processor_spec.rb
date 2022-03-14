@@ -156,6 +156,26 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with code & filename with `:`" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            ```ruby:test:example.rb
+            1
+            ```
+          MARKDOWN
+        end
+
+        it "returns code-frame, code-lang, and highlighted pre element" do
+          should eq <<-HTML.strip_heredoc
+            <div class="code-frame" data-lang="ruby">
+            <div class="code-lang"><span class="bold">test:example.rb</span></div>
+            <div class="highlight"><pre class="codehilite"><code><span class="mi">1</span>
+            </code></pre></div>
+            </div>
+          HTML
+        end
+      end
+
       context "with code & filename with .php" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
