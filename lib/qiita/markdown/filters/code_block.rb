@@ -90,7 +90,8 @@ module Qiita
           end
 
           def sections
-            @sections ||= (@text || "").split(":")
+            splited = (@text || "").split(":")
+            @sections ||= splited.length <= 2 ? splited : @text.split(":", 2)
           end
         end
       end
