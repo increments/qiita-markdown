@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 0.40.1
+
+- Fix to support file names containing colons.
+
 ## 0.40.0
 - Change ci platform to Github Actions.
 - Fix regular expressions to detect group id(url_name) for group mention.
