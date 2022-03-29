@@ -1,5 +1,8 @@
 inherit_from: .rubocop_todo.yml
 
+AllCops:
+  NewCops: enable
+
 Metrics/ClassLength:
   Enabled: false
 
@@ -17,7 +20,7 @@ Style/GuardClause:
   Enabled: false
 
 Style/PredicateName:
-  NamePrefixBlacklist:
+  ForbiddenPrefixes:
     - is_
 
 Style/StringLiterals:
@@ -26,10 +29,13 @@ Style/StringLiterals:
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
 
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 
-Style/UnneededPercentQ:
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/RedundantPercentQ:
   Enabled: false
 
 Metrics/LineLength:
