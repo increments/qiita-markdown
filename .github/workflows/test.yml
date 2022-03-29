@@ -15,18 +15,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['ubuntu-18.04', 'macos-latest']
-        ruby: ['2.2', '2.3', '2.4', '2.5', '2.7']
+        os: ['ubuntu-18.04', 'ubuntu-latest', 'macos-latest']
+        ruby: ['2.6', '2.7']
         experimental: [false]
         include:
-          - os: 'ubuntu-18.04'
+          - os: 'ubuntu-latest'
             ruby: 'head'
             experimental: true
-        exclude:
-          - os: 'ubuntu-18.04'
-            ruby: '2.2' # Rugged uses the wrong openssl version on CI and segfaults (similar to https://github.com/libgit2/rugged/issues/718)
-          - os: 'ubuntu-18.04'
-            ruby: '2.3' # Rugged uses the wrong openssl version on CI and segfaults (similar to https://github.com/libgit2/rugged/issues/718)
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     steps:
