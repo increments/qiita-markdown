@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 2.2.0"
+  spec.required_ruby_version = ">= 2.6.0"
 
   spec.add_dependency "gemoji"
   spec.add_dependency "github-linguist", "~> 4.0"
@@ -34,5 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.1"
-  spec.add_development_dependency "rubocop", "0.49.1"
+  spec.add_development_dependency "rubocop", "1.7.0"
 end

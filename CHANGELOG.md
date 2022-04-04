@@ -1,5 +1,8 @@
 ## Unreleased
 
+- Dropping Ruby 2.5 support (#107)
+- Bump rubocop from 0.40.0 to 1.7.0
+
 ## 0.40.1
 
 - Fix to support file names containing colons.
