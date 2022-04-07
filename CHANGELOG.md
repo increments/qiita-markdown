@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.41.0
+
 - Bump greenmat from 3.5.1.2 to 3.5.1.3
 - Dropping Ruby 2.5 support (#107)
 - Bump rubocop from 0.40.0 to 1.7.0
