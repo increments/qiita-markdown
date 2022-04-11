@@ -3,8 +3,8 @@ module Qiita
     module Transformers
       # Wraps a node env to transform invalid node.
       class StripInvalidNode
-        def self.call(*args)
-          new(*args).transform
+        def self.call(**args)
+          new(**args).transform
         end
 
         def initialize(env)

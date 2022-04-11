@@ -27,8 +27,8 @@ module Qiita
 
         DELIMITER = " ".freeze
 
-        def self.call(*args)
-          new(*args).transform
+        def self.call(**args)
+          new(**args).transform
         end
 
         def initialize(env)

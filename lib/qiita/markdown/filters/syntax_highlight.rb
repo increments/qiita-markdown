@@ -43,8 +43,8 @@ module Qiita
         end
 
         class Highlighter
-          def self.call(*args)
-            new(*args).call
+          def self.call(**args)
+            new(**args).call
           end
 
           def initialize(default_language: nil, node: nil, specific_language: nil)
