@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "greenmat", "3.5.1.3"
   spec.add_dependency "sanitize"
   spec.add_dependency "addressable"
-  spec.add_development_dependency "activesupport", "4.2.6"
+  spec.add_development_dependency "activesupport", "~> 7.0.0"
   spec.add_development_dependency "benchmark-ips", "~> 1.2"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "codeclimate-test-reporter", "0.4.4"
