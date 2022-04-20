@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 0.42.0
+
+- Add for Ruby 3.0, 3.1 support
 - Bump greenmat from 3.5.1.3 to 3.5.1.4
 
 ## 0.41.0
