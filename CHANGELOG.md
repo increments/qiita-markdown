@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Fix GitHub Actions can't be executed when public fork
+
 ## 0.42.0
 
 - Add for Ruby 3.0, 3.1 support

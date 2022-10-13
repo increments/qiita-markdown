@@ -11,6 +11,27 @@ permissions:
   contents: read
 
 jobs:
+  codeclimate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch names
+        id: branch-name
+        uses: tj-actions/branch-names@v4.9
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+          bundler-cache: true
+      - name: Test & publish code coverage
+        if: "${{ env.CC_TEST_REPORTER_ID != '' }}"
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          GIT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
+          GIT_COMMIT_SHA: ${{ github.sha }}
+        with:
+          coverageCommand: bundle exec rake
+
   test:
     strategy:
       fail-fast: false
@@ -25,19 +46,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     steps:
-      - name: Get branch names
-        id: branch-name
-        uses: tj-actions/branch-names@v4.9
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          GIT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
-          GIT_COMMIT_SHA: ${{ github.sha }}
-        with:
-          coverageCommand: bundle exec rake
+      - name: Test
+        run: bundle exec rake
