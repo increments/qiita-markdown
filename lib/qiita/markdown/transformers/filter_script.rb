@@ -6,6 +6,7 @@ module Qiita
           Embed::CodePen::SCRIPT_URLS,
           Embed::Tweet::SCRIPT_URL,
           Embed::SpeekerDeck::SCRIPT_URLS,
+          Embed::Docswell::SCRIPT_URLS,
         ].flatten.freeze
 
         HOST_WHITE_LIST = [

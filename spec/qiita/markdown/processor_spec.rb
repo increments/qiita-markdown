@@ -1642,6 +1642,63 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for Docswell" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <script async class="docswell-embed" src="https://www.docswell.com/assets/libs/docswell-embed/docswell-embed.min.js" data-src="https://www.docswell.com/slide/example/embed" data-aspect="0.5625"></script>
+          MARKDOWN
+        end
+
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <script async class="docswell-embed" src="https://www.docswell.com/assets/libs/docswell-embed/docswell-embed.min.js" data-src="https://www.docswell.com/slide/example/embed" data-aspect="0.5625"></script>
+            HTML
+          end
+        else
+          it "forces async attribute on script" do
+            should eq <<-HTML.strip_heredoc
+              <script async class="docswell-embed" src="https://www.docswell.com/assets/libs/docswell-embed/docswell-embed.min.js" data-src="https://www.docswell.com/slide/example/embed" data-aspect="0.5625"></script>
+            HTML
+          end
+        end
+
+        shared_examples "iframe code docswell example" do
+          let(:markdown) do
+            <<-MARKDOWN.strip_heredoc
+            <iframe src="#{url}" allowfullscreen="true" width="620" height="405" style="width:100%"></iframe>
+            MARKDOWN
+          end
+          let(:url) { "#{scheme}//www.docswell.com/slide/example/embed" }
+
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+              <iframe src="#{url}" allowfullscreen="true" width="620" height="405"></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<-HTML.strip_heredoc
+              <iframe src="#{url}" allowfullscreen="true" width="100%" height="405"></iframe>
+              HTML
+            end
+          end
+        end
+
+        context "with scheme" do
+          let(:scheme) { "https:" }
+
+          include_examples "iframe code docswell example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+
+          include_examples "iframe code docswell example"
+        end
+      end
+
       context "with embed code for Tweet" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc

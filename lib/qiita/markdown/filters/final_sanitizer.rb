@@ -49,6 +49,7 @@ module Qiita
               "type",
             ].concat(
               Embed::SpeekerDeck::ATTRIBUTES,
+              Embed::Docswell::ATTRIBUTES,
             ),
             "span" => [
               "style",

@@ -9,6 +9,7 @@ module Qiita
           Embed::Youtube::SCRIPT_HOSTS,
           Embed::SlideShare::SCRIPT_HOST,
           Embed::GoogleSlide::SCRIPT_HOST,
+          Embed::Docswell::SCRIPT_HOSTS,
         ].flatten.freeze
 
         def self.call(**args)
