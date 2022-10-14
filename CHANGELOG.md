@@ -1,6 +1,10 @@
 ## Unreleased
 
+## 0.43.0
+
 - Fix GitHub Actions can't be executed when public fork
+- Support new embed scripts and iframes
+    - Docswell
 
 ## 0.42.0
 
