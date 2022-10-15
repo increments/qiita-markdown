@@ -97,8 +97,9 @@ module Qiita
           },
           css: {
             properties: [
-              "text-align",
               "background-color",
+              "border",
+              "text-align",
             ],
           },
           elements: [

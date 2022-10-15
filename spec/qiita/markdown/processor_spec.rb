@@ -1620,6 +1620,44 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for Figma" do
+        shared_examples "embed code figma example" do
+          let(:markdown) do
+            <<-MARKDOWN.strip_heredoc
+              <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100" height="100" src="#{url}"></iframe>
+            MARKDOWN
+          end
+          let(:url) { "#{scheme}//www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com" }
+          let(:encoded_url) { CGI.escapeHTML(url) }
+
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100" height="100" src="#{encoded_url}"></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<-HTML.strip_heredoc
+                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="100" src="#{encoded_url}"></iframe>
+              HTML
+            end
+          end
+        end
+
+        context "with scheme" do
+          let(:scheme) { "https:" }
+
+          include_examples "embed code figma example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+
+          include_examples "embed code figma example"
+        end
+      end
+
       context "with HTML embed code for SpeekerDeck" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
