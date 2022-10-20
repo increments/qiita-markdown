@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Fix bug of checkbox filter
+
 ## 0.43.0
 
 - Fix GitHub Actions can't be executed when public fork

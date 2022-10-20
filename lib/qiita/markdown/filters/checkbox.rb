@@ -31,7 +31,7 @@ module Qiita
           end
 
           def convert
-            first_text_node.content = first_text_node.content.sub(checkbox_mark, "")
+            first_text_node.content = first_text_node.content.sub(checkbox_mark, "").lstrip
             first_text_node.add_previous_sibling(checkbox_node)
             @node["class"] = "task-list-item"
           end
