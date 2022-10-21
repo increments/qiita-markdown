@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 0.44.0
+
+- Support Figma embedding scripts
 - Fix bug of checkbox filter
 
 ## 0.43.0
