@@ -48,7 +48,10 @@ module Qiita
             "q"          => { "cite" => ["http", "https", :relative] },
           },
           css: {
-            properties: %w[text-align],
+            properties: %w[
+              text-align
+              border
+            ],
           },
           transformers: [
             Transformers::FilterAttributes,
