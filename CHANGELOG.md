@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Rename package name from `Qiita::Markdown` to `Qiita Markdown` in README
+
 ## 0.44.0
 
 - Support Figma embedding scripts
