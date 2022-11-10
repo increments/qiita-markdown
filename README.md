@@ -1,4 +1,4 @@
-# Qiita::Markdown
+# Qiita Markdown
 
 [![Gem Version](https://badge.fury.io/rb/qiita-markdown.svg)](https://badge.fury.io/rb/qiita-markdown)
 [![Build Status](https://travis-ci.org/increments/qiita-markdown.svg)](https://travis-ci.org/increments/qiita-markdown)
@@ -42,7 +42,7 @@ processor.call(markdown)
 
 ### Filters
 
-Qiita::Markdown is built on [jch/html-pipeline](https://github.com/jch/html-pipeline).
+Qiita Markdown is built on [jch/html-pipeline](https://github.com/jch/html-pipeline).
 Add your favorite html-pipeline-compatible filters.
 
 ```ruby
