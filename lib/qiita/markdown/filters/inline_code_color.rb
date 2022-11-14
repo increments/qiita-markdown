@@ -6,15 +6,15 @@ module Qiita
 
         REGEXPS = Regexp.union(
           /\#(?:\h{3}|\h{6})/,
-          /rgba?\(\s*(?:\d+(?:\,|\s)\s*){2}\d+\s*\)/,
-          /rgba?\(\s*(?:\d+%(?:\,|\s)\s*){2}\d+%\s*\)/,
-          /rgba?\(\s*(?:\d+\,\s*){3}\d*\.?\d+%?\s*\)/,
-          /rgba?\(\s*(?:\d+\s*){2}\d+\s*\/\s*\d?\.?\d+%?\s*\)/,
-          /rgba?\(\s*(?:\d+%\s*){2}\d+%\s*\/\s*\d?\.?\d+%?\s*\)/,
-          /hsla?\(\s*\d+(?:deg|rad|grad|turn)?\,\s*\d+%\,\s*\d+%\s*\)/,
+          /rgba?\(\s*(?:\d+(?:,|\s)\s*){2}\d+\s*\)/,
+          /rgba?\(\s*(?:\d+%(?:,|\s)\s*){2}\d+%\s*\)/,
+          /rgba?\(\s*(?:\d+,\s*){3}\d*\.?\d+%?\s*\)/,
+          %r{rgba?\(\s*(?:\d+\s*){2}\d+\s*/\s*\d?\.?\d+%?\s*\)},
+          %r{rgba?\(\s*(?:\d+%\s*){2}\d+%\s*/\s*\d?\.?\d+%?\s*\)},
+          /hsla?\(\s*\d+(?:deg|rad|grad|turn)?,\s*\d+%,\s*\d+%\s*\)/,
           /hsla?\(\s*\d+(?:deg|rad|grad|turn)?\s+\d+%\s+\d+%\s*\)/,
-          /hsla?\(\s*\d+(?:deg|rad|grad|turn)?\,\s*(?:\d+%\,\s*){2}\d?\.?\d+%?\s*\)/,
-          /hsla?\(\s*\d+(?:deg|rad|grad|turn)?\s+\d+%\s+\d+%\s*\/\s*\d?\.?\d+%?\s*\)/,
+          /hsla?\(\s*\d+(?:deg|rad|grad|turn)?,\s*(?:\d+%,\s*){2}\d?\.?\d+%?\s*\)/,
+          %r{hsla?\(\s*\d+(?:deg|rad|grad|turn)?\s+\d+%\s+\d+%\s*/\s*\d?\.?\d+%?\s*\)},
         )
 
         COLOR_CODE_PATTERN = /\A\s*(#{REGEXPS})\s*\z/

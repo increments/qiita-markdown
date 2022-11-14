@@ -250,7 +250,7 @@ describe Qiita::Markdown::Processor do
             foo
 
             </code></pre></div></div>
-           HTML
+          HTML
         end
       end
 
@@ -383,7 +383,7 @@ describe Qiita::Markdown::Processor do
 
       context "with @all and allowed_usernames context" do
         before do
-          context[:allowed_usernames] = ["alice", "bob"]
+          context[:allowed_usernames] = %w[alice bob]
         end
 
         let(:markdown) do
@@ -400,7 +400,7 @@ describe Qiita::Markdown::Processor do
 
       context "with @all and @alice" do
         before do
-          context[:allowed_usernames] = ["alice", "bob"]
+          context[:allowed_usernames] = %w[alice bob]
         end
 
         let(:markdown) do
@@ -517,7 +517,7 @@ describe Qiita::Markdown::Processor do
         it "creates link for that with .autolink class" do
           should eq(
             '<p><a href="http://example.com/search?q=%E6%97%A5%E6%9C%AC%E8%AA%9E" class="autolink">' \
-            "http://example.com/search?q=日本語</a></p>\n"
+            "http://example.com/search?q=日本語</a></p>\n",
           )
         end
       end
@@ -613,7 +613,7 @@ describe Qiita::Markdown::Processor do
 
       context "with font element with color attribute" do
         let(:markdown) do
-          %[<font color="red">test</font>]
+          %(<font color="red">test</font>)
         end
 
         it "allows font element with color attribute" do
@@ -844,7 +844,7 @@ describe Qiita::Markdown::Processor do
 
       context "with emoji_names and emoji_url_generator context" do
         before do
-          context[:emoji_names] = %w(foo o)
+          context[:emoji_names] = %w[foo o]
 
           context[:emoji_url_generator] = proc do |emoji_name|
             "https://example.com/foo.png" if emoji_name == "foo"
@@ -860,11 +860,11 @@ describe Qiita::Markdown::Processor do
         it "replaces only the specified emoji names with img elements with custom URL" do
           should include(
             '<img class="emoji" title=":foo:" alt=":foo:" src="https://example.com/foo.png"',
-            '<img class="emoji" title=":o:" alt=":o:" src="/images/emoji/unicode/2b55.png"'
+            '<img class="emoji" title=":o:" alt=":o:" src="/images/emoji/unicode/2b55.png"',
           )
 
           should_not include(
-            '<img class="emoji" title=":x:" alt=":x:"'
+            '<img class="emoji" title=":x:" alt=":x:"',
           )
         end
       end
@@ -881,7 +881,7 @@ describe Qiita::Markdown::Processor do
         it "creates link which does not have rel='nofollow noopener' and target='_blank'" do
           should eq(
             '<p><a href="http://qiita.com/?a=b" class="autolink">' \
-            "http://qiita.com/?a=b</a></p>\n"
+            "http://qiita.com/?a=b</a></p>\n",
           )
         end
       end
@@ -898,7 +898,7 @@ describe Qiita::Markdown::Processor do
         it "creates link which has rel='nofollow noopener' and target='_blank'" do
           should eq(
             '<p><a href="http://external.com/?a=b" class="autolink" rel="nofollow noopener" target="_blank">' \
-            "http://external.com/?a=b</a></p>\n"
+            "http://external.com/?a=b</a></p>\n",
           )
         end
       end
@@ -914,7 +914,7 @@ describe Qiita::Markdown::Processor do
 
         it "creates link which does not have rel='nofollow noopener' and target='_blank'" do
           should eq(
-            "<p><a href=\"http://qiita.com/?a=b\">foobar</a></p>\n"
+            "<p><a href=\"http://qiita.com/?a=b\">foobar</a></p>\n",
           )
         end
       end
@@ -930,7 +930,7 @@ describe Qiita::Markdown::Processor do
 
         it "creates link which has rel='nofollow noopener' and target='_blank'" do
           should eq(
-            "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n"
+            "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n",
           )
         end
       end
@@ -947,7 +947,7 @@ describe Qiita::Markdown::Processor do
         it "creates link which has rel='nofollow noopener' and target='_blank'" do
           should eq(
             '<p><a href="http://qqqqqqiita.com/?a=b" class="autolink" rel="nofollow noopener" target="_blank">' \
-            "http://qqqqqqiita.com/?a=b</a></p>\n"
+            "http://qqqqqqiita.com/?a=b</a></p>\n",
           )
         end
       end
@@ -963,7 +963,7 @@ describe Qiita::Markdown::Processor do
 
         it "creates link which has rel='nofollow noopener' and target='_blank'" do
           should eq(
-            "<p><a href=\"http://qqqqqqiita.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n"
+            "<p><a href=\"http://qqqqqqiita.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n",
           )
         end
       end
@@ -980,7 +980,7 @@ describe Qiita::Markdown::Processor do
         it "creates link which has rel='nofollow noopener' and target='_blank'" do
           should eq(
             '<p><a href="http://sub.qiita.com/?a=b" class="autolink" rel="nofollow noopener" target="_blank">' \
-            "http://sub.qiita.com/?a=b</a></p>\n"
+            "http://sub.qiita.com/?a=b</a></p>\n",
           )
         end
       end
@@ -996,7 +996,7 @@ describe Qiita::Markdown::Processor do
 
         it "creates link which has rel='nofollow noopener' and target='_blank', and rel value is overwritten" do
           should eq(
-            "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n"
+            "<p><a href=\"http://external.com/?a=b\" rel=\"nofollow noopener\" target=\"_blank\">foobar</a></p>\n",
           )
         end
       end

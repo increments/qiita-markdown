@@ -12,41 +12,41 @@ module Qiita
       class FinalSanitizer < HTML::Pipeline::Filter
         RULE = {
           attributes: {
-            "a" => [
-              "data-hovercard-target-name",
-              "data-hovercard-target-type",
-              "href",
-              "rel",
+            "a" => %w[
+              data-hovercard-target-name
+              data-hovercard-target-type
+              href
+              rel
             ],
             "blockquote" => Embed::Tweet::ATTRIBUTES,
-            "iframe" => [
-              "allowfullscreen",
-              "frameborder",
-              "height",
-              "marginheight",
-              "marginwidth",
-              "scrolling",
-              "src",
-              "style",
-              "width",
+            "iframe" => %w[
+              allowfullscreen
+              frameborder
+              height
+              marginheight
+              marginwidth
+              scrolling
+              src
+              style
+              width
             ],
             "img" => [
               "src",
             ],
-            "input" => [
-              "checked",
-              "disabled",
-              "type",
+            "input" => %w[
+              checked
+              disabled
+              type
             ],
-            "div" => [
-              "itemscope",
-              "itemtype",
+            "div" => %w[
+              itemscope
+              itemtype
             ],
             "p" => Embed::CodePen::ATTRIBUTES,
-            "script" => [
-              "async",
-              "src",
-              "type",
+            "script" => %w[
+              async
+              src
+              type
             ].concat(
               Embed::SpeekerDeck::ATTRIBUTES,
               Embed::Docswell::ATTRIBUTES,
@@ -60,104 +60,104 @@ module Qiita
             "th" => [
               "style",
             ],
-            "video" => [
-              "src",
-              "autoplay",
-              "controls",
-              "loop",
-              "muted",
-              "poster",
+            "video" => %w[
+              src
+              autoplay
+              controls
+              loop
+              muted
+              poster
             ],
-            all: [
-              "abbr",
-              "align",
-              "alt",
-              "border",
-              "cellpadding",
-              "cellspacing",
-              "cite",
-              "class",
-              "color",
-              "cols",
-              "colspan",
-              "data-lang",
-              "datetime",
-              "height",
-              "hreflang",
-              "id",
-              "itemprop",
-              "lang",
-              "name",
-              "rowspan",
-              "tabindex",
-              "target",
-              "title",
-              "width",
+            all: %w[
+              abbr
+              align
+              alt
+              border
+              cellpadding
+              cellspacing
+              cite
+              class
+              color
+              cols
+              colspan
+              data-lang
+              datetime
+              height
+              hreflang
+              id
+              itemprop
+              lang
+              name
+              rowspan
+              tabindex
+              target
+              title
+              width
             ],
           },
           css: {
-            properties: [
-              "background-color",
-              "border",
-              "text-align",
+            properties: %w[
+              background-color
+              border
+              text-align
             ],
           },
-          elements: [
-            "a",
-            "b",
-            "blockquote",
-            "br",
-            "code",
-            "dd",
-            "del",
-            "details",
-            "div",
-            "dl",
-            "dt",
-            "em",
-            "font",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6",
-            "h7",
-            "h8",
-            "hr",
-            "i",
-            "img",
-            "input",
-            "ins",
-            "kbd",
-            "li",
-            "ol",
-            "p",
-            "pre",
-            "q",
-            "rp",
-            "rt",
-            "ruby",
-            "s",
-            "samp",
-            "script",
-            "iframe",
-            "span",
-            "strike",
-            "strong",
-            "sub",
-            "summary",
-            "sup",
-            "table",
-            "tbody",
-            "td",
-            "tfoot",
-            "th",
-            "thead",
-            "tr",
-            "tt",
-            "ul",
-            "var",
+          elements: %w[
+            a
+            b
+            blockquote
+            br
+            code
+            dd
+            del
+            details
+            div
+            dl
+            dt
+            em
+            font
+            h1
+            h2
+            h3
+            h4
+            h5
+            h6
+            h7
+            h8
+            hr
+            i
+            img
+            input
+            ins
+            kbd
+            li
+            ol
+            p
+            pre
+            q
+            rp
+            rt
+            ruby
+            s
+            samp
+            script
+            iframe
+            span
+            strike
+            strong
+            sub
+            summary
+            sup
+            table
+            tbody
+            td
+            tfoot
+            th
+            thead
+            tr
+            tt
+            ul
+            var
           ],
           protocols: {
             "a" => {

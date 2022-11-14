@@ -18,11 +18,11 @@ module Qiita
           end
 
           def to_s
-            fail NotImplementedError
+            raise NotImplementedError
           end
 
           def increment
-            fail NotImplementedError
+            raise NotImplementedError
           end
 
           private

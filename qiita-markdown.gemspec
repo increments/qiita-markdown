@@ -1,4 +1,4 @@
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "qiita/markdown/version"
 
@@ -13,26 +13,26 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
   spec.required_ruby_version = ">= 2.6.0"
 
+  spec.add_dependency "addressable"
   spec.add_dependency "gemoji"
   spec.add_dependency "github-linguist", "~> 4.0"
+  spec.add_dependency "greenmat", "3.5.1.4"
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
   spec.add_dependency "rouge", "3.26.0"
-  spec.add_dependency "greenmat", "3.5.1.4"
   spec.add_dependency "sanitize"
-  spec.add_dependency "addressable"
   spec.add_development_dependency "activesupport", "~> 5.2.7"
   spec.add_development_dependency "benchmark-ips", "~> 1.2"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "codeclimate-test-reporter", "0.4.4"
-  spec.add_development_dependency "simplecov", "!= 0.18.0", "!= 0.18.1", "!= 0.18.2", "!= 0.18.3", "!= 0.18.4", "!= 0.18.5", "!= 0.19.0", "!= 0.19.1"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.1"
-  spec.add_development_dependency "rubocop", "~> 1.27.0"
+  spec.add_development_dependency "rubocop", "~> 1.39.0"
+  spec.add_development_dependency "simplecov", "!= 0.18.0", "!= 0.18.1", "!= 0.18.2", "!= 0.18.3", "!= 0.18.4", "!= 0.18.5", "!= 0.19.0", "!= 0.19.1"
+  spec.metadata["rubygems_mfa_required"] = "true"
 end

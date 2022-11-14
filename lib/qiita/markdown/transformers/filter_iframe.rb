@@ -2,8 +2,7 @@ module Qiita
   module Markdown
     module Transformers
       class FilterIframe
-        URL_WHITE_LIST = [
-        ].flatten.freeze
+        URL_WHITE_LIST = [].flatten.freeze
 
         HOST_WHITE_LIST = [
           Embed::Youtube::SCRIPT_HOSTS,

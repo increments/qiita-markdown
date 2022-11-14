@@ -37,6 +37,7 @@ module Qiita
 
         def transform
           return unless FILTERS.key?(name)
+
           FILTERS[name].each_pair do |attr, pattern|
             filter_attribute(attr, pattern) if node.attributes.key?(attr)
           end

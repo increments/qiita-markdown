@@ -12,7 +12,7 @@ module Qiita
 
         # https://github.com/vmg/redcarpet/blob/v3.2.3/ext/redcarpet/html.c#L609-L642
         def header(text, level)
-          @level_offset = level - 1 unless @level_offset
+          @level_offset ||= level - 1
 
           level -= @level_offset
           level = 1 if level < 1
