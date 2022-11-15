@@ -61,7 +61,7 @@ module PostProcess
         end
 
         def anchor_element
-          %[<span id="#{suffixed_id}" class="fragment"></span><a href="##{suffixed_id}"><i class="fa fa-link"></i></a>]
+          %(<span id="#{suffixed_id}" class="fragment"></span><a href="##{suffixed_id}"><i class="fa fa-link"></i></a>)
         end
 
         def content

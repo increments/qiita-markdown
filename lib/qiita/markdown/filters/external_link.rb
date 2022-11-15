@@ -7,9 +7,11 @@ module Qiita
         def call
           doc.search("a").each do |anchor|
             next unless anchor["href"]
+
             href = anchor["href"].strip
             href_host = host_of(href)
             next unless href_host
+
             if href_host != hostname
               anchor["rel"] = "nofollow noopener"
               anchor["target"] = "_blank"

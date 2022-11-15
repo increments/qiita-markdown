@@ -38,6 +38,7 @@ module Qiita
           doc.traverse do |node|
             next unless node.element?
             next if SIMPLE_ELEMENTS.include?(node.name)
+
             node.replace(node.children)
           end
         end

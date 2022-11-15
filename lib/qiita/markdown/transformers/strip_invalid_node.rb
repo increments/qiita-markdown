@@ -12,9 +12,7 @@ module Qiita
         end
 
         def transform
-          if has_invalid_list_node? || has_invalid_table_node?
-            node.replace(node.children)
-          end
+          node.replace(node.children) if has_invalid_list_node? || has_invalid_table_node?
         end
 
         private

@@ -51,9 +51,7 @@ module Qiita
           node.content.each_char.with_index do |char, index|
             current_char_is_blank = char.strip.empty?
 
-            if !@previous_char_was_blank || !current_char_is_blank
-              @current_length += 1
-            end
+            @current_length += 1 if !@previous_char_was_blank || !current_char_is_blank
 
             @previous_char_was_blank = current_char_is_blank
 

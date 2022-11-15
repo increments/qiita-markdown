@@ -6,6 +6,7 @@ module Qiita
           doc.search("sup > a").each do |a|
             footnote = find_footnote(a)
             next unless footnote
+
             a[:title] = footnote.text.gsub(/\A\n/, "").gsub(/ ↩\n\z/, "")
           end
           doc
@@ -16,6 +17,7 @@ module Qiita
         def find_footnote(a)
           href = a["href"]
           return nil if !href || href.match(/\A#fn\d+\z/).nil?
+
           doc.search(href).first
         end
       end

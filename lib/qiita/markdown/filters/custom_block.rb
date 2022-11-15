@@ -8,6 +8,7 @@ module Qiita
           doc.search('div[data-type="customblock"]').each do |div|
             metadata = Metadata.new(div["data-metadata"])
             next unless ALLOWED_TYPES.include?(metadata.type)
+
             klass = Object.const_get("#{self.class}::#{metadata.type.capitalize}")
             klass.new(div, metadata.subtype).convert
           end

@@ -54,7 +54,7 @@ module Qiita
           end
 
           def call
-            outer = Nokogiri::HTML.fragment(%Q[<div class="code-frame" data-lang="#{language}">])
+            outer = Nokogiri::HTML.fragment(%(<div class="code-frame" data-lang="#{language}">))
             frame = outer.at("div")
             frame.add_child(filename_node) if filename
             frame.add_child(highlighted_node)
@@ -72,7 +72,7 @@ module Qiita
           end
 
           def filename_node
-            %Q[<div class="code-lang"><span class="bold">#{filename}</span></div>]
+            %(<div class="code-lang"><span class="bold">#{filename}</span></div>)
           end
 
           def has_inline_php?
@@ -87,7 +87,7 @@ module Qiita
             if specific_language && Rouge::Lexer.find(specific_language)
               begin
                 highlight(specific_language).presence or raise
-              rescue
+              rescue StandardError
                 highlight(@default_language)
               end
             else
@@ -100,7 +100,7 @@ module Qiita
           end
 
           def language_node
-            Nokogiri::HTML.fragment(%Q[<div class="code-frame" data-lang="#{language}"></div>])
+            Nokogiri::HTML.fragment(%(<div class="code-frame" data-lang="#{language}"></div>))
           end
 
           def specific_language

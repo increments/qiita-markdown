@@ -16,19 +16,19 @@ module Qiita
         def call
           result[:codes] ||= []
           doc.search("pre").each do |pre|
-            if (code = pre.at("code"))
-              metadata = Metadata.new(code["data-metadata"])
-              filename = metadata.filename
-              language = metadata.language
-              language = language_aliases[language] || language
-              pre["filename"] = filename if filename
-              pre["lang"] = language if language
-              result[:codes] << {
-                code: pre.text,
-                filename: filename,
-                language: language,
-              }
-            end
+            next unless (code = pre.at("code"))
+
+            metadata = Metadata.new(code["data-metadata"])
+            filename = metadata.filename
+            language = metadata.language
+            language = language_aliases[language] || language
+            pre["filename"] = filename if filename
+            pre["lang"] = language if language
+            result[:codes] << {
+              code: pre.text,
+              filename: filename,
+              language: language,
+            }
           end
           doc
         end

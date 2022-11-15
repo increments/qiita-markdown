@@ -21,9 +21,9 @@ module Qiita
           GROUP_IDENTIFIER_PATTERN = %r{
             (?:^|\W)
             @((?>[a-z\d][a-z\d-]{2,31}))
-            \/
+            /
             ([A-Za-z\d][A-Za-z\d-]{0,62}[A-Za-z\d])
-            (?!\/)
+            (?!/)
             (?=
               \.+[ \t\W]|
               \.+$|

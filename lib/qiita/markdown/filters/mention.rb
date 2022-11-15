@@ -8,17 +8,17 @@ module Qiita
       class Mention < HTML::Pipeline::MentionFilter
         IGNORE_PARENTS = ::HTML::Pipeline::MentionFilter::IGNORE_PARENTS + Set["blockquote"]
 
-        MentionPattern = /
+        MentionPattern = %r{
           (?:^|\W)
-          @((?>[\w][\w-]{0,30}\w(?:@github)?))
-          (?!\/)
+          @((?>\w[\w-]{0,30}\w(?:@github)?))
+          (?!/)
           (?=
             \.+[ \t\W]|
             \.+$|
             [^0-9a-zA-Z_.]|
             $
           )
-        /ix
+        }ix
 
         # @note Override to use another IGNORE_PARENTS
         def call
@@ -28,8 +28,10 @@ module Qiita
             content = node.to_html
             next unless content.include?("@")
             next if has_ancestor?(node, IGNORE_PARENTS)
+
             html = mention_link_filter(content, base_url, info_url, username_pattern)
             next if html == content
+
             node.replace(html)
           end
           doc
@@ -38,22 +40,22 @@ module Qiita
         # @note Override to use customized MentionPattern and allowed_usernames logic.
         def mention_link_filter(text, _, _, _)
           text.gsub(MentionPattern) do |match|
-            name = $1
+            name = ::Regexp.last_match(1)
             case
             when allowed_usernames && name == "all"
               result[:mentioned_usernames] |= allowed_usernames
               match.sub(
                 "@#{name}",
-                %[<a href="/" class="user-mention" title="#{name}">@#{name}</a>]
+                %(<a href="/" class="user-mention" title="#{name}">@#{name}</a>),
               )
-            when allowed_usernames && !allowed_usernames.include?(name) || name == "all"
+            when (allowed_usernames && !allowed_usernames.include?(name)) || name == "all"
               match
             else
               result[:mentioned_usernames] |= [name]
               url = File.join(base_url, name)
               match.sub(
                 "@#{name}",
-                %[<a href="#{url}" class="user-mention js-hovercard" title="#{name}" data-hovercard-target-type="user" data-hovercard-target-name="#{name}">@#{name}</a>]
+                %(<a href="#{url}" class="user-mention js-hovercard" title="#{name}" data-hovercard-target-type="user" data-hovercard-target-name="#{name}">@#{name}</a>),
               )
             end
           end
@@ -66,7 +68,7 @@ module Qiita
         end
 
         def has_ancestor?(node, tags)
-          super || node.parent.parent && node.parent.parent["class"] == "code-lang"
+          super || (node.parent.parent && node.parent.parent["class"] == "code-lang")
         end
       end
     end

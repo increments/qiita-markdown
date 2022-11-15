@@ -45,7 +45,7 @@ module Qiita
         def host_of(url)
           if url
             scheme = URI.parse(url).scheme
-            Addressable::URI.parse(url).host if ["http", "https"].include? scheme
+            Addressable::URI.parse(url).host if %w[http https].include? scheme
           end
         rescue Addressable::URI::InvalidURIError, URI::InvalidURIError
           nil
