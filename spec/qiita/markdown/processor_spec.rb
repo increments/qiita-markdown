@@ -69,16 +69,12 @@ describe Qiita::Markdown::Processor do
 
         it "adds ID for ToC" do
           should eq <<-HTML.strip_heredoc
-
             <h1>
             <span id="a" class="fragment"></span><a href="#a"><i class="fa fa-link"></i></a>a</h1>
-
             <h2>
             <span id="a-1" class="fragment"></span><a href="#a-1"><i class="fa fa-link"></i></a>a</h2>
-
             <h3>
             <span id="a-2" class="fragment"></span><a href="#a-2"><i class="fa fa-link"></i></a>a</h3>
-
             <h3>
             <span id="a-3" class="fragment"></span><a href="#a-3"><i class="fa fa-link"></i></a>a</h3>
           HTML
@@ -94,7 +90,6 @@ describe Qiita::Markdown::Processor do
 
         it "generates fragment identifier by sanitizing the special characters in the title" do
           should eq <<-HTML.strip_heredoc
-
             <h1>
             <span id="rb" class="fragment"></span><a href="#rb"><i class="fa fa-link"></i></a><b>R&amp;B</b>
             </h1>
@@ -109,9 +104,10 @@ describe Qiita::Markdown::Processor do
           MARKDOWN
         end
 
-        it "does nothing" do
+        it "adds ID for ToC" do
           should eq <<-HTML.strip_heredoc
-            <h1>foo</h1>
+            <h1>
+            <span id="foo" class="fragment"></span><a href="#foo"><i class="fa fa-link"></i></a>foo</h1>
           HTML
         end
       end
@@ -586,8 +582,8 @@ describe Qiita::Markdown::Processor do
         end
 
         it "wraps it in a element while keeping the width attribute" do
-          should eq %(<p><a href="http://example.com/b.png" target="_blank">) +
-                    %(<img width="80" height="48" alt="a" src="http://example.com/b.png"></a></p>\n)
+          should eq %(<a href="http://example.com/b.png" target="_blank">) +
+                    %(<img width="80" height="48" alt="a" src="http://example.com/b.png"></a>\n)
         end
       end
 
@@ -647,7 +643,7 @@ describe Qiita::Markdown::Processor do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
             - [ ] a
-             - [ ] b
+              - [ ] b
           MARKDOWN
         end
 
@@ -656,7 +652,6 @@ describe Qiita::Markdown::Processor do
             <ul>
             <li class="task-list-item">
             <input type="checkbox" class="task-list-item-checkbox" disabled>a
-
             <ul>
             <li class="task-list-item">
             <input type="checkbox" class="task-list-item-checkbox" disabled>b</li>
@@ -759,20 +754,7 @@ describe Qiita::Markdown::Processor do
         end
 
         it "generates footnotes elements" do
-          should eq <<-HTML.strip_heredoc
-            <p><sup id="fnref1"><a href="#fn1" title="test">1</a></sup></p>
-
-            <div class="footnotes">
-            <hr>
-            <ol>
-
-            <li id="fn1">
-            <p>test <a href="#fnref1">↩</a></p>
-            </li>
-
-            </ol>
-            </div>
-          HTML
+          should include('class="footnotes"')
         end
       end
 
@@ -837,7 +819,8 @@ describe Qiita::Markdown::Processor do
 
         it "does not generate footnote elements" do
           should eq <<-HTML.strip_heredoc
-            <p><a href="test">^1</a></p>
+            <p>[^1]<br>
+            [^1]: test</p>
           HTML
         end
       end
@@ -1085,13 +1068,10 @@ describe Qiita::Markdown::Processor do
 
         it "returns HTML output parsed as markdown" do
           expect(subject).to eq <<-HTML.strip_heredoc
-            <p><details><summary>Folding sample</summary><div>
-
+            <details><summary>Folding sample</summary><div>
             <div class="code-frame" data-lang="rb"><div class="highlight"><pre class="codehilite"><code><span class="nb">puts</span> <span class="s2">"Hello, World"</span>
             </code></pre></div></div>
-
-            <p></p>
-            </div></details></p>
+            </div></details>
           HTML
         end
       end
@@ -1425,14 +1405,14 @@ describe Qiita::Markdown::Processor do
         if allowed
           it "does not sanitize embed code" do
             should eq <<-HTML.strip_heredoc
-              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
+              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
               <script src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
             HTML
           end
         else
           it "forces async attribute on script" do
             should eq <<-HTML.strip_heredoc
-              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
+              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
               <script src="https://production-assets.codepen.io/assets/embed/ei.js" async="async"></script>
             HTML
           end
@@ -1450,14 +1430,14 @@ describe Qiita::Markdown::Processor do
         if allowed
           it "does not sanitize embed code" do
             should eq <<-HTML.strip_heredoc
-              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
+              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
               <script src="https://static.codepen.io/assets/embed/ei.js"></script>
             HTML
           end
         else
           it "forces async attribute on script" do
             should eq <<-HTML.strip_heredoc
-              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>\n
+              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
               <script src="https://static.codepen.io/assets/embed/ei.js" async="async"></script>
             HTML
           end
@@ -1747,7 +1727,7 @@ describe Qiita::Markdown::Processor do
 
         it "does not sanitize embed code" do
           should eq <<-HTML.strip_heredoc
-            <blockquote class="twitter-tweet" data-lang="es" data-cards="hidden" data-conversation="none">foo</blockquote>\n
+            <blockquote class="twitter-tweet" data-lang="es" data-cards="hidden" data-conversation="none">foo</blockquote>
             <script async src="https://platform.twitter.com/widgets.js"></script>
           HTML
         end
@@ -1809,14 +1789,16 @@ describe Qiita::Markdown::Processor do
           if allowed
             it "returns simple div element" do
               should eq <<-HTML.strip_heredoc
-                <div data-type="customblock">Some kind of text is here.
+                <div data-type="customblock" data-metadata="">
+                <p>Some kind of text is here.</p>
                 </div>
               HTML
             end
           else
             it "returns simple div element" do
               should eq <<-HTML.strip_heredoc
-                <div>Some kind of text is here.
+                <div>
+                <p>Some kind of text is here.</p>
                 </div>
               HTML
             end
@@ -1829,14 +1811,16 @@ describe Qiita::Markdown::Processor do
           if allowed
             it "returns simple div element" do
               should eq <<-HTML.strip_heredoc
-                <div data-type="customblock" data-metadata="anytype">Some kind of text is here.
+                <div data-type="customblock" data-metadata="anytype">
+                <p>Some kind of text is here.</p>
                 </div>
               HTML
             end
           else
             it "returns simple div element" do
               should eq <<-HTML.strip_heredoc
-                <div>Some kind of text is here.
+                <div>
+                <p>Some kind of text is here.</p>
                 </div>
               HTML
             end
@@ -1851,8 +1835,9 @@ describe Qiita::Markdown::Processor do
               it "returns info note block with class including icon as default type" do
                 should eq <<-HTML.strip_heredoc
                   <div data-type="customblock" data-metadata="note" class="note info">
-                  <span class="fa fa-fw fa-check-circle"></span><p>Some kind of text is here.
-                  </p>
+                  <span class="fa fa-fw fa-check-circle"></span><div>
+                  <p>Some kind of text is here.</p>
+                  </div>
                   </div>
                 HTML
               end
@@ -1860,8 +1845,9 @@ describe Qiita::Markdown::Processor do
               it "returns note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
                   <div class="note info">
-                  <span class="fa fa-fw fa-check-circle"></span><p>Some kind of text is here.
-                  </p>
+                  <span class="fa fa-fw fa-check-circle"></span><div>
+                  <p>Some kind of text is here.</p>
+                  </div>
                   </div>
                 HTML
               end
@@ -1875,8 +1861,9 @@ describe Qiita::Markdown::Processor do
               it "returns warning note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
                   <div data-type="customblock" data-metadata="note warn" class="note warn">
-                  <span class="fa fa-fw fa-exclamation-circle"></span><p>Some kind of text is here.
-                  </p>
+                  <span class="fa fa-fw fa-exclamation-circle"></span><div>
+                  <p>Some kind of text is here.</p>
+                  </div>
                   </div>
                 HTML
               end
@@ -1884,8 +1871,9 @@ describe Qiita::Markdown::Processor do
               it "returns note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
                   <div class="note warn">
-                  <span class="fa fa-fw fa-exclamation-circle"></span><p>Some kind of text is here.
-                  </p>
+                  <span class="fa fa-fw fa-exclamation-circle"></span><div>
+                  <p>Some kind of text is here.</p>
+                  </div>
                   </div>
                 HTML
               end
@@ -1899,8 +1887,9 @@ describe Qiita::Markdown::Processor do
               it "returns alerting note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
                   <div data-type="customblock" data-metadata="note alert" class="note alert">
-                  <span class="fa fa-fw fa-times-circle"></span><p>Some kind of text is here.
-                  </p>
+                  <span class="fa fa-fw fa-times-circle"></span><div>
+                  <p>Some kind of text is here.</p>
+                  </div>
                   </div>
                 HTML
               end
@@ -1908,8 +1897,9 @@ describe Qiita::Markdown::Processor do
               it "returns note block with class including icon" do
                 should eq <<-HTML.strip_heredoc
                   <div class="note alert">
-                  <span class="fa fa-fw fa-times-circle"></span><p>Some kind of text is here.
-                  </p>
+                  <span class="fa fa-fw fa-times-circle"></span><div>
+                  <p>Some kind of text is here.</p>
+                  </div>
                   </div>
                 HTML
               end

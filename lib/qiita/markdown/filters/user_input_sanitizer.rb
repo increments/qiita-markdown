@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 module Qiita
   module Markdown
     module Filters
       # Sanitizes user input if :strict context is given.
-      class UserInputSanitizer < HTML::Pipeline::Filter
+      class UserInputSanitizer < ::HTML::Pipeline::Filter
         RULE = {
           elements: %w[
-            a b blockquote br code dd del details div dl dt em font h1 h2 h3 h4 h5 h6
-            hr i img ins kbd li ol p pre q rp rt ruby s samp script iframe strike strong sub
+            a b blockquote br caption code dd del details div dl dt em font h1 h2 h3 h4 h5 h6
+            hr i img ins kbd li ol p pre q rp rt ruby s samp script iframe section strike strong sub
             summary sup table tbody td tfoot th thead tr ul var
           ],
           attributes: {
-            "a" => %w[class href rel title],
+            "a" => %w[class href rel title id],
             "blockquote" => %w[cite] + Embed::Tweet::ATTRIBUTES,
             "code" => %w[data-metadata],
             "div" => %w[class data-type data-metadata],
@@ -26,11 +28,16 @@ module Qiita
             "li" => %w[id],
             "p" => Embed::CodePen::ATTRIBUTES,
             "q" => %w[cite],
-            "script" => %w[async src id].concat(Embed::SpeekerDeck::ATTRIBUTES, Embed::Docswell::ATTRIBUTES),
+            "section" => %w[class],
+            "script" => %w[async src id].concat(
+              Embed::SpeekerDeck::ATTRIBUTES,
+              Embed::Docswell::ATTRIBUTES,
+            ),
             "iframe" => %w[
               allowfullscreen
               frameborder
               height
+              loading
               marginheight
               marginwidth
               scrolling
@@ -41,6 +48,7 @@ module Qiita
             "sup" => %w[id],
             "td" => %w[colspan rowspan style],
             "th" => %w[colspan rowspan style],
+            all: %w[data-sourcepos],
           },
           protocols: {
             "a" => { "href" => ["http", "https", "mailto", :relative] },
@@ -48,10 +56,7 @@ module Qiita
             "q" => { "cite" => ["http", "https", :relative] },
           },
           css: {
-            properties: %w[
-              text-align
-              border
-            ],
+            properties: %w[text-align border],
           },
           transformers: [
             Transformers::FilterAttributes,

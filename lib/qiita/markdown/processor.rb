@@ -9,7 +9,8 @@ module Qiita
 
       def self.default_filters
         [
-          Filters::Greenmat,
+          Filters::QiitaMarker,
+          Filters::HeadingAnchor,
           Filters::UserInputSanitizer,
           Filters::ImageLink,
           Filters::Footnote,

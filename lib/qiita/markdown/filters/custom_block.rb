@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Qiita
   module Markdown
     module Filters
@@ -31,7 +33,7 @@ module Qiita
           attr_reader :node, :type
 
           ALLOWED_TYPES = %w[info warn alert].freeze
-          DEFAULT_TYPE = "info".freeze
+          DEFAULT_TYPE = "info"
 
           # @param node [Nokogiri::XML::Node]
           # @param type [String, nil]
@@ -41,16 +43,15 @@ module Qiita
           end
 
           def convert
-            node.inner_html = message
+            children = node.children
+            children.each(&:unlink)
+            node.add_child("<div></div>")
+            node.children.first.children = children
             node["class"] = "note #{type}"
             node.children.first.add_previous_sibling(icon) if icon
           end
 
           private
-
-          def message
-            "<p>#{node.text}</p>"
-          end
 
           def icon
             {
