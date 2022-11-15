@@ -6,10 +6,6 @@ AllCops:
 Metrics/ClassLength:
   Enabled: false
 
-Style/AsciiComments:
-  Exclude:
-    - benchmark/**/*
-
 Style/Documentation:
   Enabled: false
 
