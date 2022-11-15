@@ -1,6 +1,12 @@
 ## Unreleased
 
 - Drop Ruby 2.6 support
+- Change markdown parser from Greenmat to Qiita Marker
+- Fix bug on rendering loose tasklist
+
+### Braking change on HTML output
+
+Some notations will be changed between Greenmat and Qiita Marker and rendering results may change. More details, see [#130](https://github.com/increments/qiita-markdown/issues/130).
 
 ## 0.44.1
 
