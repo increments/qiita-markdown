@@ -693,8 +693,12 @@ describe Qiita::Markdown::Processor do
         it "inserts checkbox" do
           should eq <<-HTML.strip_heredoc
             <ul>
-            <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" disabled>a</p></li>
-            <li class="task-list-item"><p><input type="checkbox" class="task-list-item-checkbox" checked disabled>b</p></li>
+            <li class="task-list-item">
+            <p><input type="checkbox" class="task-list-item-checkbox" disabled>a</p>
+            </li>
+            <li class="task-list-item">
+            <p><input type="checkbox" class="task-list-item-checkbox" checked disabled>b</p>
+            </li>
             </ul>
           HTML
         end
