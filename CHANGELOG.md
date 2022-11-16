@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.44.1
+
 - Rename package name from `Qiita::Markdown` to `Qiita Markdown` in README
 - Bump rubocop from 1.27.0 to 1.39.0 and apply rubocop auto correct
 
