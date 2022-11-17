@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Drop Ruby 2.6 support
+
 ## 0.44.1
 
 - Rename package name from `Qiita::Markdown` to `Qiita Markdown` in README
