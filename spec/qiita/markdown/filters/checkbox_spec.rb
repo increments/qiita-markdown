@@ -26,6 +26,34 @@ describe Qiita::Markdown::Filters::Checkbox do
       expect(filter.call.to_s).to eq(output_html)
     end
 
+    context "when list is loose" do
+      let(:input_html) do
+        <<~HTML
+          <li>
+          <p>[ ] a</p>
+          </li>
+          <li>
+          <p>[x] b</p>
+          </li>
+        HTML
+      end
+
+      let(:output_html) do
+        <<~HTML
+          <li class="task-list-item">
+          <p><input type="checkbox" class="task-list-item-checkbox" disabled>a</p>
+          </li>
+          <li class="task-list-item">
+          <p><input type="checkbox" class="task-list-item-checkbox" checked disabled>b</p>
+          </li>
+        HTML
+      end
+
+      it "replaces checkboxes" do
+        expect(filter.call.to_s).to eq(output_html)
+      end
+    end
+
     context "when input html has many spaces after checkbox mark" do
       let(:input_html) do
         <<~HTML

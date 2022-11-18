@@ -16,6 +16,7 @@ Qiita-specified markdown processor.
 - Syntax highlighting
 - Mention
 - Footnotes
+- Note notation's custom block
 
 ## Basic Usage
 
@@ -68,7 +69,8 @@ processor.call(text)
 :inline_code_color_class_name - Class name for inline code color. (String)
 :language_aliases             - Alias table for some language names. (Hash)
 :markdown                     - A hash for enabling / disabling optional Markdown syntax. (Hash)
-                                Currently only :footnotes (default: true) is supported.
+                                Currently :footnotes (default: true) and :sourcepos (defalut: false) are supported.
+                                For more information on these options, please see [increments/qiita_marker](https://github.com/increments/qiita_marker).
 :rule                         - Sanitization rule table. (Hash)
 :script                       - A flag to allow to embed script element. (Boolean)
 ```

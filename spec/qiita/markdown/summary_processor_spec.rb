@@ -111,7 +111,6 @@ describe Qiita::Markdown::SummaryProcessor do
       it "flattens them" do
         should eq <<-EOS.strip_heredoc
           Lorem ipsum dolor sit amet.
-
           Consectetur adipisicing elit.
         EOS
       end
@@ -254,7 +253,8 @@ describe Qiita::Markdown::SummaryProcessor do
 
       it "does not generate footnote elements by default" do
         should eq <<-EOS.strip_heredoc
-          <a href="test">^1</a>
+          [^1]
+          [^1]: test
         EOS
       end
     end

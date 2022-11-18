@@ -55,7 +55,11 @@ module Qiita
           end
 
           def first_text_node
-            if @node.children.first && @node.children.first.name == "p"
+            is_loose_list_node = @node.children.first&.text == "\n" && @node.children[1]&.name == "p"
+
+            if is_loose_list_node
+              @node.children[1].children.first
+            elsif @node.children.first && @node.children.first.name == "p"
               @node.children.first.children.first
             else
               @node.children.first

@@ -15,7 +15,7 @@ module Qiita
 
       def self.default_filters
         [
-          Filters::Greenmat,
+          Filters::QiitaMarker,
           Filters::UserInputSanitizer,
           Filters::Simplify,
           Filters::Emoji,
