@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 1.0.0
+
 - Drop Ruby 2.6 support
 - Change markdown parser from Greenmat to Qiita Marker
 - Fix bug on rendering loose tasklist
