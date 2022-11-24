@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Chenge qiita_marker from development dependency to runtime dependency
+
 ## 1.0.0
 
 - Drop Ruby 2.6 support
