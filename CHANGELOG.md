@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 1.0.1
+
 - Chenge qiita_marker from development dependency to runtime dependency
 
 ## 1.0.0
