@@ -1734,13 +1734,13 @@ describe Qiita::Markdown::Processor do
           if allowed
             it "does not sanitize embed code" do
               should eq <<-HTML.strip_heredoc
-              <iframe src="#{url}" allowfullscreen="true" width="620" height="405"></iframe>
+              <iframe src="#{url}" allowfullscreen="true" width="620" height="405" style="width:100%"></iframe>
               HTML
             end
           else
             it "forces width attribute on iframe" do
               should eq <<-HTML.strip_heredoc
-              <iframe src="#{url}" allowfullscreen="true" width="100%" height="405"></iframe>
+              <iframe src="#{url}" allowfullscreen="true" width="100%" height="405" style="width:100%"></iframe>
               HTML
             end
           end
