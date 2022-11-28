@@ -1448,6 +1448,44 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for CodeSandbox" do
+        shared_examples "embed code CodeSandbox example" do
+          let(:markdown) do
+            <<-MARKDOWN.strip_heredoc
+              <iframe src="#{url}" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="hello-world" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+            MARKDOWN
+          end
+          let(:url) { "#{scheme}//codesandbox.io/embed/hello-world-nx2eb6?fontsize=14&hidenavigation=1&theme=dark" }
+          let(:encoded_url) { CGI.escapeHTML(url) }
+
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+                <iframe src="#{encoded_url}" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="hello-world" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<-HTML.strip_heredoc
+                <iframe src="#{encoded_url}" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="hello-world" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts" width="100%"></iframe>
+              HTML
+            end
+          end
+        end
+
+        context "with scheme" do
+          let(:scheme) { "https:" }
+
+          include_examples "embed code CodeSandbox example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+
+          include_examples "embed code CodeSandbox example"
+        end
+      end
+
       context "with HTML embed code for Asciinema" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc

@@ -34,15 +34,18 @@ module Qiita
               Embed::Docswell::ATTRIBUTES,
             ),
             "iframe" => %w[
+              allow
               allowfullscreen
               frameborder
               height
               loading
               marginheight
               marginwidth
+              sandbox
               scrolling
               src
               style
+              title
               width
             ],
             "sup" => %w[id],
@@ -56,7 +59,14 @@ module Qiita
             "q" => { "cite" => ["http", "https", :relative] },
           },
           css: {
-            properties: %w[text-align border],
+            properties: %w[
+              border
+              border-radius
+              height
+              overflow
+              text-align
+              width
+            ],
           },
           transformers: [
             Transformers::FilterAttributes,

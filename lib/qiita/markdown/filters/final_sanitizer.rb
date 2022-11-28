@@ -22,15 +22,18 @@ module Qiita
             ],
             "blockquote" => Embed::Tweet::ATTRIBUTES,
             "iframe" => %w[
+              allow
               allowfullscreen
               frameborder
               height
               loading
               marginheight
               marginwidth
+              sandbox
               scrolling
               src
               style
+              title
               width
             ],
             "img" => [
@@ -103,7 +106,11 @@ module Qiita
             properties: %w[
               background-color
               border
+              border-radius
+              height
+              overflow
               text-align
+              width
             ],
           },
           elements: %w[

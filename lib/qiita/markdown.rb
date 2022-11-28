@@ -8,6 +8,7 @@ require "rouge"
 require "sanitize"
 
 require "qiita/markdown/embed/code_pen"
+require "qiita/markdown/embed/code_sandbox"
 require "qiita/markdown/embed/tweet"
 require "qiita/markdown/embed/asciinema"
 require "qiita/markdown/embed/youtube"
