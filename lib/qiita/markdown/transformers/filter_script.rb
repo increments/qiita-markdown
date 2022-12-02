@@ -11,6 +11,7 @@ module Qiita
 
         HOST_WHITE_LIST = [
           Embed::Asciinema::SCRIPT_HOST,
+          Embed::GithubGist::SCRIPT_HOSTS,
         ].flatten.freeze
 
         def self.call(**args)

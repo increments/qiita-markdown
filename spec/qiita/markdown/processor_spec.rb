@@ -1721,6 +1721,28 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for GitHubGist" do
+        let(:markdown) do
+          <<-MARKDOWN.strip_heredoc
+            <script src="https://gist.github.com/xxx/yyy.js"></script>
+          MARKDOWN
+        end
+
+        if allowed
+          it "does not sanitize embed code" do
+            should eq <<-HTML.strip_heredoc
+              <script src="https://gist.github.com/xxx/yyy.js"></script>
+            HTML
+          end
+        else
+          it "forces async attribute on script" do
+            should eq <<-HTML.strip_heredoc
+              <script src="https://gist.github.com/xxx/yyy.js" async="async"></script>
+            HTML
+          end
+        end
+      end
+
       context "with embed code for Tweet" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
