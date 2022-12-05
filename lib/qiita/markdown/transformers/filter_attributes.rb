@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Qiita
   module Markdown
     module Transformers
@@ -7,6 +9,7 @@ module Qiita
             "class" => %w[autolink],
             "rel" => %w[footnote url],
             "rev" => %w[footnote],
+            "id" => /\Afnref-.+\z/,
           },
           "blockquote" => {
             "class" => Embed::Tweet::CLASS_NAME,
@@ -17,15 +20,18 @@ module Qiita
           "p" => {
             "class" => Embed::CodePen::CLASS_NAME,
           },
+          "section" => {
+            "class" => %w[footnotes],
+          },
           "sup" => {
             "id" => /\Afnref\d+\z/,
           },
           "li" => {
-            "id" => /\Afn\d+\z/,
+            "id" => /\Afn.+\z/,
           },
         }.freeze
 
-        DELIMITER = " ".freeze
+        DELIMITER = " "
 
         def self.call(**args)
           new(**args).transform
