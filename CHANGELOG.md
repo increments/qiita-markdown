@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Avoid sanitizing attributes related to footnotes
+
 ## 1.0.1
 
 - Chenge qiita_marker from development dependency to runtime dependency
