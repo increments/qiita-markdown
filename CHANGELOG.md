@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 1.0.2
+
 - Avoid sanitizing attributes related to footnotes
 
 ## 1.0.1
