@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Bump rake version to work with ruby 3.2
+
 ## 1.0.2
 
 - Avoid sanitizing attributes related to footnotes
