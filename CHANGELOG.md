@@ -1,5 +1,7 @@
 ## Unreleased
 
+# 1.0.3
+
 - Bump rake version to work with ruby 3.2
 - Bump rouge 3.26.0 to 4.1.0
 
