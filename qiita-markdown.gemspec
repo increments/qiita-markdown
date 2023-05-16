@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "github-linguist", "~> 4.0"
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
-  spec.add_dependency "qiita_marker", "~> 0.23.6"
+  spec.add_dependency "qiita_marker", "~> 0.23.9"
   spec.add_dependency "rouge", "~> 4.1.0"
   spec.add_dependency "sanitize"
   spec.add_development_dependency "activesupport", "~> 5.2.7"
