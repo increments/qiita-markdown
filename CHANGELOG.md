@@ -1,5 +1,9 @@
 ## Unreleased
 
+- Drop Ruby 2.7 support
+- Bump qiita_marker 0.23.6 to 0.23.9
+- Drop Ubuntu 18.04 support
+
 # 1.0.3
 
 - Bump rake version to work with ruby 3.2
