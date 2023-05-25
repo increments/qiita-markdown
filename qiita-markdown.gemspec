@@ -15,14 +15,14 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 2.7.0"
+  spec.required_ruby_version = ">= 3.0.0"
 
   spec.add_dependency "addressable"
   spec.add_dependency "gemoji"
   spec.add_dependency "github-linguist", "~> 4.0"
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
-  spec.add_dependency "qiita_marker", "~> 0.23.6"
+  spec.add_dependency "qiita_marker", "~> 0.23.9"
   spec.add_dependency "rouge", "~> 4.1.0"
   spec.add_dependency "sanitize"
   spec.add_development_dependency "activesupport", "~> 5.2.7"
