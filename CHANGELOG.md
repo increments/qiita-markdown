@@ -1,5 +1,7 @@
 ## Unreleased
 
+# 1.0.4
+
 - Drop Ruby 2.7 support
 - Bump qiita_marker 0.23.6 to 0.23.9
 - Drop Ubuntu 18.04 support
