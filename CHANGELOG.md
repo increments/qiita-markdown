@@ -1,5 +1,6 @@
 ## Unreleased
 - Add base64 to dependency
+- Bump rouge 4.1.0 to 4.2.0
 
 # 1.0.4
 
