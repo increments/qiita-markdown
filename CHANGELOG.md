@@ -1,4 +1,5 @@
 ## Unreleased
+- Add base64 to dependency
 
 # 1.0.4
 
