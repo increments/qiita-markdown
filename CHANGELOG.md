@@ -1,15 +1,18 @@
 ## Unreleased
+
+## 1.1.0
+
 - Add uri to requiring libraries
-- Add base64 to dependency
+- Bump rubocop 1.39.0 to 1.60.2
 - Bump rouge 4.1.0 to 4.2.0
 
-# 1.0.4
+## 1.0.4
 
 - Drop Ruby 2.7 support
 - Bump qiita_marker 0.23.6 to 0.23.9
 - Drop Ubuntu 18.04 support
 
-# 1.0.3
+## 1.0.3
 
 - Bump rake version to work with ruby 3.2
 - Bump rouge 3.26.0 to 4.1.0
