@@ -6,6 +6,7 @@ require "nokogiri"
 require "qiita_marker"
 require "rouge"
 require "sanitize"
+require "uri"
 
 require "qiita/markdown/embed/code_pen"
 require "qiita/markdown/embed/tweet"
