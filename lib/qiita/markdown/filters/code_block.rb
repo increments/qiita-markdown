@@ -86,7 +86,7 @@ module Qiita
           end
 
           def linguist_language
-            @linguist_language ||= Linguist::Language.find_by_filename(filename).first
+            @linguist_language ||= Linguist::Language.find_by_extension(filename).first
           end
 
           def sections
