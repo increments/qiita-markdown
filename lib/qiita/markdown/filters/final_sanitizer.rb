@@ -63,6 +63,9 @@ module Qiita
             "th" => [
               "style",
             ],
+            "details" => [
+              "open",
+            ],
             "video" => %w[
               src
               autoplay

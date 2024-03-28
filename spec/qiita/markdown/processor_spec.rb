@@ -1067,6 +1067,11 @@ describe Qiita::Markdown::Processor do
             puts "Hello, World"
             ```
             </div></details>
+
+            <details open close><summary>Folding sample2</summary>
+
+            it allows open attributes
+            </details>
           MARKDOWN
         end
 
@@ -1076,6 +1081,9 @@ describe Qiita::Markdown::Processor do
             <div class="code-frame" data-lang="rb"><div class="highlight"><pre class="codehilite"><code><span class="nb">puts</span> <span class="s2">"Hello, World"</span>
             </code></pre></div></div>
             </div></details>
+            <details open><summary>Folding sample2</summary>
+            <p>it allows open attributes</p>
+            </details>
           HTML
         end
       end

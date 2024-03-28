@@ -16,6 +16,7 @@ module Qiita
             "blockquote" => %w[cite] + Embed::Tweet::ATTRIBUTES,
             "code" => %w[data-metadata],
             "div" => %w[class data-type data-metadata],
+            "details" => %w[open],
             "font" => %w[color],
             "h1" => %w[id],
             "h2" => %w[id],
