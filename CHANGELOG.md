@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.1.1
+
+- Allow open attribute on details
+- Bump tj-actions/branch-names from 4.9 to 7.0.7
+
 ## 1.1.0
 
 - Add uri to requiring libraries
