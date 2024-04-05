@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "addressable"
   spec.add_dependency "gemoji"
-  spec.add_dependency "github-linguist", "~> 4.0"
+  spec.add_dependency "github-linguist", "~> 7.0"
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
   spec.add_dependency "qiita_marker", "~> 0.23.9"
