@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.1.2
+
+- Add test for code_block filter
+- Upgrade github-linguist from 4.x to 7.x
+
 ## 1.1.1
 
 - Allow open attribute on details
