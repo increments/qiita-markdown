@@ -1410,6 +1410,7 @@ describe Qiita::Markdown::Processor do
         "https://production-assets.codepen.io/assets/embed/ei.js",
         "https://static.codepen.io/assets/embed/ei.js",
         "https://cpwebassets.codepen.io/assets/embed/ei.js",
+        "https://public.codepenassets.com/embed/index.js",
       ].each do |script_url|
         context "with HTML embed code for CodePen using script url `#{script_url}`" do
           let(:markdown) do

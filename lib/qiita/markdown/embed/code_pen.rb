@@ -6,6 +6,7 @@ module Qiita
           "https://production-assets.codepen.io/assets/embed/ei.js",
           "https://static.codepen.io/assets/embed/ei.js",
           "https://cpwebassets.codepen.io/assets/embed/ei.js",
+          "https://public.codepenassets.com/embed/index.js",
         ]
         CLASS_NAME = %w[codepen]
         DATA_ATTRIBUTES = %w[
