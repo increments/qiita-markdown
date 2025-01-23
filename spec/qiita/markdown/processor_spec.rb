@@ -1406,52 +1406,34 @@ describe Qiita::Markdown::Processor do
     end
 
     shared_examples_for "override embed code attributes" do |allowed:|
-      context "with HTML embed code for CodePen using old script url" do
-        let(:markdown) do
-          <<-MARKDOWN.strip_heredoc
-            <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
-            <script src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-          MARKDOWN
-        end
-
-        if allowed
-          it "does not sanitize embed code" do
-            should eq <<-HTML.strip_heredoc
+      [
+        "https://production-assets.codepen.io/assets/embed/ei.js",
+        "https://static.codepen.io/assets/embed/ei.js",
+        "https://cpwebassets.codepen.io/assets/embed/ei.js",
+        "https://public.codepenassets.com/embed/index.js",
+      ].each do |script_url|
+        context "with HTML embed code for CodePen using script url `#{script_url}`" do
+          let(:markdown) do
+            <<-MARKDOWN.strip_heredoc
               <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
-              <script src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-            HTML
+              <script src="#{script_url}"></script>
+            MARKDOWN
           end
-        else
-          it "forces async attribute on script" do
-            should eq <<-HTML.strip_heredoc
-              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
-              <script src="https://production-assets.codepen.io/assets/embed/ei.js" async="async"></script>
-            HTML
-          end
-        end
-      end
 
-      context "with HTML embed code for CodePen" do
-        let(:markdown) do
-          <<-MARKDOWN.strip_heredoc
-            <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
-            <script src="https://static.codepen.io/assets/embed/ei.js"></script>
-          MARKDOWN
-        end
-
-        if allowed
-          it "does not sanitize embed code" do
-            should eq <<-HTML.strip_heredoc
-              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
-              <script src="https://static.codepen.io/assets/embed/ei.js"></script>
-            HTML
-          end
-        else
-          it "forces async attribute on script" do
-            should eq <<-HTML.strip_heredoc
-              <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
-              <script src="https://static.codepen.io/assets/embed/ei.js" async="async"></script>
-            HTML
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+                <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
+                <script src="#{script_url}"></script>
+              HTML
+            end
+          else
+            it "forces async attribute on script" do
+              should eq <<-HTML.strip_heredoc
+                <p data-height="1" data-theme-id="0" data-slug-hash="foo" data-default-tab="bar" data-user="baz" data-embed-version="2" data-pen-title="qux" class="codepen"></p>
+                <script src="#{script_url}" async="async"></script>
+              HTML
+            end
           end
         end
       end
