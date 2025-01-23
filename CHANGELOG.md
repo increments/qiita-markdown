@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.2.0
+
+- Accept new codepen script url (public.codepenassets.com)
+
 ## 1.1.2
 
 - Add test for code_block filter
