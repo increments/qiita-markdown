@@ -1520,6 +1520,43 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for Google Drive Video" do
+        shared_examples "embed code googledrive example" do
+          let(:markdown) do
+            <<-MARKDOWN.strip_heredoc
+              <iframe src="#{url}" width="640" height="480" frameborder="0" allowfullscreen="true"></iframe>
+            MARKDOWN
+          end
+          let(:file_id) { "DRIVE_FILE_ID_EXAMPLE" }
+          let(:url) { "#{scheme}//drive.google.com/file/d/#{file_id}/preview" }
+
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<-HTML.strip_heredoc
+                <iframe src="#{url}" width="640" height="480" frameborder="0" allowfullscreen="true"></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<-HTML.strip_heredoc
+                <iframe src="#{url}" width="100%" height="480" frameborder="0" allowfullscreen="true"></iframe>
+              HTML
+            end
+          end
+        end
+
+        context "with scheme" do
+          let(:scheme) { "https:" }
+          include_examples "embed code googledrive example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+          include_examples "embed code googledrive example"
+        end
+      end
+      
+
       context "with HTML embed code for SlideShare" do
         shared_examples "embed code slideshare example" do
           let(:markdown) do

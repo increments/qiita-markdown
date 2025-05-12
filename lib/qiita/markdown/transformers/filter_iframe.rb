@@ -10,6 +10,7 @@ module Qiita
           Embed::GoogleSlide::SCRIPT_HOST,
           Embed::Docswell::SCRIPT_HOSTS,
           Embed::Figma::SCRIPT_HOST,
+          Embed::GoogleDriveVideo::SCRIPT_HOST,
         ].flatten.freeze
 
         def self.call(**args)
