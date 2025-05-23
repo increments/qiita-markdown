@@ -9,8 +9,6 @@ updates:
       time: "14:00"
       timezone: "Asia/Tokyo"
     open-pull-requests-limit: 5
-    reviewers:
-      - "increments/qiita-dev-group"
     rebase-strategy: "disabled"
 
   - package-ecosystem: "github-actions"
@@ -21,6 +19,4 @@ updates:
       time: "14:00"
       timezone: "Asia/Tokyo"
     open-pull-requests-limit: 5
-    reviewers:
-      - "increments/qiita-dev-group"
     rebase-strategy: "disabled"
