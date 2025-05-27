@@ -24,7 +24,7 @@ jobs:
           bundler-cache: true
       - name: Test & publish code coverage
         if: "${{ env.CC_TEST_REPORTER_ID != '' }}"
-        uses: paambaati/codeclimate-action@7bcf9e73c0ee77d178e72c0ec69f1a99c1afc1f3 # v2.7.5
+        uses: paambaati/codeclimate-action@f429536ee076d758a24705203199548125a28ca7 # v9.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           GIT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
