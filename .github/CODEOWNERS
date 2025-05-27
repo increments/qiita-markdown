@@ -1,0 +1,5 @@
+# package-ecosystem: bundler, directories: /
+/Gemfile @increments/qiita-dev-group
+
+# package-ecosystem: github-actions, directories: /
+/.github/workflows @increments/qiita-dev-group

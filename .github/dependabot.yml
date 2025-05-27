@@ -1,0 +1,22 @@
+version: 2
+updates:
+
+  - package-ecosystem: "bundler"
+    directories:
+      - "/"
+    schedule:
+      interval: "daily"
+      time: "14:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 5
+    rebase-strategy: "disabled"
+
+  - package-ecosystem: "github-actions"
+    directories:
+      - "/"
+    schedule:
+      interval: "daily"
+      time: "14:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 5
+    rebase-strategy: "disabled"
