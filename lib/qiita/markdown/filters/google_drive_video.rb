@@ -17,6 +17,7 @@ module Qiita
                 %(<iframe src="#{embed_url}" width="640" height="480" frameborder="0" allowfullscreen="true"></iframe>)
               else
                 Regexp.last_match[0]
+              end
             end
             node.replace(html)
           end
