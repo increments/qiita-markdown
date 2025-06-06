@@ -3,8 +3,15 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   NewCops: enable
 
+Layout/LineLength:
+  Enabled: false
+
 Metrics/ClassLength:
   Enabled: false
+
+Naming/PredicatePrefix:
+  ForbiddenPrefixes:
+    - is_
 
 Style/Documentation:
   Enabled: false
@@ -14,10 +21,6 @@ Style/EmptyCaseCondition:
 
 Style/GuardClause:
   Enabled: false
-
-Style/PredicateName:
-  ForbiddenPrefixes:
-    - is_
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -32,9 +35,6 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
 
 Style/RedundantPercentQ:
-  Enabled: false
-
-Metrics/LineLength:
   Enabled: false
 
 Metrics/BlockLength:
