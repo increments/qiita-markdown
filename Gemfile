@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in qiita-markdown.gemspec
 gemspec
 
-gem "activesupport", "~> 5.2.7"
+gem "activesupport", "~> 7.1.5"
 gem "bundler"
 gem "codeclimate-test-reporter", "0.4.4"
 gem "pry"
