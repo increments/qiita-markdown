@@ -1,7 +1,7 @@
 module Qiita
   module Markdown
     module Filters
-      class Footnote < HTML::Pipeline::Filter
+      class Footnote < ::HTMLPipelineFilter
         def call
           doc.search("sup > a").each do |a|
             footnote = find_footnote(a)

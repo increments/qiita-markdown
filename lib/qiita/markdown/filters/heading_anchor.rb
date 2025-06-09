@@ -3,7 +3,7 @@
 module Qiita
   module Markdown
     module Filters
-      class HeadingAnchor < ::HTML::Pipeline::Filter
+      class HeadingAnchor < ::HTMLPipelineFilter
         def call
           doc.search("h1, h2, h3, h4, h5, h6").each do |heading|
             heading["id"] = suffixed_id(heading)

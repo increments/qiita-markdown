@@ -3,7 +3,7 @@
 module Qiita
   module Markdown
     module Filters
-      class HtmlToc < ::HTML::Pipeline::Filter
+      class HtmlToc < ::HTMLPipelineFilter
         # @return [Nokogiri::HTML::DocumentFragment]
         def call
           headings = doc.search("h1, h2, h3, h4, h5, h6")

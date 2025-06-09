@@ -3,7 +3,7 @@
 module Qiita
   module Markdown
     module Filters
-      class CustomBlock < HTML::Pipeline::Filter
+      class CustomBlock < ::HTMLPipelineFilter
         ALLOWED_TYPES = %w[note].freeze
 
         def call
