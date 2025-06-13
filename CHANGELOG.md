@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.3.0
+
+- Support embedding new iframes
+    - Google Drive
+    - StackBlitz
+
 ## 1.2.0
 
 - Accept new codepen script url (public.codepenassets.com)
