@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.4.0
+
+- Add support for embedding blueprintUE iframes
+
 ## 1.3.0
 
 - Support embedding new iframes
