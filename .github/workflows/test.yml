@@ -22,15 +22,13 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: true
+      - name: Test
+        run: bundle exec rake
       - name: Test & publish code coverage
-        if: "${{ env.CC_TEST_REPORTER_ID != '' }}"
-        uses: paambaati/codeclimate-action@7bcf9e73c0ee77d178e72c0ec69f1a99c1afc1f3 # v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          GIT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
-          GIT_COMMIT_SHA: ${{ github.sha }}
+        uses: qltysh/qlty-action/coverage@b9133a486505563742d768da29f7951271678c87 # v1.1.1
         with:
-          coverageCommand: bundle exec rake
+          oidc: true
+          files: coverage/coverage.json
 
   test:
     strategy:
