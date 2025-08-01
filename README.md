@@ -2,8 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/qiita-markdown.svg)](https://badge.fury.io/rb/qiita-markdown)
 [![Build Status](https://travis-ci.org/increments/qiita-markdown.svg)](https://travis-ci.org/increments/qiita-markdown)
-[![Code Climate](https://codeclimate.com/github/increments/qiita-markdown/badges/gpa.svg)](https://codeclimate.com/github/increments/qiita-markdown)
-[![Test Coverage](https://codeclimate.com/github/increments/qiita-markdown/badges/coverage.svg)](https://codeclimate.com/github/increments/qiita-markdown)
 
 Qiita-specified markdown processor.
 
