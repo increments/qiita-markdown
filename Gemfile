@@ -5,7 +5,6 @@ gemspec
 
 gem "activesupport", "~> 5.2.7"
 gem "bundler"
-gem "codeclimate-test-reporter", "0.4.4"
 gem "pry"
 gem "rake"
 gem "rspec", "~> 3.1"

@@ -1,11 +1,6 @@
 if ENV["CI"]
-  if ENV["GITHUB_ACTIONS"]
-    require "simplecov"
-    SimpleCov.start
-  else
-    require "codeclimate-test-reporter"
-    CodeClimate::TestReporter.start
-  end
+  require "simplecov"
+  SimpleCov.start
 end
 
 require "qiita-markdown"
