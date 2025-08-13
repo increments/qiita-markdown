@@ -2,6 +2,8 @@
 
 [![Gem Version](https://badge.fury.io/rb/qiita-markdown.svg)](https://badge.fury.io/rb/qiita-markdown)
 [![Build Status](https://travis-ci.org/increments/qiita-markdown.svg)](https://travis-ci.org/increments/qiita-markdown)
+[![Maintainability](https://qlty.sh/badges/f983cb35-d208-4d2f-8872-03fb3e1205de/maintainability.svg)](https://qlty.sh/gh/increments/projects/qiita-markdown)
+[![Code Coverage](https://qlty.sh/badges/f983cb35-d208-4d2f-8872-03fb3e1205de/test_coverage.svg)](https://qlty.sh/gh/increments/projects/qiita-markdown)
 
 Qiita-specified markdown processor.
 
