@@ -5,8 +5,8 @@ updates:
     directories:
       - "/"
     schedule:
-      interval: "daily"
-      time: "14:00"
+      interval: "weekly"
+      day: "sunday"
       timezone: "Asia/Tokyo"
     open-pull-requests-limit: 5
     rebase-strategy: "disabled"
@@ -15,8 +15,8 @@ updates:
     directories:
       - "/"
     schedule:
-      interval: "daily"
-      time: "14:00"
+      interval: "weekly"
+      day: "sunday"
       timezone: "Asia/Tokyo"
     open-pull-requests-limit: 5
     rebase-strategy: "disabled"
