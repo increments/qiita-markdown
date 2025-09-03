@@ -9,7 +9,7 @@ module Qiita
           Embed::SlideShare::SCRIPT_HOST,
           Embed::GoogleSlide::SCRIPT_HOST,
           Embed::Docswell::SCRIPT_HOSTS,
-          Embed::Figma::SCRIPT_HOST,
+          Embed::Figma::SCRIPT_HOSTS,
           Embed::GoogleDrive::SCRIPT_HOST,
           Embed::StackBlitz::SCRIPT_HOST,
           Embed::BlueprintUe::SCRIPT_HOST,
