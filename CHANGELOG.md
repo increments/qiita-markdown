@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.5.0
+
+- Accept new figma script host (embed.figma.com)
+
 ## 1.4.0
 
 - Add support for embedding blueprintUE iframes
