@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.6.0
+
+- Support for a new inline math syntax
+
 ## 1.5.0
 
 - Accept new figma script host (embed.figma.com)
