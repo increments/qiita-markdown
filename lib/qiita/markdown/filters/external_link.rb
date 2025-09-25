@@ -3,7 +3,7 @@ require "addressable/uri"
 module Qiita
   module Markdown
     module Filters
-      class ExternalLink < HTML::Pipeline::Filter
+      class ExternalLink < ::HTMLPipelineFilter
         def call
           doc.search("a").each do |anchor|
             next unless anchor["href"]

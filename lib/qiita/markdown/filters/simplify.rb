@@ -14,7 +14,7 @@ module Qiita
       #   want to clean up only some elements, and they would be run in the
       #   `FinalSanitizer` filter later.
       #   https://github.com/rgrove/sanitize/blob/v3.1.2/lib/sanitize.rb#L77-L100
-      class Simplify < HTML::Pipeline::Filter
+      class Simplify < ::HTMLPipelineFilter
         SIMPLE_ELEMENTS = %w[a b code em i ins q s samp span strike strong sub sup var]
 
         COMPLEX_CONTENT_ELEMENTS = %w[table]

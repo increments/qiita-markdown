@@ -8,7 +8,7 @@ module Qiita
       #
       # @example
       #   Truncate.new(doc, truncate: { length: 50, omission: '... (continued)' })
-      class Truncate < HTML::Pipeline::Filter
+      class Truncate < ::HTMLPipelineFilter
         DEFAULT_OPTIONS = {
           length: 100,
           omission: "…".freeze,
