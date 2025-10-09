@@ -25,5 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "qiita_marker", "~> 0.23.9"
   spec.add_dependency "rouge", "~> 4.2"
   spec.add_dependency "sanitize"
+  spec.add_dependency "uri", ">= 1.0.4"
   spec.metadata["rubygems_mfa_required"] = "true"
 end
