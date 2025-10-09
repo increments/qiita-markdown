@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.6.1
+
+- Add a dependency on the uri gem to use version 1.0.4 or higher.
+
 ## 1.6.0
 
 - Support for a new inline math syntax
