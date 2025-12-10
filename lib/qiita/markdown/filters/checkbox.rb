@@ -7,7 +7,7 @@ module Qiita
       # * [ ] Bar
       # * [ ] Baz
       #
-      class Checkbox < HTML::Pipeline::Filter
+      class Checkbox < ::HTMLPipelineFilter
         def call
           doc.search("li").each do |li|
             list = List.new(li)
