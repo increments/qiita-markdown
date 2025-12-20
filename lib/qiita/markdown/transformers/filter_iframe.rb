@@ -13,6 +13,7 @@ module Qiita
           Embed::GoogleDrive::SCRIPT_HOST,
           Embed::StackBlitz::SCRIPT_HOST,
           Embed::BlueprintUe::SCRIPT_HOST,
+          Embed::ClaudeArtifact::SCRIPT_HOST,
         ].flatten.freeze
 
         def self.call(**args)

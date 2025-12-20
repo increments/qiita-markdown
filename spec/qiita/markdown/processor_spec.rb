@@ -1829,6 +1829,43 @@ describe Qiita::Markdown::Processor do
         end
       end
 
+      context "with HTML embed code for Claude Artifact" do
+        shared_examples "embed code claude artifact example" do
+          let(:markdown) do
+            <<~MARKDOWN
+              <iframe src="#{url}" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
+            MARKDOWN
+          end
+          let(:url) { "#{scheme}//claude.site/public/artifacts/4f47d0d5-3be1-41da-a871-df530aae8f54/embed" }
+
+          if allowed
+            it "does not sanitize embed code" do
+              should eq <<~HTML
+                <iframe src="#{url}" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
+              HTML
+            end
+          else
+            it "forces width attribute on iframe" do
+              should eq <<~HTML
+                <iframe src="#{url}" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
+              HTML
+            end
+          end
+        end
+
+        context "with scheme" do
+          let(:scheme) { "https:" }
+
+          include_examples "embed code claude artifact example"
+        end
+
+        context "without scheme" do
+          let(:scheme) { "" }
+
+          include_examples "embed code claude artifact example"
+        end
+      end
+
       context "with embed code for Tweet" do
         let(:markdown) do
           <<-MARKDOWN.strip_heredoc
