@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.7.0
+
+- Support for embedding Claude Artifacts iframes
+
 ## 1.6.1
 
 - Add a dependency on the uri gem to use version 1.0.4 or higher.
