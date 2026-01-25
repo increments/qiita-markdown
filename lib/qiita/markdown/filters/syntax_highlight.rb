@@ -1,7 +1,7 @@
 module Qiita
   module Markdown
     module Filters
-      class SyntaxHighlight < HTML::Pipeline::Filter
+      class SyntaxHighlight < ::HTMLPipelineFilter
         DEFAULT_LANGUAGE = "text"
         DEFAULT_TIMEOUT = Float::INFINITY
         DEFAULT_OPTION = "html_legacy"

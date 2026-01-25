@@ -33,7 +33,7 @@ module Qiita
       end
 
       # @note Modify filters if you want.
-      # @return [Array<HTML::Pipeline::Filter>]
+      # @return [Array<HTMLPipelineFilter>]
       def filters
         @filters ||= self.class.default_filters
       end

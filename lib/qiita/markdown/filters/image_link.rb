@@ -1,7 +1,7 @@
 module Qiita
   module Markdown
     module Filters
-      class ImageLink < HTML::Pipeline::Filter
+      class ImageLink < ::HTMLPipelineFilter
         def call
           doc.search("img").each do |img|
             next if img.ancestors.any? { |ancestor| ancestor.name == "a" }
