@@ -19,4 +19,4 @@ jobs:
         with:
           ruby-version: 3.4.4 # Latest stable Ruby for release builds
           bundler-cache: true
-      - uses: rubygems/release-gem@1c162a739e8b4cb21a676e97b087e8268d8fc40b # v1.1.2
+      - uses: rubygems/release-gem@e9a6361a0b14562539327c2a02373edc56dd3169 # v1.1.4
