@@ -1,7 +1,7 @@
 module Qiita
   module Markdown
     module Filters
-      class Toc < HTML::Pipeline::Filter
+      class Toc < ::HTMLPipelineFilter
         def call
           doc.css("h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]").each do |node|
             Heading.new(node).decorate

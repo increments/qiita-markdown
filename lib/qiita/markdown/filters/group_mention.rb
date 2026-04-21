@@ -1,7 +1,7 @@
 module Qiita
   module Markdown
     module Filters
-      class GroupMention < HTML::Pipeline::Filter
+      class GroupMention < ::HTMLPipelineFilter
         # @note Override
         def call
           if context[:group_mention_url_generator]
