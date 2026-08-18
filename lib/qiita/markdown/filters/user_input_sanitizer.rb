@@ -4,7 +4,7 @@ module Qiita
   module Markdown
     module Filters
       # Sanitizes user input if :strict context is given.
-      class UserInputSanitizer < ::HTML::Pipeline::Filter
+      class UserInputSanitizer < ::HTMLPipelineFilter
         RULE = {
           elements: %w[
             a b blockquote br caption code dd del details div dl dt em font h1 h2 h3 h4 h5 h6

@@ -1,7 +1,7 @@
 module Qiita
   module Markdown
     module Filters
-      class InlineCodeColor < HTML::Pipeline::Filter
+      class InlineCodeColor < ::HTMLPipelineFilter
         DEFAULT_CLASS_NAME = "inline-code-color".freeze
 
         REGEXPS = Regexp.union(

@@ -1,5 +1,5 @@
 require "cgi"
-require "html/pipeline"
+require "html_pipeline"
 require "linguist"
 require "mem"
 require "nokogiri"
