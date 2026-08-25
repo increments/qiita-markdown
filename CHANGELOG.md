@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Drop Ruby 3.0, 3.1, 3.2 support
+
 ## 1.7.0
 
 - Support for embedding Claude Artifacts iframes
