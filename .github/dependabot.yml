@@ -14,7 +14,7 @@ updates:
       default-days: 7
     ignore:
       - dependency-name: "html-pipeline"
-        update-types: ["version-update:semver-major"]
+        versions: [">=3.0"]
 
   - package-ecosystem: "github-actions"
     directories:
