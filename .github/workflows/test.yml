@@ -18,10 +18,12 @@ jobs:
         os: ['ubuntu-latest', 'macos-latest']
         ruby: ['3.3', '3.4']
         experimental: [false]
-        include:
-          - os: 'ubuntu-latest'
-            ruby: 'head'
-            experimental: true
+        # Temporarily disabled: qiita_marker does not support Ruby 4 yet
+        # See: https://github.com/increments/qiita-markdown/issues/268
+        # include:
+        #   - os: 'ubuntu-latest'
+        #     ruby: 'head'
+        #     experimental: true
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     steps:
