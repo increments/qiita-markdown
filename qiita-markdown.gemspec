@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = [">= 3.3.0", "< 4.0"]
 
   spec.add_dependency "addressable"
   spec.add_dependency "gemoji"
@@ -25,5 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "qiita_marker", "~> 0.23.9"
   spec.add_dependency "rouge", "~> 4.2"
   spec.add_dependency "sanitize"
+  spec.add_dependency "uri", ">= 1.0.4"
   spec.metadata["rubygems_mfa_required"] = "true"
 end

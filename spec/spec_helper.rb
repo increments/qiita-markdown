@@ -1,10 +1,13 @@
 if ENV["CI"]
-  if ENV["GITHUB_ACTIONS"]
-    require "simplecov"
-    SimpleCov.start
-  else
-    require "codeclimate-test-reporter"
-    CodeClimate::TestReporter.start
+  require "simplecov"
+  require "simplecov_json_formatter"
+  SimpleCov.start do
+    SimpleCov.formatters = [
+      SimpleCov::Formatter::JSONFormatter,
+      SimpleCov::Formatter::HTMLFormatter,
+    ]
+
+    add_filter "/spec/"
   end
 end
 

@@ -4,7 +4,10 @@ module Qiita
   module Markdown
     module Embed
       module Figma
-        SCRIPT_HOST = "www.figma.com"
+        SCRIPT_HOSTS = [
+          "www.figma.com",
+          "embed.figma.com",
+        ].freeze
       end
     end
   end

@@ -1,5 +1,5 @@
 module Qiita
   module Markdown
-    VERSION = "1.2.0"
+    VERSION = "1.7.0"
   end
 end

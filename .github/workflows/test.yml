@@ -11,45 +11,41 @@ permissions:
   contents: read
 
 jobs:
-  codeclimate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get branch names
-        id: branch-name
-        uses: tj-actions/branch-names@6c999acf206f5561e19f46301bb310e9e70d8815 # v7.0.7
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-      - uses: ruby/setup-ruby@13e7a03dc3ac6c3798f4570bfead2aed4d96abfb # v1.244.0
-        with:
-          ruby-version: '3.2'
-          bundler-cache: true
-      - name: Test & publish code coverage
-        if: "${{ env.CC_TEST_REPORTER_ID != '' }}"
-        uses: paambaati/codeclimate-action@7bcf9e73c0ee77d178e72c0ec69f1a99c1afc1f3 # v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          GIT_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
-          GIT_COMMIT_SHA: ${{ github.sha }}
-        with:
-          coverageCommand: bundle exec rake
-
   test:
     strategy:
       fail-fast: false
       matrix:
         os: ['ubuntu-latest', 'macos-latest']
-        ruby: ['3.2', '3.3', '3.4']
+        ruby: ['3.3', '3.4']
         experimental: [false]
-        include:
-          - os: 'ubuntu-latest'
-            ruby: 'head'
-            experimental: true
+        # Temporarily disabled: qiita_marker does not support Ruby 4 yet
+        # See: https://github.com/increments/qiita-markdown/issues/268
+        # include:
+        #   - os: 'ubuntu-latest'
+        #     ruby: 'head'
+        #     experimental: true
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     steps:
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-      - uses: ruby/setup-ruby@13e7a03dc3ac6c3798f4570bfead2aed4d96abfb # v1.244.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Test
         run: bundle exec rake
+
+  qlty:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - name: Test
+        run: bundle exec rake
+      - uses: qltysh/qlty-action/coverage@fd52dc852530a708d68c3b7342f8d33d1df4cd55 # v2.2.1
+        with:
+          token: ${{secrets.QLTY_COVERAGE_TOKEN}}
+          files: ./coverage/coverage.json

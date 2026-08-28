@@ -1,5 +1,33 @@
 ## Unreleased
 
+- Drop Ruby 3.0, 3.1, 3.2 support
+
+## 1.7.0
+
+- Support for embedding Claude Artifacts iframes
+
+## 1.6.1
+
+- Add a dependency on the uri gem to use version 1.0.4 or higher.
+
+## 1.6.0
+
+- Support for a new inline math syntax
+
+## 1.5.0
+
+- Accept new figma script host (embed.figma.com)
+
+## 1.4.0
+
+- Add support for embedding blueprintUE iframes
+
+## 1.3.0
+
+- Support embedding new iframes
+    - Google Drive
+    - StackBlitz
+
 ## 1.2.0
 
 - Accept new codepen script url (public.codepenassets.com)
