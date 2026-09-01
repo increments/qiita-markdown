@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in qiita-markdown.gemspec
 gemspec
 
-gem "activesupport", "~> 7.1.6"
+gem "activesupport", "~> 8.1.3"
 gem "bundler"
 gem "pry"
 gem "rake"
