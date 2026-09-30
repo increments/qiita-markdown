@@ -70,8 +70,8 @@ module Qiita
               nil
             when !has_only_filename?
               sections[0]
-            when linguist_language
-              linguist_language.default_alias_name
+            when rouge_lexer
+              rouge_lexer.tag
             end
           end
 
@@ -85,8 +85,8 @@ module Qiita
             sections[1].nil? && sections[0]&.include?(".")
           end
 
-          def linguist_language
-            @linguist_language ||= Linguist::Language.find_by_extension(filename).first
+          def rouge_lexer
+            @rouge_lexer ||= Rouge::Lexer.guesses(filename: filename).first
           end
 
           def sections
