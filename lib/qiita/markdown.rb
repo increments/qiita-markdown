@@ -1,6 +1,5 @@
 require "cgi"
 require "html/pipeline"
-require "linguist"
 require "mem"
 require "nokogiri"
 require "qiita_marker"
