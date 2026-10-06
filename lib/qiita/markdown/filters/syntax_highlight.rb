@@ -4,7 +4,7 @@ module Qiita
       class SyntaxHighlight < HTML::Pipeline::Filter
         DEFAULT_LANGUAGE = "text"
         DEFAULT_TIMEOUT = Float::INFINITY
-        DEFAULT_OPTION = "html_legacy"
+        FORMATTER = Rouge::Formatters::HTMLPygments.new(Rouge::Formatters::HTML.new)
 
         def call
           elapsed = 0
@@ -80,7 +80,7 @@ module Qiita
           end
 
           def highlight(language)
-            Rouge.highlight(code, language, DEFAULT_OPTION)
+            Rouge.highlight(code, language, FORMATTER)
           end
 
           def highlighted_node

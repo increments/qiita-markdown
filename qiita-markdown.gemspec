@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "html-pipeline", "~> 2.0"
   spec.add_dependency "mem"
   spec.add_dependency "qiita_marker", "~> 0.23.9"
-  spec.add_dependency "rouge", "~> 4.2"
+  spec.add_dependency "rouge", "~> 5.1"
   spec.add_dependency "sanitize"
   spec.add_dependency "uri", ">= 1.0.4"
   spec.metadata["rubygems_mfa_required"] = "true"
