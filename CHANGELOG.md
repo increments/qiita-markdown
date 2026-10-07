@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 1.8.0
+
 - Drop Ruby 3.0, 3.1, 3.2 support
 - Detect code block language from filename with Rouge instead of github-linguist
 - Require rouge 5.1 or later
